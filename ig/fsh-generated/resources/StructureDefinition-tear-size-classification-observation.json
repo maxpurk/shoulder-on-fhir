@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "tear-size-classification-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-size-classification-observation",
+  "version": "0.2.0",
+  "name": "TearSizeClassificationObservation",
+  "title": "Tear Size Classification Observation (Cofield)",
+  "status": "draft",
+  "date": "2026-07-26",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the categorical Cofield bucket of rotator cuff tear size (small / medium / large / massive), determined pre-operatively from imaging. Covers expert consensus Q4.a (size, categorical decomposition, imaging context). Sibling to TearSizeObservation, which captures the continuous linear measurement in cm in the same context; the intra-operative direct measurement is captured by IntraopTearSizeClassificationObservation.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "imaging",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Imaging"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "tear-size-classification",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/cofield-tear-size-classification"
+        }
+      }
+    ]
+  }
+}

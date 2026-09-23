@@ -1,0 +1,238 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "ShoulderObservationCodes",
+  "id": "shoulder-observation",
+  "title": "Shoulder Observation CodeSystem",
+  "description": "CodeSystem for shoulder-specific observation types.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+  "concept": [
+    {
+      "code": "patte-classification",
+      "display": "Patte Classification",
+      "definition": "Tendon retraction classification according to Patte"
+    },
+    {
+      "code": "goutallier-classification",
+      "display": "Goutallier Classification",
+      "definition": "Fatty infiltration classification according to Goutallier"
+    },
+    {
+      "code": "tendons-involved",
+      "display": "Tendons Involved",
+      "definition": "Rotator cuff tendon involvement: which tendon(s) are affected by the tear, derived from imaging or intra-operative findings. Value bound to TendonsInvolved (SNOMED CT anatomy codes for the four rotator cuff tendons). One Observation per affected tendon; multi-tendon involvement is captured as multiple Observations linked from the index Condition via evidence.detail. No SNOMED CT observable_entity or LOINC concept exists for tendon involvement as of authoring (verified May 2026)."
+    },
+    {
+      "code": "tear-location",
+      "display": "Tear Location",
+      "definition": "Location of the rotator cuff tear along the affected tendon's course: near the insertion, at the musculotendinous junction, or intratendinous. Value bound to TearLocation. Distinct from Patte classification, which grades how far the torn stump has retracted, not where the tear originates. No SNOMED CT or LOINC concept exists for this axis as of authoring (verified July 2026)."
+    },
+    {
+      "code": "tear-thickness",
+      "display": "Tear Thickness",
+      "definition": "Whether the rotator cuff tear is full-thickness or partial-thickness (expert consensus Q4.c), decoupled from Condition.code. Value bound to TearThickness (SNOMED CT 202843000/202842005, reused as Observation values)."
+    },
+    {
+      "code": "internal-rotation",
+      "display": "Internal Rotation (at side, active)",
+      "definition": "Active shoulder internal rotation at the side (adducted), recorded on the InternalRotationVertebralLevel 'hand behind back' ordinal. No precoordinated SNOMED CT or LOINC ordinal value codes exist for this axis (verified July 2026)."
+    },
+    {
+      "code": "passive-internal-rotation",
+      "display": "Internal Rotation (at side, passive)",
+      "definition": "Passive shoulder internal rotation at the side (adducted), recorded on the InternalRotationVertebralLevel 'hand behind back' ordinal. No precoordinated SNOMED CT or LOINC ordinal value codes exist for this axis (verified July 2026)."
+    },
+    {
+      "code": "external-rotation-90-abduction",
+      "display": "External Rotation at 90° Abduction (active)",
+      "definition": "Active shoulder external rotation measured with the arm abducted to 90°, in degrees. Distinct from at-side ER (LOINC 41387-2). No precoordinated LOINC or SNOMED CT code exists for a position-specific rotation measurement (verified July 2026)."
+    },
+    {
+      "code": "passive-external-rotation-90-abduction",
+      "display": "External Rotation at 90° Abduction (passive)",
+      "definition": "Passive shoulder external rotation measured with the arm abducted to 90°, in degrees. Distinct from at-side ER (LOINC 41388-0). No precoordinated LOINC or SNOMED CT code exists for a position-specific rotation measurement (verified July 2026)."
+    },
+    {
+      "code": "internal-rotation-90-abduction",
+      "display": "Internal Rotation at 90° Abduction (active)",
+      "definition": "Active shoulder internal rotation measured with the arm abducted to 90°, in degrees, a controlled, goniometer-reliable position distinct from at-side IR (vertebral-level ordinal, #internal-rotation). No precoordinated LOINC or SNOMED CT code exists for a position-specific rotation measurement (verified July 2026)."
+    },
+    {
+      "code": "passive-internal-rotation-90-abduction",
+      "display": "Internal Rotation at 90° Abduction (passive)",
+      "definition": "Passive shoulder internal rotation measured with the arm abducted to 90°, in degrees, a controlled, goniometer-reliable position distinct from at-side IR (vertebral-level ordinal, #passive-internal-rotation). No precoordinated LOINC or SNOMED CT code exists for a position-specific rotation measurement (verified July 2026)."
+    },
+    {
+      "code": "supraspinatus-strength",
+      "display": "Supraspinatus Strength",
+      "definition": "Supraspinatus muscle strength grading (MMT 0–5 scale, Janda grading). Tested with the empty-can / Jobe position. Use valueQuantity with UCUM unit {score} (0–5 ordinal). No SNOMED CT observable entity or LOINC concept exists for a supraspinatus-specific or 'Janda' strength axis (verified July 2026; only the generic, non-muscle-specific SNOMED#249956007 'MRC grade - muscle power' and LOINC#80322-1 'Muscle strength' exist)."
+    },
+    {
+      "code": "external-rotation-strength",
+      "display": "External Rotation Strength (Composite: Infraspinatus + Teres Minor)",
+      "definition": "Composite external-rotation strength grading on the MMT 0–5 scale. Tested at 0° abduction with elbow flexed at 90°; resisted external rotation. Reflects combined infraspinatus + teres minor function, these two muscles are not isolated by manual muscle testing in clinical practice (Patte / Hornblower tests are used to flag isolated teres minor involvement, recorded separately as #hornblower-test). Use valueQuantity with UCUM unit {score} (0–5 ordinal)."
+    },
+    {
+      "code": "subscapularis-strength",
+      "display": "Subscapularis Strength",
+      "definition": "Subscapularis muscle strength grading on the MMT 0–5 scale. Tested via lift-off (Gerber) or belly-press position, graded for force. Use valueQuantity with UCUM unit {score} (0–5 ordinal). Clinically distinct from the binary lift-off / belly-press / bear-hug provocation tests (#lift-off-test, #belly-press-test, #bear-hug-test), which record positive/negative function rather than graded strength."
+    },
+    {
+      "code": "supraspinatus-strength-dynamometry",
+      "display": "Supraspinatus Strength (Dynamometry)",
+      "definition": "Supraspinatus muscle strength as a continuous kg force reading via handheld/spring dynamometry, tested at 90° scapular-plane abduction (same position as #supraspinatus-strength's ordinal grade). Use valueQuantity with UCUM unit kg. Sibling to #supraspinatus-strength (dual encoding, mirrors the tear-size cm + Cofield-bucket pattern), not a replacement. No SNOMED CT or LOINC concept exists for shoulder dynamometry (verified July 2026)."
+    },
+    {
+      "code": "internal-rotation-strength",
+      "display": "Internal Rotation Strength (Composite)",
+      "definition": "Composite internal-rotation strength grading on the MMT 0–5 scale. Tested at 0° abduction with elbow flexed at 90°; resisted internal rotation, the mirror position of #external-rotation-strength. Reflects combined subscapularis + secondary internal rotator (pectoralis major / latissimus dorsi / teres major) function. Use valueQuantity with UCUM unit {score} (0–5 ordinal). Clinically distinct from #subscapularis-strength (lift-off/belly-press isolation testing)."
+    },
+    {
+      "code": "belly-press-test",
+      "display": "Belly Press Test",
+      "definition": "Subscapularis function test: patient presses hand into abdomen while maintaining wrist extension. Result recorded as positive/negative."
+    },
+    {
+      "code": "bear-hug-test",
+      "display": "Bear Hug Test",
+      "definition": "Subscapularis function test: patient resists removal of hand placed on opposite shoulder with elbow elevated. Result recorded as positive/negative."
+    },
+    {
+      "code": "hornblower-test",
+      "display": "Hornblower Test (Signe du Clairon)",
+      "definition": "Teres minor function test: examiner raises arm to 90° abduction and 90° external rotation; patient cannot actively maintain external rotation (positive = arm drops into internal rotation). Result recorded as positive/negative."
+    },
+    {
+      "code": "tear-size",
+      "display": "Tear Size",
+      "definition": "Maximum tear diameter in centimetres, measured on MRI or intra-operatively (UCUM unit: cm). Linear measurement; paired with #tear-size-classification when the categorical Cofield bucket is also captured."
+    },
+    {
+      "code": "tear-size-classification",
+      "display": "Tear Size Classification (Cofield)",
+      "definition": "Categorical Cofield bucket for rotator cuff tear size: small (<1 cm), medium (1–3 cm), large (3–5 cm), massive (>5 cm). Value bound to CofieldTearSizeClassification. Sibling to #tear-size (linear cm), both expert consensus Q4.a sub-elements; capture both when known so downstream consumers do not need to re-bucket."
+    },
+    {
+      "code": "constant-score-pain",
+      "display": "Constant-Murley: Pain (0-15)",
+      "definition": "Pain sub-score of the Constant-Murley composite (original 1987 breakdown: 0-15 of 100). Patient-reported. Captured as Observation.component[Pain] on ConstantScoreObservation, present only in component-derived entry mode. No LOINC/SNOMED concept exists for this sub-component (verified July 2026)."
+    },
+    {
+      "code": "constant-score-adl",
+      "display": "Constant-Murley: Activities of Daily Living (0-20)",
+      "definition": "ADL sub-score of the Constant-Murley composite (original 1987 breakdown: 0-20 of 100). Patient-reported. Captured as Observation.component[ADL] on ConstantScoreObservation, present only in component-derived entry mode. No LOINC/SNOMED concept exists for this sub-component (verified July 2026)."
+    },
+    {
+      "code": "constant-score-rom",
+      "display": "Constant-Murley: Range of Motion (0-40)",
+      "definition": "Range-of-motion sub-score of the Constant-Murley composite (original 1987 breakdown: 0-40 of 100). Examiner-graded via banded functional milestones for the four movements (flexion/abduction/external rotation/internal rotation) scored on active, painless motion, clinically distinct from, and not derived from, this IG's degree-valued and vertebral-level ROM Observations captured elsewhere. Captured as Observation.component[ROM] on ConstantScoreObservation, present only in component-derived entry mode. No LOINC/SNOMED concept exists for this sub-component (verified July 2026)."
+    },
+    {
+      "code": "constant-score-strength",
+      "display": "Constant-Murley: Strength (0-25)",
+      "definition": "Strength sub-score of the Constant-Murley composite (original 1987 breakdown: 0-25 of 100), a single spring-balance/dynamometer-derived point value, clinically distinct from #supraspinatus-strength-dynamometry, which is a different clinical test. Captured as Observation.component[Strength] on ConstantScoreObservation, present only in component-derived entry mode. No LOINC/SNOMED concept exists for this sub-component (verified July 2026)."
+    },
+    {
+      "code": "ssv-score",
+      "display": "Subjective Shoulder Value",
+      "definition": "Subjective Shoulder Value (SSV): patient self-rates the shoulder as a percentage of an entirely normal shoulder, which would score 100% (Gilbart and Gerber 2007). A separately published instrument from the Single Assessment Numeric Evaluation, asking for the same kind of single rating. No equivalent code exists in SNOMED CT International Edition or LOINC at the time of authoring; local code used."
+    },
+    {
+      "code": "sane-score",
+      "display": "SANE Score",
+      "definition": "Single Assessment Numeric Evaluation (SANE): patient rates the shoulder today as a percentage of normal, on a 0–100% scale with 100% being normal (Williams et al. 1999). A separately published instrument from the Subjective Shoulder Value, asking for the same kind of single rating. No equivalent code exists in SNOMED CT International Edition or LOINC at the time of authoring; local code used."
+    },
+    {
+      "code": "atrophy",
+      "display": "Atrophy",
+      "definition": "Whether visible muscle atrophy (e.g. supraspinatus or infraspinatus fossa hollowing) is present on visual inspection. SNOMED CT 1119438000 'Atrophy of muscle of shoulder' exists as a real concept but does not resolve against tx.fhir.org's currently-served SNOMED edition (verified July 2026), local code used pending re-verification. Value bound to standard SNOMED present/absent qualifiers."
+    },
+    {
+      "code": "normal-shoulder-contour",
+      "display": "Normal Shoulder Contour",
+      "definition": "Overall gestalt assessment of whether the shoulder contour is normal on visual inspection, distinct from and complementary to the specific atrophy and deformity findings. No laterality-neutral SNOMED CT concept, observable-entity or finding/disorder, exists for this axis (verified July 2026); value bound to standard SNOMED present/absent qualifiers."
+    },
+    {
+      "code": "pain-average",
+      "display": "Pain Severity — On Average",
+      "definition": "Patient-reported shoulder pain severity on average, 0-10 numeric rating. No precoordinated LOINC or SNOMED CT concept exists for 'average pain' as a distinct question-level variable (verified July 2026)."
+    },
+    {
+      "code": "pain-active-movement",
+      "display": "Pain Severity — With Active Movement",
+      "definition": "Patient-reported shoulder pain severity during patient-generated active movement, 0-10 numeric rating. No precoordinated LOINC or SNOMED CT concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "pain-passive-movement",
+      "display": "Pain Severity — With Passive Movement",
+      "definition": "Patient-reported shoulder pain severity during examiner-generated passive movement, 0-10 numeric rating. No precoordinated LOINC or SNOMED CT concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "pain-rest",
+      "display": "Pain Severity — At Rest",
+      "definition": "Patient-reported shoulder pain severity at rest (no movement or loading), 0-10 numeric rating. No precoordinated LOINC or SNOMED CT concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "sports-participation",
+      "display": "Sports Participation",
+      "definition": "Patient's pre-treatment level of sports participation. Value bound to SportsParticipationLevel, a 4-tier ordinal (none / recreational / competitive / professional). No suitable LOINC or SNOMED CT ordinal value codes exist for level of pre-treatment sport participation as of authoring (verified July 2026); the existing #return-to-sport-work covers post-treatment status only."
+    },
+    {
+      "code": "sleep-disturbance",
+      "display": "Sleep Disturbance",
+      "definition": "Degree to which the patient's sleep is disturbed specifically by the shoulder pathology being registered (expert consensus Q1.i). Value bound to SleepDisturbanceSeverity, a 3-tier ordinal (unaffected / occasionally disturbed / nightly disturbed) matching the Constant-Murley score's own ADL sleep sub-item. No SNOMED CT or LOINC concept exists for a graded, shoulder-attributed sleep-disturbance axis as of authoring (verified July 2026)."
+    },
+    {
+      "code": "occupational-physical-demand",
+      "display": "Occupational Physical Demand",
+      "definition": "Physical demand intensity category of the patient's occupation (sedentary / light manual / heavy manual), part of expert consensus Q1.k 'Occupation'. Value bound to OccupationalPhysicalDemand. No SNOMED CT or LOINC concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "occupational-overhead-exposure",
+      "display": "Occupational Overhead Exposure",
+      "definition": "Whether the patient's occupation regularly involves overhead reaching or repetitive shoulder-loading tasks, part of expert consensus Q1.k 'Occupation', an axis independent of physical-demand intensity. Value bound to OccupationalOverheadExposure. No SNOMED CT or LOINC concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "functional-limitation-severity",
+      "display": "Functional Limitation Severity",
+      "definition": "Five-tier functional-ceiling ordinal (no limitation / overhead-limited / shoulder-level-limited / below-shoulder-limited / unable to use the arm) for expert consensus Q1.n 'Functional limitations'. Value bound to FunctionalLimitationSeverity. Replaces a prior valueString free-text realisation, no SNOMED CT or LOINC concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "prior-physical-therapy-session-count",
+      "display": "Prior Physical Therapy Session Count",
+      "definition": "Bucketed count of prior physical-therapy sessions for the registered condition (≤10 / 11-20 / >20), part of expert consensus Q1.f 'Prior treatment'. Value bound to PriorPhysicalTherapySessionCount. No SNOMED CT or LOINC concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "prior-injection-count",
+      "display": "Prior Shoulder Injection Count",
+      "definition": "Bucketed count of prior shoulder injections for the registered condition (1-3 / >3), part of expert consensus Q1.f 'Prior treatment'. Value bound to PriorInjectionCount. No SNOMED CT or LOINC concept exists for this axis (verified July 2026)."
+    },
+    {
+      "code": "return-to-sport-work",
+      "display": "Return to Sport/Work",
+      "definition": "Patient's ability to return to pre-injury sport or occupational activities. Value bound to ReturnToActivity."
+    },
+    {
+      "code": "procedure-approach",
+      "display": "Procedure Approach",
+      "definition": "Surgical approach for the procedure (arthroscopic / open / mini-open). Value bound to ProcedureApproach (fully local, no SNOMED concept exists for a standalone 'arthroscopic approach' qualifier, verified July 2026)."
+    },
+    {
+      "code": "reconstruction-extent",
+      "display": "Reconstruction Extent",
+      "definition": "Extent of the rotator cuff procedure (partial repair / complete repair / prosthesis). Value bound to ReconstructionExtent (SNOMED CT concepts reused as Observation values)."
+    },
+    {
+      "code": "fixation-technique",
+      "display": "Fixation Technique",
+      "definition": "Suture-anchor fixation construct (single-row / double-row / suture-bridge / transosseous-no-anchor / not-applicable). Value bound to FixationTechnique (fully local, no SNOMED concept exists for this axis, verified July 2026)."
+    }
+  ],
+  "version": "0.1.7",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-30",
+  "caseSensitive": true,
+  "count": 44
+}

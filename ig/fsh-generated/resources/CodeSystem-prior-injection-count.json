@@ -1,0 +1,28 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "PriorInjectionCountCodes",
+  "id": "prior-injection-count",
+  "title": "Prior Shoulder Injection Count",
+  "description": "Bucketed count of prior shoulder injections received for the condition\nbeing registered, part of the unanimous-consensus Q1.f \"Prior\ntreatment (PT/injections),\" which names no mechanism.\n\nThe count is bucketed rather than captured as free text or as injection dates:\nwhat matters for treatment history is how many injections were given, not\nexactly when. It is only asked when the prior-injection yes/no flag is \"yes\";\nthe \"no injections\" case is already represented by that flag, so this\nCodeSystem carries no redundant zero-count member.\n\nNo SNOMED CT or LOINC concept exists for a bucketed injection-count axis as\nof authoring (verified July 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-injection-count",
+  "concept": [
+    {
+      "code": "1-3",
+      "display": "1 to 3 injections",
+      "definition": "1 to 3 shoulder injections received for this condition."
+    },
+    {
+      "code": "gt-3",
+      "display": "More than 3 injections",
+      "definition": "More than 3 shoulder injections received for this condition."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 2
+}

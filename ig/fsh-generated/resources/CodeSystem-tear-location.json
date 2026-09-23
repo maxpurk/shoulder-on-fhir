@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "TearLocationCodes",
+  "id": "tear-location",
+  "title": "Tear Location",
+  "description": "Location of a rotator cuff tear along the affected tendon's course, as\ndistinct from Patte classification (which describes how far the torn stump\nhas *retracted*, not where the original tear started). Three positions\nalong a rotator cuff tendon, proceeding from the bony footprint inward:\n\nReference: no precoordinated SNOMED CT concept exists for this axis as of\nauthoring (verified July 2026); modeled as a local classification, the same\npattern already used for Patte / Goutallier / Cofield tear-size bucket.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+  "concept": [
+    {
+      "code": "insertion-near",
+      "display": "Near the insertion (footprint)",
+      "definition": "The tear originates at or immediately adjacent to the tendon's bony insertion on the greater/lesser tuberosity, the most common tear location."
+    },
+    {
+      "code": "musculotendinous",
+      "display": "Musculotendinous junction",
+      "definition": "The tear originates at the junction between the muscle belly and the tendon proper."
+    },
+    {
+      "code": "intratendinous",
+      "display": "Intratendinous (mid-substance)",
+      "definition": "The tear originates within the substance of the tendon itself, between the insertion and the musculotendinous junction, without extending to either."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-13",
+  "caseSensitive": true,
+  "count": 3
+}

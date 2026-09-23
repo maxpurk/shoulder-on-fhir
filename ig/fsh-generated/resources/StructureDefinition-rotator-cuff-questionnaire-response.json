@@ -1,0 +1,57 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-questionnaire-response",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-questionnaire-response",
+  "version": "0.2.0",
+  "name": "RotatorCuffQuestionnaireResponse",
+  "title": "Rotator Cuff Questionnaire Response",
+  "status": "draft",
+  "date": "2026-06-07",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for capturing responses to multi-item Patient-Reported Outcome Measure\n(PROM) instruments used in rotator cuff surgery registries. The IG carries only\nthe expert consensus Q12 preferred instruments: the Constant-Murley score and the\nSSV/SANE pair the answer statement names. Each instrument is represented as a FHIR\nQuestionnaire; this profile constrains the corresponding QuestionnaireResponse\nto link it to a ShoulderPatient subject.\n\nFor single-value composite scores (Constant-Murley total, SSV, SANE), use\nShoulderObservation with the corresponding code (SNOMED CT 273383002 for\nConstant-Murley; local ShoulderObservationCodes #ssv-score / #sane-score)\ninstead of a full QuestionnaireResponse.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "QuestionnaireResponse",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "QuestionnaireResponse.questionnaire",
+        "path": "QuestionnaireResponse.questionnaire",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "QuestionnaireResponse.status",
+        "path": "QuestionnaireResponse.status",
+        "mustSupport": true
+      },
+      {
+        "id": "QuestionnaireResponse.subject",
+        "path": "QuestionnaireResponse.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "QuestionnaireResponse.authored",
+        "path": "QuestionnaireResponse.authored",
+        "mustSupport": true
+      },
+      {
+        "id": "QuestionnaireResponse.item",
+        "path": "QuestionnaireResponse.item",
+        "mustSupport": true
+      }
+    ]
+  }
+}

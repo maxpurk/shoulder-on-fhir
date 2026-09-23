@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "TearLocation",
+  "id": "tear-location",
+  "title": "Tear Location ValueSet",
+  "description": "ValueSet containing all tear-location codes (position of a rotator cuff tear along the tendon's course).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/tear-location",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-13",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+        "concept": [
+          {
+            "code": "insertion-near",
+            "display": "Near the insertion (footprint)"
+          },
+          {
+            "code": "musculotendinous",
+            "display": "Musculotendinous junction"
+          },
+          {
+            "code": "intratendinous",
+            "display": "Intratendinous (mid-substance)"
+          }
+        ]
+      }
+    ]
+  }
+}

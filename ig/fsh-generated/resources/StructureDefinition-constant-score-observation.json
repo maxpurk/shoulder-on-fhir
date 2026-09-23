@@ -1,0 +1,313 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "constant-score-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation",
+  "version": "0.4.0",
+  "name": "ConstantScoreObservation",
+  "title": "Constant-Murley Score Observation",
+  "status": "draft",
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the Constant-Murley composite shoulder outcome\nscore (0–100). Covers expert consensus Q12 preferred instrument (Constant, element `Q12-Constant` in the mapping). Bound to SNOMED CT 273383002\n\"Constant and Murley shoulder assessment score (assessment scale)\".\n\nTwo entry modes, distinguished by whether `component[]` is populated:\n\n1. **Direct total entry**, `valueQuantity` only, no `component[]`. Used\n   when a site has only a previously published total on hand and did not\n   re-collect the four sub-scores; a common, legitimate registry pattern.\n2. **Component-derived entry**, all four `component[]` slices populated\n   (Pain / ADL / ROM / Strength, matching the original Constant & Murley\n   1987 15/20/40/25-point breakdown), with `valueQuantity` set to their\n   sum. All four are required together when this mode is used, to avoid\n   a partial sum silently masquerading as a real total.\n\nThe four component sub-scores are **directly captured clinical/patient\ninput, not derived from this IG's other clinical Observations**\n(`Shoulder*RotationObservation`, strength MMT profiles, etc.). Such a\nderivation would be clinically illegitimate: the Constant ROM sub-score (0–40) grades external rotation by functional\nhand-position milestones and internal rotation by a 6-level vertebral\nladder distinct from this IG's own 8-tier `InternalRotationVertebralLevel`,\nscored on *active, painless* motion specifically, not a\nlinear degrees-to-points conversion of the degree-valued ROM Observations\ncaptured elsewhere. The Constant Strength sub-score (0–25) is a single\nspring-balance/dynamometer-derived point value, clinically distinct from\n`SupraspinatusStrengthDynamometryObservation`, which is a\ndifferent clinical test entirely. No LOINC or SNOMED CT code exists for\nany of the four sub-components, so local codes are used.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation",
+        "constraint": [
+          {
+            "key": "constant-score-component-sum",
+            "severity": "error",
+            "human": "If any Constant-Murley sub-score component is present, all four (Pain, ADL, ROM, Strength) must be present, and the total must equal their sum.",
+            "expression": "component.empty() or (component.count() = 4 and value.ofType(Quantity).value = component.where(code.coding.where(code = 'constant-score-pain').exists()).value.ofType(Quantity).value + component.where(code.coding.where(code = 'constant-score-adl').exists()).value.ofType(Quantity).value + component.where(code.coding.where(code = 'constant-score-rom').exists()).value.ofType(Quantity).value + component.where(code.coding.where(code = 'constant-score-strength').exists()).value.ofType(Quantity).value)",
+            "source": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          }
+        ]
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "survey",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Survey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "273383002",
+              "system": "http://snomed.info/sct"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.focus",
+        "path": "Observation.focus",
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 100,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "{score}"
+      },
+      {
+        "id": "Observation.component",
+        "path": "Observation.component",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "code"
+            }
+          ],
+          "rules": "open",
+          "description": "Sliced by component.code (pattern) to distinguish the four Constant-Murley sub-scores"
+        }
+      },
+      {
+        "id": "Observation.component:Pain",
+        "path": "Observation.component",
+        "sliceName": "Pain",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:Pain.code",
+        "path": "Observation.component.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "constant-score-pain",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.component:Pain.value[x]",
+        "path": "Observation.component.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 15,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.component:Pain.value[x].system",
+        "path": "Observation.component.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.component:Pain.value[x].code",
+        "path": "Observation.component.value[x].code",
+        "patternCode": "{score}"
+      },
+      {
+        "id": "Observation.component:ADL",
+        "path": "Observation.component",
+        "sliceName": "ADL",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:ADL.code",
+        "path": "Observation.component.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "constant-score-adl",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.component:ADL.value[x]",
+        "path": "Observation.component.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 20,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.component:ADL.value[x].system",
+        "path": "Observation.component.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.component:ADL.value[x].code",
+        "path": "Observation.component.value[x].code",
+        "patternCode": "{score}"
+      },
+      {
+        "id": "Observation.component:ROM",
+        "path": "Observation.component",
+        "sliceName": "ROM",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:ROM.code",
+        "path": "Observation.component.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "constant-score-rom",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.component:ROM.value[x]",
+        "path": "Observation.component.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 40,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.component:ROM.value[x].system",
+        "path": "Observation.component.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.component:ROM.value[x].code",
+        "path": "Observation.component.value[x].code",
+        "patternCode": "{score}"
+      },
+      {
+        "id": "Observation.component:Strength",
+        "path": "Observation.component",
+        "sliceName": "Strength",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component:Strength.code",
+        "path": "Observation.component.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "constant-score-strength",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.component:Strength.value[x]",
+        "path": "Observation.component.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 25,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.component:Strength.value[x].system",
+        "path": "Observation.component.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.component:Strength.value[x].code",
+        "path": "Observation.component.value[x].code",
+        "patternCode": "{score}"
+      }
+    ]
+  }
+}

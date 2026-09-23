@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ReturnToActivity",
+  "id": "return-to-activity",
+  "title": "Return to Activity Status ValueSet",
+  "description": "ValueSet containing all codes from ReturnToActivityCodes. Bound to Observation.valueCodeableConcept when code = ShoulderObservationCodes#return-to-sport-work.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/return-to-activity",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-04-08",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/return-to-activity",
+        "concept": [
+          {
+            "code": "returned-full",
+            "display": "Returned to Full Activities"
+          },
+          {
+            "code": "returned-modified",
+            "display": "Returned to Modified Activities"
+          },
+          {
+            "code": "not-returned",
+            "display": "Not Returned"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "RotatorCuffProcedureCategory",
+  "id": "rotator-cuff-procedure-category",
+  "title": "Rotator Cuff Procedure Category ValueSet",
+  "description": "SNOMED CT category codes for RotatorCuffProcedure: surgical procedure, physical therapy procedure, administration of medication. Extends the standard FHIR procedure-category set (which omits PT and injection) to fit the expert consensus scope.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-procedure-category",
+  "version": "0.2.0",
+  "experimental": true,
+  "date": "2026-06-07",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "387713003",
+            "display": "Surgical procedure"
+          },
+          {
+            "code": "91251008",
+            "display": "Physical therapy procedure"
+          },
+          {
+            "code": "18629005",
+            "display": "Administration of medication"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -27,7 +27,7 @@ curl -s -X POST "$HAPI_BASE/\$reindex-terminology" \
   -d '{"resourceType":"Parameters"}' > /dev/null
 
 # Collect VS ids to invalidate: every ValueSet whose canonical URL starts
-# with https://hpi.de/ (the IG namespace). HAPI's scheduled pre-expansion
+# with https://maxpurk.github.io/shoulder-on-fhir (the IG namespace). HAPI's scheduled pre-expansion
 # can run while CodeSystem indexing is still in flight, cache EXPANDED with
 # 0 concepts in trm_valueset, and never recover without invalidation.
 #
@@ -45,7 +45,7 @@ next_url="$HAPI_BASE/ValueSet?_count=200&_elements=id,url"
 pages=0
 while [ -n "$next_url" ] && [ "$next_url" != "null" ]; do
   page=$(curl -s "$next_url")
-  page_ids=$(echo "$page" | jq -r '.entry[]?.resource | select(.url | startswith("https://hpi.de/")) | .id')
+  page_ids=$(echo "$page" | jq -r '.entry[]?.resource | select(.url | startswith("https://maxpurk.github.io/shoulder-on-fhir")) | .id')
   [ -n "$page_ids" ] && ig_ids="$ig_ids $page_ids"
   next_url=$(echo "$page" | jq -r '[.link[]? | select(.relation == "next") | .url] | first // ""')
   pages=$((pages + 1))

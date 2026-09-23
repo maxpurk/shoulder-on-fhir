@@ -1,0 +1,61 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "hand-dominance-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation",
+  "version": "0.2.0",
+  "name": "HandDominanceObservation",
+  "title": "Hand Dominance Observation",
+  "status": "draft",
+  "date": "2026-07-29",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation recording the patient's hand dominance (handedness), clinically\nrelevant for shoulder surgery planning and outcome interpretation. Injuries to\nthe dominant arm may have greater functional impact and influence treatment\ndecisions and rehabilitation planning.\n\nCoded via SNOMED CT 57427004 \"Handedness\" (observable entity), the\ntextbook code=question / value=answer pairing. Value is bound to\nHandDominance (SNOMED CT codes: right-handed, left-handed, ambidextrous,\nand an explicit unknown). Category is social-history as handedness is a\nstable patient characteristic. No LOINC code exists for handedness.\n\nCovers expert consensus Q1.m (hand dominance / handedness). Handedness is a\nclinical finding, so it is carried as an Observation rather than as a Patient\nextension.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "social-history",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Social History"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "57427004",
+              "system": "http://snomed.info/sct",
+              "display": "Handedness"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/hand-dominance"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "occupational-physical-demand-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/occupational-physical-demand-observation",
+  "version": "0.1.0",
+  "name": "OccupationalPhysicalDemandObservation",
+  "title": "Occupational Physical Demand Observation",
+  "status": "draft",
+  "date": "2026-07-17",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the physical demand category of the patient's\noccupation (sedentary / light manual / heavy manual). Part of the unanimous-consensus\nQ1.k \"Occupation,\" which names no mechanism, added as a second axis\nalongside `EmploymentStatusObservation`, motivated by overhead/repetitive\nshoulder loading being a well-established rotator-cuff risk and\nreturn-to-work factor. No comparable registry (DART, EPRD, IRD, SEPR)\ncaptures this axis (verified against the DART, EPRD, IRD and SEPR dataset\nspecifications).\n\n`Observation.code` is a local `ShoulderObservationCodes` catalog entry, no\nSNOMED CT or LOINC concept exists for occupational physical demand level\n(verified July 2026). `valueCodeableConcept` is bound to\n`OccupationalPhysicalDemand` (fully local, same reason).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "social-history",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Social History"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "occupational-physical-demand",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/occupational-physical-demand"
+        }
+      }
+    ]
+  }
+}

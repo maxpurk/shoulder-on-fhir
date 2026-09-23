@@ -3,7 +3,7 @@
 > **Status:** Limitation — open, narrowed. `tools/check-template-fidelity.sh` now reads the
 > profiles a template claims and holds the template to them, including pins written as a bare
 > `Coding` or a bare code, pins inside a backbone or an extension, and pins the containing
-> bundle profile places on an entry's resource: 239 literals judged across 86 entries, none
+> bundle profile places on an entry's resource: 244 literals judged across 86 entries, none
 > disagreeing. So the static half of the gap is closed. What remains is the runtime half: no
 > static check can tell whether an expression will yield a value when the form is filled. Found 2026-09-17 while filling the generic form filler
 > against the registration template. Classified against the expert consensus: **none** — no `Q#.#` element is affected, and
@@ -64,8 +64,8 @@ every contained template bundle to the profile its own `meta.profile` claims, wa
 It follows the same per-resource source choice `seed/load-profiles.sh` makes, preferring the
 published `ig/output` for content while letting the compiled `fsh-generated` decide which
 Questionnaires exist, so a resource left behind in a stale build directory is not mistaken for one
-the guide still ships. Exit 0 is clean. At the time of writing: 86 template entries examined, 239
-literals on a profile-pinned path, all 239 in agreement, no unfillable required element, and no
+the guide still ships. Exit 0 is clean. At the time of writing: 86 template entries examined, 244
+literals on a profile-pinned path, all 244 in agreement, no unfillable required element, and no
 element in any profile pinning more than one coding, so the third check is reported and unexercised.
 
 **Numeric bounds are outside the script.** A profile states a permitted range as `minValue[x]` and

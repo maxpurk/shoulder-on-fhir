@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PriorInjectionCount",
+  "id": "prior-injection-count",
+  "title": "Prior Shoulder Injection Count ValueSet",
+  "description": "ValueSet containing the two bucketed prior-injection count categories (expert consensus Q1.f).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/prior-injection-count",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-injection-count",
+        "concept": [
+          {
+            "code": "1-3",
+            "display": "1 to 3 injections"
+          },
+          {
+            "code": "gt-3",
+            "display": "More than 3 injections"
+          }
+        ]
+      }
+    ]
+  }
+}

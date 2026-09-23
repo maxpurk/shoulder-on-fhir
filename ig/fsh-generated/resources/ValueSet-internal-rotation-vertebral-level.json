@@ -1,0 +1,54 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "InternalRotationVertebralLevel",
+  "id": "internal-rotation-vertebral-level",
+  "title": "Internal Rotation Vertebral Level ValueSet",
+  "description": "ValueSet containing the eight-tier 'hand behind back' internal rotation scale (expert consensus Q2.b/Q2.c, Q9.b/Q9.c).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+        "concept": [
+          {
+            "code": "unable",
+            "display": "Unable to reach behind back"
+          },
+          {
+            "code": "greater-trochanter",
+            "display": "Greater trochanter (lateral thigh)"
+          },
+          {
+            "code": "buttock",
+            "display": "Buttock"
+          },
+          {
+            "code": "sacrum",
+            "display": "Sacrum"
+          },
+          {
+            "code": "l5",
+            "display": "L5 (belt line)"
+          },
+          {
+            "code": "l3",
+            "display": "L3 (waist)"
+          },
+          {
+            "code": "t12",
+            "display": "T12 (thoracolumbar junction)"
+          },
+          {
+            "code": "t7-or-above",
+            "display": "T7 or above (inferior scapular angle / interscapular)"
+          }
+        ]
+      }
+    ]
+  }
+}

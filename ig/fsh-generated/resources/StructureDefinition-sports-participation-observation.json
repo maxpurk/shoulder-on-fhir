@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sports-participation-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sports-participation-observation",
+  "version": "0.1.1",
+  "name": "SportsParticipationObservation",
+  "title": "Sports Participation Observation",
+  "status": "draft",
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the patient's pre-treatment level of sports\nparticipation. Four-tier ordinal (none / recreational / competitive /\nprofessional), the sports-medicine return-to-sport stratification,\nstrictly more informative than the plain yes/no participation flag used by\nsome peer registries (the `none` grade already subsumes that distinction),\nand coarsely comparable to DART's `DEM-08` \"Activity level (pre-injury)\"\nenum and to the Tegner Activity Scale.\n\nThe expert consensus names only \"Sports\" without specifying a mechanism. A\ncoded ordinal is used rather than a free-text description of sport, frequency,\nand competitive level, which would not be comparable across patients.\n\nNo suitable LOINC or SNOMED CT code exists for level/type of pre-treatment\nsport participation, so a local code (ShoulderObservationCodes#sports-participation)\nis used. The existing ReturnToActivityObservation (#return-to-sport-work) covers\nthe post-treatment return outcome only, these are clinically distinct and use\ndifferent scales.\n\nExpert consensus Q1.j (unanimous consensus), required patient-history element.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "social-history",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Social History"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "sports-participation",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/sports-participation-level"
+        }
+      }
+    ]
+  }
+}

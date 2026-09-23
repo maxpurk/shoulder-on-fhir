@@ -1,0 +1,52 @@
+{
+  "resourceType": "Observation",
+  "id": "AnnaFu6wFlexion",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "exam",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "display": "Exam"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "41389-8",
+        "system": "http://loinc.org",
+        "display": "Shoulder Flexion Active Range of Motion Quantitative"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaFu6wEncounter"
+  },
+  "effectiveDateTime": "2024-05-27",
+  "valueQuantity": {
+    "value": 80,
+    "code": "deg",
+    "system": "http://unitsofmeasure.org",
+    "unit": "degrees"
+  },
+  "bodySite": {
+    "coding": [
+      {
+        "code": "91774008",
+        "system": "http://snomed.info/sct",
+        "display": "Structure of right shoulder region"
+      }
+    ]
+  }
+}

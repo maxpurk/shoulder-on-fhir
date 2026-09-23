@@ -1,0 +1,42 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "Q11Timepoint",
+  "id": "q11-timepoint",
+  "title": "Q11 Research Follow-Up Timepoint ValueSet",
+  "description": "ValueSet containing all codes from Q11TimepointCodes. Bound to RotatorCuffResearchCarePlan.activity.detail.code.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/q11-timepoint",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-08-04",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+        "concept": [
+          {
+            "code": "6-weeks",
+            "display": "6 Weeks"
+          },
+          {
+            "code": "3-months",
+            "display": "3 Months"
+          },
+          {
+            "code": "6-months",
+            "display": "6 Months"
+          },
+          {
+            "code": "1-year",
+            "display": "1 Year"
+          },
+          {
+            "code": "2-years",
+            "display": "2 Years"
+          }
+        ]
+      }
+    ]
+  }
+}

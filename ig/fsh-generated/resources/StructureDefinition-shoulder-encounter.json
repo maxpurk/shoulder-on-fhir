@@ -1,0 +1,120 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-encounter",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter",
+  "version": "0.4.0",
+  "name": "ShoulderEncounter",
+  "title": "Shoulder Encounter",
+  "status": "draft",
+  "date": "2026-07-13",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting shoulder-related clinical encounters across all three\nbundle contexts of the three-bundle architecture:\n\n* **Registration consultation (T0)**, pre-operative visit at which the\n  diagnosis is established and the patient is enrolled; 1..1 anchor in\n  `RotatorCuffRegistrationBundle`.\n* **Surgical admission (T1)**, the encounter framing the index procedure in\n  `RotatorCuffSurgeryBundle`.\n* **Routine follow-up (Tn)**, expert consensus Q11 follow-up at 6 wk / 3 mo /\n  6 mo / 1 y / 2 y in `RotatorCuffFollowUpBundle`.\n\n`status` is fixed to `finished`: an encounter is submitted to the registry once\nit has taken place. `period.start` and `period.end` carry the start and the\ncompletion timestamp.\n\n`type` is bound (extensible) to `ShoulderEncounterType`: SNOMED CT\n`185349003` (Encounter for check up) for registration, `390906007` (Follow-up\nencounter) for post-operative visits (expert consensus Q10), `308335008` (Patient\nencounter procedure) for surgical admission (T1).\n\n`reasonReference` is **required (1..1)** and MUST point to a `Condition` that\nmotivates the visit, the type is `Reference(Condition)` so `ShoulderEncounter`\nremains anatomy-region and reusable by sibling shoulder IGs (e.g. a future\narthroplasty IG). Inside the three rotator-cuff bundle profiles the Condition\nslice is constrained to `RotatorCuffCondition`, so `Encounter.reasonReference`\nresolves to a `RotatorCuffCondition` by composition.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.status",
+        "path": "Encounter.status",
+        "patternCode": "finished",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.class",
+        "path": "Encounter.class",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type",
+        "path": "Encounter.type",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-encounter-type"
+        }
+      },
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period.start",
+        "path": "Encounter.period.start",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period.end",
+        "path": "Encounter.period.end",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.reasonReference",
+        "path": "Encounter.reasonReference",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Condition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis",
+        "path": "Encounter.diagnosis",
+        "short": "Ranked diagnoses addressed by this visit, rank 1 is the principal (Hauptdiagnose)",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis.condition",
+        "path": "Encounter.diagnosis.condition",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Condition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.diagnosis.use",
+        "path": "Encounter.diagnosis.use",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "http://terminology.hl7.org/ValueSet/diagnosis-role"
+        }
+      },
+      {
+        "id": "Encounter.diagnosis.rank",
+        "path": "Encounter.diagnosis.rank",
+        "mustSupport": true
+      }
+    ]
+  }
+}

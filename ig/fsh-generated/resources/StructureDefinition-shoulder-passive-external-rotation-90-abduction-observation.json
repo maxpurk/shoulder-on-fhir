@@ -1,0 +1,76 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-passive-external-rotation-90-abduction-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation",
+  "version": "0.1.0",
+  "name": "ShoulderPassiveExternalRotation90AbductionObservation",
+  "title": "Shoulder External Rotation at 90° Abduction Passive Range of Motion Observation",
+  "status": "draft",
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting passive shoulder external rotation measured with\nthe arm abducted to 90° (a controlled, goniometer-reliable position\ndistinct from at-side/adducted ER,\nShoulderPassiveExternalRotationObservation), in degrees. Recorded alongside the\nat-side rotation measurements. Together they allow assessment of both\ncapsular tightness and rotator-cuff/subscapularis competence, which\nat-side measurement alone cannot quantify. Covers expert consensus Q2.c (passive range of motion, pre-treatment)\nand Q9.c (post-treatment); pre/post differentiation is by\neffectiveDateTime.\n\nNo precoordinated LOINC or SNOMED CT code exists for a position-specific\n(\"at 90° abduction\") shoulder rotation measurement (verified July 2026), so a\nlocal code is used. `maxValueQuantity` is set permissively (360°) rather than\nat a strict physiological ceiling: it is a data-entry bound, not a claim that\n360° is an achievable physiological range.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "passive-external-rotation-90-abduction",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "maxValueQuantity": {
+          "value": 360,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "deg"
+      }
+    ]
+  }
+}

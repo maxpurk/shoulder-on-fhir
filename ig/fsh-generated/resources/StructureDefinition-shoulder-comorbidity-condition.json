@@ -1,0 +1,75 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-comorbidity-condition",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition",
+  "version": "0.1.1",
+  "name": "ShoulderComorbidityCondition",
+  "title": "Shoulder Comorbidity Condition",
+  "status": "draft",
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for pre-existing comorbid Conditions captured alongside a rotator\ncuff registry entry, expert consensus Q1.c. Distinct from RotatorCuffCondition\n(the index encounter diagnosis): a comorbidity is a problem-list item\ncoexisting with the rotator-cuff pathology, not the reason for the surgical\nencounter.\n\nOut of scope: shoulder-region disorders (rotator cuff pathology, AC joint\nosteoarthritis, impingement, etc.) are never comorbidities in this registry\n, they belong on RotatorCuffCondition (the principal diagnosis) or on\nShoulderDiagnosisCondition (a coexisting non-rotator-cuff shoulder finding,\ne.g. incidental AC joint OA). Comorbidities are strictly non-shoulder,\nsystemic or other-body-part conditions. Both demonstration frontends enforce\nthis by excluding, from the comorbidity typeahead, the SNOMED descendants of\nthree anchor concepts: `118944007 |Disorder of shoulder region|`,\n`239960007 |Impingement syndrome of shoulder region|` and\n`359532006 |Rotator cuff impingement syndrome|`. This profile's binding\ndoes not technically forbid a shoulder-region code, since IPS's Problems VS\nhas no anatomical-region exclusion mechanism.\n\nDerives from HL7 Europe Core `condition-eu-core`. Instances\nadditionally claim IPS `Condition-uv-ips` via `meta.profile[]`, the\ncross-resource patient reference chain holds because `subject` ultimately\nresolves to a `Reference(ShoulderPatient)` which is a derived profile of\nboth `patient-eu-core` (parent of `condition-eu-core.subject`) and claims\n`PatientUvIps` via `meta.profile[]` (parent of `Condition-uv-ips.subject`).\n\nCode binding: `code from http://hl7.org/fhir/uv/ips/ValueSet/problems-\nsnomed-absent-unknown-uv-ips (extensible)`. This sits on top of EU Core's\ninherited preferred binding to `problems-uv-ips`, the IG tightens\nEU/IPS's `preferred` to `extensible` for registry-comparability. Where a SNOMED\nconcept exists, clinicians MUST use it; ICD-10 (WHO base, or a national\nmodification such as ICD-10-GM at deployment) and other codings remain\npermitted as additional `coding[]` siblings (dual-coding pattern).\n\nCarried on RotatorCuffRegistrationBundle.entry[comorbidity] (0..*).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.eu/fhir/base/StructureDefinition/condition-eu-core",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.category",
+        "path": "Condition.category",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "problem-list-item",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "http://hl7.org/fhir/uv/ips/ValueSet/problems-snomed-absent-unknown-uv-ips"
+        }
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.recordedDate",
+        "path": "Condition.recordedDate",
+        "mustSupport": true
+      }
+    ]
+  }
+}

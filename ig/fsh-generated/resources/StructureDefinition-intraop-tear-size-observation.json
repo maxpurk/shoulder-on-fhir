@@ -1,0 +1,66 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "intraop-tear-size-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-observation",
+  "version": "0.1.0",
+  "name": "IntraopTearSizeObservation",
+  "title": "Intra-operative Tear Size Observation",
+  "status": "draft",
+  "date": "2026-07-26",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting maximum rotator cuff tear diameter in centimetres measured directly during surgery (intra-operative exam). Covers expert consensus Q4.a (size, continuous decomposition, surgical context). Sibling to TearSizeObservation, which captures the pre-operative imaging-derived measurement of the same concept; discrepancies between the pre-operative imaging estimate and the intra-operative direct measurement are clinically expected and meaningful, which is why both are modelled as distinct Observations differing only by acquisition context (category).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "tear-size",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ]
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "cm"
+      }
+    ]
+  }
+}

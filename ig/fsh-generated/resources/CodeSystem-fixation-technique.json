@@ -1,0 +1,43 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "FixationTechniqueCodes",
+  "id": "fixation-technique",
+  "title": "Fixation Technique",
+  "description": "Suture-anchor fixation construct used for rotator cuff repair, single-row,\ndouble-row, or suture-bridge (transosseous-equivalent), plus two catch-all\ntiers for repairs without anchors and procedures where the axis does not\napply. Layer 2 (IG-operational) addition, out-of-consensus: the expert\nconsensus (Q1-Q13) never names fixation technique.\n\nSingle-row, double-row, and suture-bridge are the three biomechanically and\nclinically distinct fixation philosophies used throughout current rotator cuff\nrepair literature and by peer surgical registries, not an arbitrary cut of a\ncontinuum. Suture-bridge is kept as\nits own tier rather than merged into \"double-row\" because it is a specific\ndouble-row sub-variant with its own distinct compressive mechanism\n(lateral-row sutures/tapes pass over the tendon surface before anchoring,\ncompressing the tendon against the footprint), a distinction registries\nthat lump it into plain double-row lose.\n\nNo SNOMED CT concept exists for any of these five tiers as a standalone\nfixation-technique axis (verified July 2026), only whole-procedure fused\nconcepts (e.g. SNOMED `699120002` \"Arthroscopic repair of rotator cuff\")\nexist, with no separate axis for anchor configuration.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/fixation-technique",
+  "concept": [
+    {
+      "code": "single-row",
+      "display": "Single-row fixation",
+      "definition": "Suture anchors placed in a single row along the tendon footprint; tendon secured to that row with simple or mattress sutures."
+    },
+    {
+      "code": "double-row",
+      "display": "Double-row fixation",
+      "definition": "Suture anchors placed in two rows (medial articular-margin row and lateral greater-tuberosity row); tendon secured to both rows independently."
+    },
+    {
+      "code": "suture-bridge",
+      "display": "Suture-bridge / transosseous-equivalent fixation",
+      "definition": "Double-row construct in which lateral-row sutures or tapes pass over the tendon surface before lateral anchoring, compressing the tendon against the footprint (transosseous-equivalent technique)."
+    },
+    {
+      "code": "transosseous-no-anchor",
+      "display": "Transosseous repair without anchors",
+      "definition": "Tendon secured directly to bone tunnels drilled through the greater tuberosity, without suture anchors."
+    },
+    {
+      "code": "not-applicable",
+      "display": "Not applicable",
+      "definition": "No tendon-to-bone fixation construct was used (e.g. debridement alone, decompression alone, or arthroplasty)."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 5
+}

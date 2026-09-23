@@ -1,0 +1,57 @@
+{
+  "resourceType": "Procedure",
+  "id": "AnnaConcomitantMumford",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+      "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+    ]
+  },
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "code": "387713003",
+        "system": "http://snomed.info/sct",
+        "display": "Surgical procedure"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "734057006",
+        "system": "http://snomed.info/sct",
+        "display": "Excision of distal clavicle"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaSurgeryEncounter"
+  },
+  "performedDateTime": "2024-04-15T09:00:00+02:00",
+  "bodySite": [
+    {
+      "coding": [
+        {
+          "code": "91774008",
+          "system": "http://snomed.info/sct",
+          "display": "Structure of right shoulder region"
+        }
+      ]
+    }
+  ],
+  "reasonReference": [
+    {
+      "reference": "Condition/AnnaAcJointOa"
+    }
+  ],
+  "partOf": [
+    {
+      "reference": "Procedure/AnnaIndexRepair"
+    }
+  ]
+}

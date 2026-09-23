@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PresentAbsent",
+  "id": "present-absent",
+  "title": "Present/Absent Finding ValueSet",
+  "description": "ValueSet for recording binary (present/absent) visual inspection findings, used for shoulder atrophy, deformity, and normal-contour exam items (expert consensus Q2.a / Q9.a).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/present-absent",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "52101004",
+            "display": "Present"
+          },
+          {
+            "code": "2667000",
+            "display": "Absent"
+          }
+        ]
+      }
+    ]
+  }
+}

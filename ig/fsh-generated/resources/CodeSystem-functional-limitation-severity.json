@@ -1,0 +1,43 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "FunctionalLimitationSeverityCodes",
+  "id": "functional-limitation-severity",
+  "title": "Functional Limitation Severity",
+  "description": "Five-tier ordinal grading the highest functional plane at which the patient's\nshoulder still limits activity: overhead, at shoulder level, below shoulder\nlevel, and unable to use the arm. Each tier names an observable functional\nplane, so the grading is anchored to what the patient can do.\n\nEach tier is a strict functional subset of the one above it. A patient unable\nto use the arm is, by construction, also overhead-limited and\nshoulder-level-limited. That subset relation is what makes the scale ordinal\nfor registry analysis, not merely categorical. The tiers match how rotator\ncuff patients are already triaged verbally in clinic.\n\nThe CodeSystem realises expert consensus Q1.n \"Functional limitations\" (unanimous\nconsensus, no mechanism specified). A coded ordinal is used so that the\nanswer is analysable across the registry.\n\nIt is distinct from the Constant-Murley score's own ADL sub-score\n(`ConstantScoreObservation` `component[ADL]`, 0-20 points, the expert consensus Q12\npreferred outcome instrument, captured at follow-up): this is a quick\none-item baseline gestalt captured once at registration, not a multi-domain\ninstrument.\n\nNo SNOMED CT or LOINC concept exists for this functional-ceiling axis as of\nauthoring (verified July 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/functional-limitation-severity",
+  "concept": [
+    {
+      "code": "no-limitation",
+      "display": "No functional limitation",
+      "definition": "Patient reports no restriction attributable to the shoulder in overhead, at-shoulder-level, or below-shoulder-level activities."
+    },
+    {
+      "code": "overhead-limitation",
+      "display": "Overhead activity limited",
+      "definition": "Patient can perform activities at or below shoulder level without difficulty, but overhead activity (e.g. reaching a high shelf, overhead work or sport) is limited by the shoulder."
+    },
+    {
+      "code": "shoulder-level-limitation",
+      "display": "At-shoulder-level activity limited",
+      "definition": "Overhead activity is not attempted or not possible; activity at shoulder level (e.g. combing hair, reaching sideways to shoulder height) is also limited by the shoulder, though below-shoulder-level activity remains largely unaffected."
+    },
+    {
+      "code": "below-shoulder-limitation",
+      "display": "Below-shoulder-level activity limited",
+      "definition": "Even activities performed below shoulder level (e.g. dressing, perineal care, lifting light objects at waist height) are limited by the shoulder."
+    },
+    {
+      "code": "unable-to-use-arm",
+      "display": "Unable to use the arm functionally",
+      "definition": "The shoulder/arm cannot be used for functional activity; patient relies substantially on the contralateral arm for activities of daily living."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 5
+}

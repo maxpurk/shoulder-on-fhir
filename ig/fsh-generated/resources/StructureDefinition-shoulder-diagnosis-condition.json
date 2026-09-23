@@ -1,0 +1,117 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-diagnosis-condition",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition",
+  "version": "0.1.1",
+  "name": "ShoulderDiagnosisCondition",
+  "title": "Shoulder Diagnosis (Non-Rotator-Cuff)",
+  "status": "draft",
+  "date": "2026-07-13",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting shoulder pathology that coexists with, but is\ndistinct from, the index rotator cuff tear, e.g. long head of biceps\ntendinopathy, AC joint osteoarthritis, a glenoid labrum tear, adhesive\ncapsulitis, glenohumeral osteoarthritis, or shoulder instability.\n\nAn anatomy-region profile (`Shoulder*`, not `RotatorCuff*`): these\ndiagnoses are not rotator cuff tears and\ncarry none of RotatorCuffCondition's RC-specific apparatus (no required\n`condition-dueTo` etiology classifier, no `stage`/`evidence` staging\nmachinery for Patte/Goutallier/tendons-involved/tear-location, since those\nclassification systems do not apply to e.g. adhesive capsulitis).\n\nUsed via `RotatorCuffRegistrationBundle.otherDiagnosis` (`0..*`) alongside\none or more `RotatorCuffCondition` entries. The registry convention still\nholds: one registration entry = one patient + one shoulder side: a\nShoulderDiagnosisCondition's `bodySite` MUST match the laterality of the\nRotatorCuffCondition(s) in the same bundle, it names a second problem on\nthe same shoulder, not a diagnosis on the other side.\n\nWhich diagnosis in the bundle (RC or non-RC) is the principal reason for the\nvisit is recorded on `ShoulderEncounter.diagnosis.rank`, not on the Condition\nitself.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.eu/fhir/base/StructureDefinition/condition-eu-core",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition.extension:dueTo",
+        "path": "Condition.extension",
+        "sliceName": "dueTo",
+        "min": 0,
+        "max": "0",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/condition-dueTo"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.category",
+        "path": "Condition.category",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "encounter-diagnosis",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-diagnosis"
+        }
+      },
+      {
+        "id": "Condition.bodySite",
+        "path": "Condition.bodySite",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality"
+        }
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.onset[x]",
+        "path": "Condition.onset[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Age"
+          },
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.recordedDate",
+        "path": "Condition.recordedDate",
+        "mustSupport": true
+      }
+    ]
+  }
+}

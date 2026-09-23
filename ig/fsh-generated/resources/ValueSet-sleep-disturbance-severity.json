@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "SleepDisturbanceSeverity",
+  "id": "sleep-disturbance-severity",
+  "title": "Sleep Disturbance Severity ValueSet",
+  "description": "ValueSet containing the three sleep-disturbance severity grades (expert consensus Q1.i).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/sleep-disturbance-severity",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-17",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sleep-disturbance-severity",
+        "concept": [
+          {
+            "code": "unaffected",
+            "display": "Unaffected"
+          },
+          {
+            "code": "occasional",
+            "display": "Occasionally disturbed"
+          },
+          {
+            "code": "nightly",
+            "display": "Nightly disturbed"
+          }
+        ]
+      }
+    ]
+  }
+}

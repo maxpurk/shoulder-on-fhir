@@ -1,0 +1,38 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ImagingModality",
+  "id": "imaging-modality",
+  "title": "Imaging Modality ValueSet",
+  "description": "DICOM acquisition-modality codes for shoulder imaging: DX for a plain radiograph (Q3), and MR, CT, or US for the advanced-imaging choice (Q5, Q6, and the Q7 ultrasound recording pattern). A patient can have both a radiograph and an advanced study, so both frontends consume this ValueSet as a multi-select. The binding is extensible, so any other DICOM modality code is also valid.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/imaging-modality",
+  "version": "0.2.0",
+  "experimental": true,
+  "date": "2026-08-02",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://dicom.nema.org/resources/ontology/DCM",
+        "concept": [
+          {
+            "code": "DX",
+            "display": "Digital Radiography"
+          },
+          {
+            "code": "MR",
+            "display": "Magnetic Resonance"
+          },
+          {
+            "code": "CT",
+            "display": "Computed Tomography"
+          },
+          {
+            "code": "US",
+            "display": "Ultrasound"
+          }
+        ]
+      }
+    ]
+  }
+}

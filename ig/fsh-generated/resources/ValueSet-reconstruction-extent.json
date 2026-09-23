@@ -1,0 +1,38 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ReconstructionExtent",
+  "id": "reconstruction-extent",
+  "title": "Reconstruction Extent ValueSet",
+  "description": "SNOMED CT concepts for the extent of the index rotator cuff procedure, partial reconstruction, complete reconstruction, or shoulder prosthesis\n(anatomic or reverse total arthroplasty), decoupled from `Procedure.code`\nin a postcoordination style, mirroring the diagnosis-side \"one axis, one\nelement\" pattern. All four concepts are\nprecoordinated SNOMED disorder/procedure-level codes, reused here as\nObservation values (the same reuse pattern `TearThickness` already applies).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/reconstruction-extent",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "304385007",
+            "display": "Partial repair of rotator cuff"
+          },
+          {
+            "code": "304384006",
+            "display": "Complete repair of rotator cuff"
+          },
+          {
+            "code": "308681004",
+            "display": "Prosthetic arthroplasty of shoulder"
+          },
+          {
+            "code": "785850002",
+            "display": "Reverse prosthetic total arthroplasty of shoulder"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "EmploymentStatus",
+  "id": "employment-status",
+  "title": "Employment Status ValueSet",
+  "description": "Current employment status (expert consensus Q1.k, part of \"Occupation\"). LOINC's\nofficial answer list for 67875-5 \"Employment status - current\" (LL1901-9)\nplus one local addition (self-employed) that list is missing. See\n`EmploymentStatusSupplement` for why the local code is needed. Same hybrid\npattern as `RotatorCuffEtiology`.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/employment-status",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-17",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "LA17957-4",
+            "display": "Employed full time"
+          },
+          {
+            "code": "LA17958-2",
+            "display": "Employed part time"
+          },
+          {
+            "code": "LA17956-6",
+            "display": "Unemployed"
+          },
+          {
+            "code": "LA17959-0",
+            "display": "Homemaker"
+          },
+          {
+            "code": "LA17960-8",
+            "display": "Retired due to age/preference"
+          },
+          {
+            "code": "LA17961-6",
+            "display": "Retired due to disability"
+          },
+          {
+            "code": "LA17962-4",
+            "display": "Medical leave of absence"
+          },
+          {
+            "code": "LA15276-1",
+            "display": "Student"
+          }
+        ]
+      },
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/employment-status-supplement",
+        "concept": [
+          {
+            "code": "self-employed",
+            "display": "Self-employed"
+          }
+        ]
+      }
+    ]
+  }
+}

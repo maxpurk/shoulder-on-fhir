@@ -1,0 +1,77 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-passive-flexion-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation",
+  "version": "0.1.0",
+  "name": "ShoulderPassiveFlexionObservation",
+  "title": "Shoulder Flexion Passive Range of Motion Observation",
+  "status": "draft",
+  "date": "2026-05-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting passive shoulder flexion range of motion in degrees, coded with LOINC 41390-6. Covers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c (post-treatment); pre/post differentiation is by effectiveDateTime. The expert consensus names this movement 'Forward Flexion'; LOINC uses 'Flexion'.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "41390-6",
+              "system": "http://loinc.org",
+              "display": "Shoulder Flexion Passive Range of Motion Quantitative"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "maxValueQuantity": {
+          "value": 180,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "deg"
+      }
+    ]
+  }
+}

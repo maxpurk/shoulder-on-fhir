@@ -1,0 +1,42 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "SatisfactionScale",
+  "id": "satisfaction-scale",
+  "title": "Patient Satisfaction Scale ValueSet",
+  "description": "ValueSet containing the five LOINC answer codes from LL4543-6. Bound to Observation.valueCodeableConcept when code = LOINC 77218-6 (patient satisfaction with healthcare delivery).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/satisfaction-scale",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-04-08",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "LA27750-1",
+            "display": "Not at all satisfied"
+          },
+          {
+            "code": "LA24976-5",
+            "display": "Mostly dissatisfied"
+          },
+          {
+            "code": "LA27752-7",
+            "display": "Somewhat satisfied"
+          },
+          {
+            "code": "LA24974-0",
+            "display": "Mostly satisfied"
+          },
+          {
+            "code": "LA27754-3",
+            "display": "Completely satisfied"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-procedure",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+  "version": "0.5.0",
+  "name": "RotatorCuffProcedure",
+  "title": "Rotator Cuff Procedure",
+  "status": "draft",
+  "date": "2026-09-12",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting rotator cuff surgical interventions (rotator cuff\nrepairs and concomitant procedures) as well as prior non-surgical treatments\n(physical therapy, injections, distinguished by `category` binding).\n\nDerives from HL7 Europe Core `procedure-eu-core`, which preferred-\nbinds `code` to IPS `procedures-uv-ips` and pins `subject` to\n`Reference(patient-eu-core)`. The patient-reference chain is satisfied because\n`ShoulderPatient` parents from `patient-eu-core`. Our local\nextensible binding to `RotatorCuffProcedureType` (SNOMED-first surgical and\nprior-treatment codes) sits on top of the inherited preferred binding.\n\nSurgical Procedure instances additionally claim IPS `Procedure-uv-ips`\nconformance via `meta.profile[]` (both frontends stamp this at bundle assembly).\nThe claim is scoped to surgical procedures, prior non-surgical treatments\n(physical therapy, injections) do not claim IPS, avoiding an over-broad\npatient-summary assertion on conservative care. The IPS profile's\n`subject only Reference(Patient-uv-ips)` is satisfied because ShoulderPatient\ninstances claim PatientUvIps in `meta.profile[]`.\n\nThe `RotatorCuff*` prefix marks a pathology-specific profile; anatomy-region\nprofiles that carry no rotator-cuff-specific constraint are named `Shoulder*`.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Procedure",
+  "baseDefinition": "http://hl7.eu/fhir/base/StructureDefinition/procedure-eu-core",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Procedure.partOf",
+        "path": "Procedure.partOf",
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.status",
+        "path": "Procedure.status",
+        "patternCode": "completed",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.category",
+        "path": "Procedure.category",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-procedure-category"
+        }
+      },
+      {
+        "id": "Procedure.code",
+        "path": "Procedure.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-procedure-type"
+        }
+      },
+      {
+        "id": "Procedure.subject",
+        "path": "Procedure.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.encounter",
+        "path": "Procedure.encounter",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performed[x]",
+        "path": "Procedure.performed[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performed[x]:performedDateTime",
+        "path": "Procedure.performed[x]",
+        "sliceName": "performedDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performed[x]:performedPeriod",
+        "path": "Procedure.performed[x]",
+        "sliceName": "performedPeriod",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performer",
+        "path": "Procedure.performer",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performer.actor",
+        "path": "Procedure.performer.actor",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.reasonReference",
+        "path": "Procedure.reasonReference",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition",
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.bodySite",
+        "path": "Procedure.bodySite",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality"
+        }
+      },
+      {
+        "id": "Procedure.outcome",
+        "path": "Procedure.outcome",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.note",
+        "path": "Procedure.note",
+        "mustSupport": true
+      }
+    ]
+  }
+}

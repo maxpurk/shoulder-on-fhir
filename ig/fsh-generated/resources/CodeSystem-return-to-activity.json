@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "ReturnToActivityCodes",
+  "id": "return-to-activity",
+  "title": "Return to Activity Status",
+  "description": "Coded classification of a patient's ability to return to pre-injury sport or\noccupational activities after shoulder surgery (expert consensus component Q12.e).\nNo equivalent codes exist in SNOMED CT or LOINC for this three-category instrument\nas used in shoulder surgery registries; local codes are used in the interim.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/return-to-activity",
+  "concept": [
+    {
+      "code": "returned-full",
+      "display": "Returned to Full Activities",
+      "definition": "Patient has returned to their pre-injury level of sport or occupational activities without restrictions."
+    },
+    {
+      "code": "returned-modified",
+      "display": "Returned to Modified Activities",
+      "definition": "Patient has returned to sport or work but at a reduced or modified level compared to pre-injury status."
+    },
+    {
+      "code": "not-returned",
+      "display": "Not Returned",
+      "definition": "Patient has not returned to pre-injury sport or occupational activities at the time of assessment."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-04-08",
+  "publisher": "Hasso Plattner Institute",
+  "caseSensitive": true,
+  "count": 3
+}

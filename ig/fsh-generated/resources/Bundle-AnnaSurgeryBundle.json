@@ -1,0 +1,458 @@
+{
+  "resourceType": "Bundle",
+  "id": "AnnaSurgeryBundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-surgery-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Encounter/AnnaSurgeryEncounter",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "AnnaSurgeryEncounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "status": "finished",
+        "class": {
+          "code": "IMP",
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "inpatient encounter"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "code": "308335008",
+                "system": "http://snomed.info/sct",
+                "display": "Patient encounter procedure"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "period": {
+          "start": "2024-04-15T07:30:00+02:00",
+          "end": "2024-04-15T11:00:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Procedure/AnnaIndexRepair",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "AnnaIndexRepair",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+          ]
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "code": "387713003",
+              "system": "http://snomed.info/sct",
+              "display": "Surgical procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "code": "699120002",
+              "system": "http://snomed.info/sct",
+              "display": "Arthroscopic repair of rotator cuff"
+            }
+          ],
+          "text": "Arthroscopic rotator cuff repair with suture anchors"
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "performedDateTime": "2024-04-15T09:00:00+02:00",
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "code": "91774008",
+                "system": "http://snomed.info/sct",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Procedure/AnnaConcomitantMumford",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "AnnaConcomitantMumford",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+          ]
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "code": "387713003",
+              "system": "http://snomed.info/sct",
+              "display": "Surgical procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "code": "734057006",
+              "system": "http://snomed.info/sct",
+              "display": "Excision of distal clavicle"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "performedDateTime": "2024-04-15T09:00:00+02:00",
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "code": "91774008",
+                "system": "http://snomed.info/sct",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/AnnaAcJointOa"
+          }
+        ],
+        "partOf": [
+          {
+            "reference": "Procedure/AnnaIndexRepair"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaApproach",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaApproach",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/procedure-approach-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "procedure",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "procedure-approach",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Procedure Approach"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "effectiveDateTime": "2024-04-15",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "arthroscopic",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/procedure-approach",
+              "display": "Arthroscopic"
+            }
+          ]
+        },
+        "partOf": [
+          {
+            "reference": "Procedure/AnnaIndexRepair"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaReconstructionExtent",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaReconstructionExtent",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/reconstruction-extent-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "procedure",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "reconstruction-extent",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Reconstruction Extent"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "effectiveDateTime": "2024-04-15",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "304384006",
+              "system": "http://snomed.info/sct",
+              "display": "Complete repair of rotator cuff"
+            }
+          ]
+        },
+        "partOf": [
+          {
+            "reference": "Procedure/AnnaIndexRepair"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFixation",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFixation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/fixation-technique-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "procedure",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "fixation-technique",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Fixation Technique"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "effectiveDateTime": "2024-04-15",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "single-row",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/fixation-technique",
+              "display": "Single-row fixation"
+            }
+          ]
+        },
+        "partOf": [
+          {
+            "reference": "Procedure/AnnaIndexRepair"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaIntraopTearSize",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaIntraopTearSize",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "tear-size",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Tear Size"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "effectiveDateTime": "2024-04-15T09:45:00+02:00",
+        "valueQuantity": {
+          "value": 3.2,
+          "code": "cm",
+          "system": "http://unitsofmeasure.org",
+          "unit": "cm"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaIntraopCofield",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaIntraopCofield",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-classification-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "tear-size-classification",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Tear Size Classification (Cofield)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "effectiveDateTime": "2024-04-15T09:45:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "large",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+              "display": "Large tear (3–5 cm)"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

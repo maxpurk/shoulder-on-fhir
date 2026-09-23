@@ -1,0 +1,3910 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "shoulder-follow-up",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extr-defn"
+    ]
+  },
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/Questionnaire/shoulder-follow-up",
+  "title": "Shoulder Registry Follow-Up (SDC)",
+  "description": "SDC-conformant Questionnaire for the Shoulder on FHIR registry per-visit\n(longitudinal) submission. Captures one Q11 timepoint's worth of data:\nEncounter, post-operative examination Observations (Q9), and outcome-score\nObservations (Q12 instruments + components a–g).\n\nPatient and Condition are NOT captured, they exist from the prior\nRotatorCuffRegistrationBundle submission. The frontend resolves them in its\nPatientLookup step and injects them via launchContext.\n\nSDC features demonstrated:\n- launchContext + itemPopulationContext + initialExpression: encounter.linkedDiagnosis\n  is a read-only field whose value is resolved live, via FHIRPath, from both\n  the launchContext-declared %patient and the itemPopulationContext-declared\n  %rotatorCuffCondition query, a genuine client-side evaluation of all three\n  extensions, not just their declaration. The Encounter.reasonReference /\n  Observation.subject references actually written into the submitted bundle\n  are wired separately, by LaunchContext in bundleAssembler.ts, this\n  mechanism is additive UX/spec-conformance, not the source of truth for\n  those references.\n- calculatedExpression: Constant-Murley total auto-computes from four\n  sub-scores (pain / ADL / ROM / strength), captured as\n  Observation.component[]. Total and sub-scores are all read-only in this\n  form; the ConstantScoreObservation profile itself still permits a\n  direct total with no components, for sites submitting outside these forms.",
+  "version": "0.4.0",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/artifact-versionAlgorithm",
+      "valueCoding": {
+        "code": "semver",
+        "system": "http://hl7.org/fhir/version-algorithm"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "encounterId"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",
+      "extension": [
+        {
+          "url": "name",
+          "valueCoding": {
+            "code": "patient",
+            "system": "http://hl7.org/fhir/uv/sdc/CodeSystem/launchContext",
+            "display": "Patient"
+          }
+        },
+        {
+          "url": "type",
+          "valueCode": "Patient"
+        },
+        {
+          "url": "description",
+          "valueString": "The patient whose follow-up visit is being recorded, resolved via PatientLookup before form launch."
+        }
+      ]
+    }
+  ],
+  "name": "ShoulderFollowUp",
+  "status": "draft",
+  "subjectType": [
+    "Patient"
+  ],
+  "item": [
+    {
+      "linkId": "encounter",
+      "text": "Follow-Up Encounter",
+      "type": "group",
+      "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+          "extension": [
+            {
+              "url": "definition",
+              "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+            },
+            {
+              "url": "fullUrl",
+              "valueString": "%encounterId"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
+          "valueExpression": {
+            "name": "rotatorCuffCondition",
+            "language": "application/x-fhir-query",
+            "expression": "Condition?subject={{%patient.id}}&_profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.status"
+            },
+            {
+              "url": "fixed-value",
+              "valueCode": "finished"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.class"
+            },
+            {
+              "url": "fixed-value",
+              "valueCoding": {
+                "code": "AMB",
+                "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+                "display": "ambulatory"
+              }
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.subject.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.subject.reference"
+              }
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.reasonReference.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+              }
+            }
+          ]
+        }
+      ],
+      "item": [
+        {
+          "linkId": "encounter.type",
+          "text": "Encounter Type",
+          "type": "choice",
+          "required": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.type",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-encounter-type",
+          "initial": [
+            {
+              "valueCoding": {
+                "code": "390906007",
+                "system": "http://snomed.info/sct",
+                "display": "Follow-up encounter"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "encounter.date",
+          "text": "Visit Date",
+          "type": "dateTime",
+          "required": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter#Encounter.period.start"
+        },
+        {
+          "linkId": "encounter.timepoint",
+          "text": "Q11 Follow-Up Timepoint",
+          "type": "choice",
+          "required": true,
+          "answerOption": [
+            {
+              "valueString": "6 weeks"
+            },
+            {
+              "valueString": "3 months"
+            },
+            {
+              "valueString": "6 months"
+            },
+            {
+              "valueString": "1 year"
+            },
+            {
+              "valueString": "2 years"
+            }
+          ]
+        },
+        {
+          "linkId": "encounter.linkedDiagnosis",
+          "text": "Linked Patient & Diagnosis (confirm before continuing)",
+          "type": "string",
+          "readOnly": true,
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%patient.name.first().family & ': ' & %rotatorCuffCondition.code.coding.first().display & ', ' & %rotatorCuffCondition.bodySite.coding.first().display"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "encounter.conditionId",
+          "text": "Rotator Cuff Condition ID",
+          "type": "string",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%rotatorCuffCondition.id"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "encounter.laterality",
+          "text": "Side",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden",
+              "valueBoolean": true
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%rotatorCuffCondition.bodySite.coding.first()"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "postOpExam",
+      "text": "Post-Operative Examination",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "obs.abduction",
+          "text": "Active Abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 180
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.forward-flexion",
+          "text": "Active Forward Flexion (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 180
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.external-rotation",
+          "text": "Active External Rotation, at side (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.internal-rotation",
+          "text": "Active Internal Rotation, at side (hand behind back)",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.value[x]",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.external-rotation-90-abduction",
+          "text": "Active External Rotation, at 90° abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.internal-rotation-90-abduction",
+          "text": "Active Internal Rotation, at 90° abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-abduction",
+          "text": "Passive Abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 180
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-forward-flexion",
+          "text": "Passive Forward Flexion (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 180
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-external-rotation",
+          "text": "Passive External Rotation, at side (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-internal-rotation",
+          "text": "Passive Internal Rotation, at side (hand behind back)",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.value[x]",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-external-rotation-90-abduction",
+          "text": "Passive External Rotation, at 90° abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.passive-internal-rotation-90-abduction",
+          "text": "Passive Internal Rotation, at 90° abduction (°)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 360
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.supraspinatus-strength",
+          "text": "Supraspinatus Strength (MMT 0–5)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 5
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.external-rotation-strength",
+          "text": "External Rotation Strength (MMT 0–5, Janda)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 5
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.internal-rotation-strength",
+          "text": "Internal Rotation Strength (MMT 0–5, Janda)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 5
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.subscapularis-strength",
+          "text": "Subscapularis Strength (MMT 0–5)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 5
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.supraspinatus-strength-dynamometry",
+          "text": "Supraspinatus Strength (Dynamometry, kg)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 50
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.pain-average",
+          "text": "Pain Severity, On Average (0–10)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 10
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.pain-active-movement",
+          "text": "Pain Severity, With Active Movement (0–10)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 10
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.pain-passive-movement",
+          "text": "Pain Severity, With Passive Movement (0–10)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 10
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.pain-rest",
+          "text": "Pain Severity, At Rest (0–10)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 10
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.jobe-test",
+          "text": "Jobe Test (Supraspinatus)",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "10828004",
+                "system": "http://snomed.info/sct",
+                "display": "Positive"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "260385009",
+                "system": "http://snomed.info/sct",
+                "display": "Negative"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.lift-off-test",
+          "text": "Lift-Off Test (Subscapularis)",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "10828004",
+                "system": "http://snomed.info/sct",
+                "display": "Positive"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "260385009",
+                "system": "http://snomed.info/sct",
+                "display": "Negative"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.belly-press-test",
+          "text": "Belly Press Test (Subscapularis)",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "10828004",
+                "system": "http://snomed.info/sct",
+                "display": "Positive"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "260385009",
+                "system": "http://snomed.info/sct",
+                "display": "Negative"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.atrophy",
+          "text": "Atrophy",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "52101004",
+                "system": "http://snomed.info/sct",
+                "display": "Present"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2667000",
+                "system": "http://snomed.info/sct",
+                "display": "Absent"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.deformity",
+          "text": "Deformity",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "52101004",
+                "system": "http://snomed.info/sct",
+                "display": "Present"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2667000",
+                "system": "http://snomed.info/sct",
+                "display": "Absent"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.normal-shoulder-contour",
+          "text": "Normal Shoulder Contour",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.value[x]",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "52101004",
+                "system": "http://snomed.info/sct",
+                "display": "Present"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "2667000",
+                "system": "http://snomed.info/sct",
+                "display": "Absent"
+              }
+            }
+          ],
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation#Observation.bodySite"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.laterality').answer.value.first()"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "outcomeScores",
+      "text": "Outcome Scores",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "obs.constant-score.pain",
+          "text": "Constant: Pain (0–15), calculated",
+          "type": "decimal",
+          "readOnly": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.component:Pain.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 15
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        },
+        {
+          "linkId": "obs.constant-score.adl",
+          "text": "Constant: Activities of Daily Living (0–20), calculated",
+          "type": "decimal",
+          "readOnly": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.component:ADL.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 20
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        },
+        {
+          "linkId": "obs.constant-score.rom",
+          "text": "Constant: Range of Motion (0–40), calculated",
+          "type": "decimal",
+          "readOnly": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.component:ROM.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 40
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        },
+        {
+          "linkId": "obs.constant-score.strength",
+          "text": "Constant: Strength (0–25), calculated",
+          "type": "decimal",
+          "readOnly": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.component:Strength.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 25
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        },
+        {
+          "linkId": "obs.constant-score",
+          "text": "Constant-Murley Total (0–100), calculated from the four items above",
+          "type": "decimal",
+          "readOnly": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.repeat(item).where(linkId.startsWith('obs.constant-score.')).answer.valueDecimal.sum()"
+              }
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 100
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        },
+        {
+          "linkId": "obs.ssv-score",
+          "text": "Subjective Shoulder Value (0–100)",
+          "type": "decimal",
+          "required": true,
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 100
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation#Observation.focus.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.sane-score",
+          "text": "SANE Score (0–100)",
+          "type": "decimal",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.value[x]",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 100
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation#Observation.focus.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.patient-satisfaction",
+          "text": "Patient Satisfaction",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.value[x]",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/satisfaction-scale",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation#Observation.focus.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "obs.return-to-sport-work",
+          "text": "Return to Sport / Work",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.value[x]",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/return-to-activity",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.status"
+                },
+                {
+                  "url": "fixed-value",
+                  "valueCode": "final"
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.subject.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.subject.reference"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.encounter.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%encounterId"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.effective[x]"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+                  }
+                }
+              ]
+            },
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+              "extension": [
+                {
+                  "url": "definition",
+                  "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation#Observation.focus.reference"
+                },
+                {
+                  "url": "expression",
+                  "valueExpression": {
+                    "language": "text/fhirpath",
+                    "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.pain-normal-activities",
+          "text": "POOS-15: Pain, impact on normal activities",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "none",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "None"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "mild",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Mild"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "moderate",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Moderate"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "severe",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Severe"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.adl-occupation",
+          "text": "POOS-15: ADL, occupation/daily-living limitation",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "none",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "None"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "moderate",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Moderate"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "severe",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Severe"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.adl-leisure",
+          "text": "POOS-15: ADL, leisure/recreation limitation",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "none",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "None"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "moderate",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Moderate"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "severe",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Severe"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.adl-sleep",
+          "text": "POOS-15: ADL, sleep disturbance (due to shoulder)",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "unaffected",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Unaffected"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "occasional",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Occasionally disturbed"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "nightly",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Nightly disturbed"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.adl-arm-use",
+          "text": "POOS-15: ADL, painless arm-use ceiling",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "waist",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Waist"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "xiphoid",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Xiphoid"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "neck",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Neck"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "head",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Head"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "above-head",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Above head"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.rom-external-rotation",
+          "text": "POOS-15: ROM, External Rotation functional position",
+          "type": "choice",
+          "answerOption": [
+            {
+              "valueCoding": {
+                "code": "behind-head-elbow-forward",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Hand behind head, elbow forward"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "behind-head-elbow-back",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Hand behind head, elbow back"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "above-head-elbow-forward",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Hand above head, elbow forward"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "above-head-elbow-back",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Hand above head, elbow back"
+              }
+            },
+            {
+              "valueCoding": {
+                "code": "full-elevation",
+                "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+                "display": "Full elevation"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "constant-calc.power-test",
+          "text": "POOS-15: Constant power test (kg, scaption-plane resisted abduction)",
+          "type": "decimal",
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/maxValue",
+              "valueDecimal": 50
+            },
+            {
+              "url": "http://hl7.org/fhir/StructureDefinition/minValue",
+              "valueDecimal": 0
+            }
+          ]
+        }
+      ],
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+          "extension": [
+            {
+              "url": "definition",
+              "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.status"
+            },
+            {
+              "url": "fixed-value",
+              "valueCode": "final"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.subject.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.subject.reference"
+              }
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.encounter.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%encounterId"
+              }
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.effective[x]"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, iif(%resource.repeat(item).where(linkId='encounter.startDate').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.startDate').answer.value, now()))"
+              }
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation#Observation.focus.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.repeat(item).where(linkId='encounter.conditionId').answer.value.select('Condition/' + $this)"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "reimaging",
+      "text": "Re-imaging (optional)",
+      "type": "group",
+      "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study#ImagingStudy",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtract",
+          "extension": [
+            {
+              "url": "definition",
+              "valueCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext",
+          "valueExpression": {
+            "language": "application/x-fhir-query",
+            "expression": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study#ImagingStudy.status"
+            },
+            {
+              "url": "fixed-value",
+              "valueCode": "available"
+            }
+          ]
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-definitionExtractValue",
+          "extension": [
+            {
+              "url": "definition",
+              "valueUri": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study#ImagingStudy.subject.reference"
+            },
+            {
+              "url": "expression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%resource.subject.reference"
+              }
+            }
+          ]
+        }
+      ],
+      "item": [
+        {
+          "linkId": "reimaging.modality",
+          "text": "Imaging Modality",
+          "type": "choice",
+          "definition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study#ImagingStudy.modality",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/imaging-modality"
+        }
+      ]
+    }
+  ]
+}

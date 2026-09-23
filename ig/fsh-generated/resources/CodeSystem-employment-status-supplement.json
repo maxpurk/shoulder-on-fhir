@@ -1,0 +1,23 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "EmploymentStatusSupplement",
+  "id": "employment-status-supplement",
+  "title": "Employment Status Supplement",
+  "description": "Local code for employment-status distinctions with no apt concept in LOINC's\nofficial answer list for \"Employment status - current\" (67875-5, answer list\nLL1901-9: Unemployed / Employed full time / Employed part time / Homemaker /\nRetired due to age-preference / Retired due to disability / Medical leave of\nabsence / Student, no self-employed distinction). Used together with the\nLOINC LA answer codes in `EmploymentStatus` for\n`EmploymentStatusObservation.valueCodeableConcept`. Same pattern as\n`ShoulderEtiology` supplying `#acute-on-chronic` alongside SNOMED concepts\nfor `RotatorCuffEtiology`.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/employment-status-supplement",
+  "concept": [
+    {
+      "code": "self-employed",
+      "display": "Self-employed",
+      "definition": "Self-employed (Selbständigkeit), distinct from LOINC LL1901-9's 'Employed full time'/'Employed part time', neither of which distinguishes employment status from self-employment. No LOINC answer list found that captures this distinction (verified July 2026)."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-17",
+  "publisher": "Hasso Plattner Institute",
+  "caseSensitive": true,
+  "count": 1
+}

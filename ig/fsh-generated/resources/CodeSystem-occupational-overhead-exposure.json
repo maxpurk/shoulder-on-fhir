@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "OccupationalOverheadExposureCodes",
+  "id": "occupational-overhead-exposure",
+  "title": "Occupational Overhead Exposure",
+  "description": "Whether the patient's occupation regularly involves overhead reaching or\nrepetitive shoulder-loading tasks (Überkopfarbeit), split off from\n`OccupationalPhysicalDemandCodes` as its own independent yes/no/unknown axis\nso that intensity and overhead exposure can be recorded\nsimultaneously (a roofer is both heavy-manual and overhead-exposed; a single\nenum would force an artificial either/or choice).\n\nPart of the unanimous-consensus Q1.k \"Occupation,\" which names no\nmechanism. No SNOMED CT or LOINC concept exists for occupational overhead\nexposure as of authoring (verified July 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-overhead-exposure",
+  "concept": [
+    {
+      "code": "yes",
+      "display": "Regular overhead work",
+      "definition": "Occupation regularly requires overhead reaching or repetitive shoulder-loading tasks."
+    },
+    {
+      "code": "no",
+      "display": "No regular overhead work",
+      "definition": "Occupation does not regularly require overhead reaching or repetitive shoulder-loading."
+    },
+    {
+      "code": "unknown",
+      "display": "Unknown",
+      "definition": "Overhead-exposure status of the occupation is not known or not asked."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 3
+}

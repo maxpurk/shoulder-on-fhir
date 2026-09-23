@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PatteClassification",
+  "id": "patte-classification",
+  "title": "Patte Classification ValueSet",
+  "description": "ValueSet containing all Patte classification stages for rotator cuff tendon retraction.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/patte-classification",
+  "version": "0.1.1",
+  "experimental": true,
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+        "concept": [
+          {
+            "code": "I",
+            "display": "Stage I - Retracted tendon end at the bony insertion"
+          },
+          {
+            "code": "II",
+            "display": "Stage II - Retracted tendon end at the humeral head"
+          },
+          {
+            "code": "III",
+            "display": "Stage III - Retracted tendon end at the glenoid"
+          }
+        ]
+      }
+    ]
+  }
+}

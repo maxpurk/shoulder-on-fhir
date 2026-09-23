@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-passive-internal-rotation-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation",
+  "version": "0.2.0",
+  "name": "ShoulderPassiveInternalRotationObservation",
+  "title": "Shoulder Internal Rotation Passive Range of Motion Observation",
+  "status": "draft",
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting passive shoulder internal rotation at the side\n(adducted position), recorded by the \"hand behind back\" functional reach\ntest, the highest vertebral landmark the examiner can passively bring the\npatient's hand to, on an eight-tier ordinal (InternalRotationVertebralLevel).\nCovers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\nThe reach test is the measure used in clinical practice. It reuses most of the\nConstant-Murley score's own internal-rotation landmarks and adds finer rungs, so\nderiving the Constant range-of-motion sub-score from it applies a documented\nlossy remapping. It is preferred here\nbecause at-side internal rotation is confounded by scapulothoracic\nsubstitution and trunk rotation, which makes a goniometric degree value\nclinically unreliable. Internal rotation measured at 90° abduction is a\ncontrolled, goniometer-reliable position and stays degree-valued; see\nShoulderPassiveInternalRotation90AbductionObservation.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nvertebral-level internal-rotation scale (verified July 2026).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "passive-internal-rotation",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level"
+        }
+      }
+    ]
+  }
+}

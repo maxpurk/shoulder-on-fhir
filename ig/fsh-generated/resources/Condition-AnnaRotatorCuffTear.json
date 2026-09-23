@@ -1,0 +1,103 @@
+{
+  "resourceType": "Condition",
+  "id": "AnnaRotatorCuffTear",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "code": "confirmed",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "display": "Confirmed"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "encounter-diagnosis",
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "926335004",
+        "system": "http://snomed.info/sct",
+        "display": "Rupture of rotator cuff of shoulder"
+      }
+    ],
+    "text": "Full-thickness supraspinatus tendon tear, right shoulder"
+  },
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/condition-dueTo",
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "code": "362975008",
+            "system": "http://snomed.info/sct",
+            "display": "Degenerative disorder"
+          }
+        ]
+      }
+    }
+  ],
+  "clinicalStatus": {
+    "coding": [
+      {
+        "code": "active",
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+      }
+    ]
+  },
+  "bodySite": [
+    {
+      "coding": [
+        {
+          "code": "91774008",
+          "system": "http://snomed.info/sct",
+          "display": "Structure of right shoulder region"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "onsetDateTime": "2023-12-22",
+  "recordedDate": "2024-01-08",
+  "stage": [
+    {
+      "assessment": [
+        {
+          "reference": "Observation/AnnaPatte"
+        },
+        {
+          "reference": "Observation/AnnaGoutallier"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "detail": [
+        {
+          "reference": "Observation/AnnaTendonSupraspinatus"
+        },
+        {
+          "reference": "Observation/AnnaTearLocation"
+        },
+        {
+          "reference": "Observation/AnnaTearThickness"
+        }
+      ]
+    }
+  ]
+}

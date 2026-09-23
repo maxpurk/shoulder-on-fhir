@@ -1,0 +1,75 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "reconstruction-extent-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/reconstruction-extent-observation",
+  "version": "0.1.0",
+  "name": "ReconstructionExtentObservation",
+  "title": "Reconstruction Extent Observation",
+  "status": "draft",
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the extent of the index rotator cuff procedure, partial reconstruction, complete reconstruction, or shoulder prosthesis\n(anatomic or reverse total arthroplasty), decoupled from `Procedure.code`\nin a postcoordination style mirroring the diagnosis-side \"one axis, one\nelement\" pattern. Linked to the specific\n`RotatorCuffProcedure` it describes via `Observation.partOf`.\n\nLayer 2 (IG-operational) addition: the expert consensus never names the\nextent of reconstruction. `valueCodeableConcept` is `required`-bound\nto `ReconstructionExtent`, four precoordinated SNOMED CT concepts, reused\nas Observation values (the same reuse pattern `TearThicknessObservation`\nalready applies).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.partOf",
+        "path": "Observation.partOf",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "procedure",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Procedure"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "reconstruction-extent",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/reconstruction-extent"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "CofieldTearSizeClassification",
+  "id": "cofield-tear-size-classification",
+  "title": "Cofield Tear Size Classification ValueSet",
+  "description": "ValueSet containing all four Cofield rotator cuff tear-size categories (small / medium / large / massive). Bound to Observation.valueCodeableConcept in TearSizeClassificationObservation (pre-operative, from imaging) and IntraopTearSizeClassificationObservation (intra-operative).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/cofield-tear-size-classification",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-19",
+  "publisher": "Hasso Plattner Institute",
+  "copyright": "See CofieldTearSizeClassificationCodes copyright.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+        "concept": [
+          {
+            "code": "small",
+            "display": "Small tear (<1 cm)"
+          },
+          {
+            "code": "medium",
+            "display": "Medium tear (1–3 cm)"
+          },
+          {
+            "code": "large",
+            "display": "Large tear (3–5 cm)"
+          },
+          {
+            "code": "massive",
+            "display": "Massive tear (>5 cm)"
+          }
+        ]
+      }
+    ]
+  }
+}

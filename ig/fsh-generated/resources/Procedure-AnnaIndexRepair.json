@@ -1,0 +1,53 @@
+{
+  "resourceType": "Procedure",
+  "id": "AnnaIndexRepair",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+      "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+    ]
+  },
+  "status": "completed",
+  "category": {
+    "coding": [
+      {
+        "code": "387713003",
+        "system": "http://snomed.info/sct",
+        "display": "Surgical procedure"
+      }
+    ]
+  },
+  "code": {
+    "coding": [
+      {
+        "code": "699120002",
+        "system": "http://snomed.info/sct",
+        "display": "Arthroscopic repair of rotator cuff"
+      }
+    ],
+    "text": "Arthroscopic rotator cuff repair with suture anchors"
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaSurgeryEncounter"
+  },
+  "performedDateTime": "2024-04-15T09:00:00+02:00",
+  "bodySite": [
+    {
+      "coding": [
+        {
+          "code": "91774008",
+          "system": "http://snomed.info/sct",
+          "display": "Structure of right shoulder region"
+        }
+      ]
+    }
+  ],
+  "reasonReference": [
+    {
+      "reference": "Condition/AnnaRotatorCuffTear"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ShoulderLaterality",
+  "id": "shoulder-laterality",
+  "title": "Shoulder Laterality ValueSet",
+  "description": "ValueSet for shoulder laterality (left, right). Used in bodySite to specify which shoulder is affected.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-12",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "91775009",
+            "display": "Structure of left shoulder region"
+          },
+          {
+            "code": "91774008",
+            "display": "Structure of right shoulder region"
+          }
+        ]
+      }
+    ]
+  }
+}

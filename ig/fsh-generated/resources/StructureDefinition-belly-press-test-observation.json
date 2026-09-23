@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "belly-press-test-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation",
+  "version": "0.1.0",
+  "name": "BellyPressTestObservation",
+  "title": "Belly Press Test Observation",
+  "status": "draft",
+  "date": "2026-05-12",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the result of the Belly Press subscapularis provocation test. Covers expert consensus Q2.g (pre-treatment) and Q9.g (post-treatment); pre/post differentiation is by effectiveDateTime.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "belly-press-test",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative"
+        }
+      }
+    ]
+  }
+}

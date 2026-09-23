@@ -1,0 +1,75 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "procedure-approach-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/procedure-approach-observation",
+  "version": "0.1.0",
+  "name": "ProcedureApproachObservation",
+  "title": "Procedure Approach Observation",
+  "status": "draft",
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the surgical approach (arthroscopic / open /\nmini-open) used for a specific rotator cuff procedure, decoupled from\n`Procedure.code`, which today bakes approach into fused precoordinated\ncodes (see `ProcedureApproachCodes` for the rationale). Linked to the\nspecific `RotatorCuffProcedure` it describes via `Observation.partOf`\n(base FHIR, a Surgery-bundle encounter can carry an index procedure plus\n0..* concomitant procedures, so the link must be unambiguous).\n\nLayer 2 (IG-operational) addition: the expert consensus never enumerates\nprocedure technique. `valueCodeableConcept` is `required`-bound to\n`ProcedureApproach` (fully local, no SNOMED CT concept exists for a\nstandalone \"arthroscopic approach\" qualifier, verified July 2026).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.partOf",
+        "path": "Observation.partOf",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "procedure",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Procedure"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "procedure-approach",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/procedure-approach"
+        }
+      }
+    ]
+  }
+}

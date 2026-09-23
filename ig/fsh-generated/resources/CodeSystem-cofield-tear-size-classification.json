@@ -1,0 +1,43 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "CofieldTearSizeClassificationCodes",
+  "id": "cofield-tear-size-classification",
+  "title": "Cofield Tear Size Classification",
+  "description": "Categorical classification of rotator cuff tear size as defined by DeOrio and Cofield\n(1984) and universally adopted in shoulder surgery literature: small (<1 cm), medium (1–3 cm),\nlarge (3–5 cm), massive (>5 cm). The bucket boundaries are measured on the maximum\ntear diameter, either on MRI or intra-operatively. This CodeSystem is authored because\nno equivalent codes exist in SNOMED CT, LOINC, RadLex, or NCI Thesaurus as of the\nauthoring date of this IG (exhaustive search documented in the IG source repository).\nSibling concept to the linear-cm `TearSizeObservation`, both encode expert consensus Q4.a\n(\"Size\") and are intended to be captured together when known.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+  "concept": [
+    {
+      "code": "small",
+      "display": "Small tear (<1 cm)",
+      "definition": "Small rotator cuff tear with a maximum diameter less than 1 cm. Measured on the\nlargest dimension of the tear, either on MRI or intra-operatively."
+    },
+    {
+      "code": "medium",
+      "display": "Medium tear (1–3 cm)",
+      "definition": "Medium rotator cuff tear with a maximum diameter between 1 cm and 3 cm inclusive\nof the lower bound and exclusive of the upper bound. Measured on the largest\ndimension of the tear, either on MRI or intra-operatively."
+    },
+    {
+      "code": "large",
+      "display": "Large tear (3–5 cm)",
+      "definition": "Large rotator cuff tear with a maximum diameter between 3 cm and 5 cm inclusive\nof the lower bound and exclusive of the upper bound. Measured on the largest\ndimension of the tear, either on MRI or intra-operatively."
+    },
+    {
+      "code": "massive",
+      "display": "Massive tear (>5 cm)",
+      "definition": "Massive rotator cuff tear with a maximum diameter greater than 5 cm, frequently\ninvolving more than one tendon of the rotator cuff. Measured on the largest\ndimension of the tear, either on MRI or intra-operatively. Generally associated\nwith chronicity, fatty infiltration (cf. Goutallier), and poorer surgical prognosis."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-19",
+  "publisher": "Hasso Plattner Institute",
+  "purpose": "To enable coded representation of the Cofield categorical tear-size bucket in FHIR Observation resources within the Shoulder on FHIR Implementation Guide, alongside the continuous linear measurement (cm) captured by TearSizeObservation.",
+  "copyright": "This CodeSystem is authored by the Shoulder on FHIR IG project. Clinical classification originates from: DeOrio JK, Cofield RH. Results of a second attempt at surgical repair of a failed initial rotator-cuff repair. J Bone Joint Surg Am. 1984;66(4):563–7.",
+  "caseSensitive": true,
+  "hierarchyMeaning": "is-a",
+  "compositional": false,
+  "versionNeeded": false,
+  "count": 4
+}

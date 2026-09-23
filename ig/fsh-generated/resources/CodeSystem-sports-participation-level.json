@@ -1,0 +1,38 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "SportsParticipationLevelCodes",
+  "id": "sports-participation-level",
+  "title": "Sports Participation Level",
+  "description": "Four-tier ordinal grading the patient's pre-treatment level of sports\nparticipation, the sports-medicine return-to-sport stratification\n(none / recreational / competitive / professional), coarsely comparable to\nDART's `DEM-08` \"Activity level (pre-injury)\" enum and to the Tegner\nActivity Scale, without importing Tegner's lower-limb-oriented item\ndescriptors, which do not transfer to a shoulder registry.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nsports-participation-level scale as of authoring (verified July 2026):\nSNOMED CT `social_context` has no match for \"sports participation\" or\n\"competitive sport\"; SNOMED `observable_entity` has candidate axis codes\n(e.g. `68130003` Physical activity, `256235009` Exercise) but no\nprecoordinated grade values; LOINC's answer-list `LL6103-7` (\"Physical\nactivity levels\") has no corresponding bindable FHIR ValueSet and no\nsports-specific question code. Local codes are used in the interim.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sports-participation-level",
+  "concept": [
+    {
+      "code": "none",
+      "display": "Does not participate in sport",
+      "definition": "Patient does not participate in any regular sport pre-treatment."
+    },
+    {
+      "code": "recreational",
+      "display": "Recreational / leisure sport",
+      "definition": "Patient participates in sport at a recreational or leisure level (unorganized, non-competitive)."
+    },
+    {
+      "code": "competitive",
+      "display": "Competitive / organized sport",
+      "definition": "Patient participates in organized, competitive sport at a club or amateur-league level."
+    },
+    {
+      "code": "professional",
+      "display": "Professional / elite sport",
+      "definition": "Patient participates in sport at a professional or elite competitive level."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-18",
+  "caseSensitive": true,
+  "count": 4
+}

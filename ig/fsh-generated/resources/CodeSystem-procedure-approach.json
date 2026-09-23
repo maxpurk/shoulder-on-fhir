@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "ProcedureApproachCodes",
+  "id": "procedure-approach",
+  "title": "Procedure Approach",
+  "description": "Surgical approach used for the procedure, arthroscopic, open, or mini-open\n(arthroscopic-assisted with a small open incision). Layer 2 (IG-operational)\naddition, decoupled from `Procedure.code` in a postcoordination style\nmirroring the diagnosis-side decoupling: `RotatorCuffProcedureType` bakes\napproach into fused codes (e.g. SNOMED `699120002` \"Arthroscopic repair of rotator cuff\" vs.\n`56060000` \"Repair of musculotendinous cuff of shoulder\" for the open\nequivalent), which cannot represent approach and reconstruction-extent\nindependently.\n\nFully local rather than mixed-system: SNOMED CT has a generic `129236007`\n\"Open approach - access\" qualifier, but no equivalent standalone\n\"arthroscopic approach\" qualifier exists, SNOMED instead bakes\n\"arthroscopic\" into whole-procedure concepts (verified July 2026 against a\nlive SNOMED CT terminology server). Keeping all three tiers on one local CodeSystem avoids an\ninternally inconsistent mix of one real code and two invented ones.\n\nLayer 2 (IG-operational) addition: the expert consensus (Q1-Q13) never\nenumerates procedure technique.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/procedure-approach",
+  "concept": [
+    {
+      "code": "arthroscopic",
+      "display": "Arthroscopic",
+      "definition": "Fully arthroscopic (all-portal) approach."
+    },
+    {
+      "code": "open",
+      "display": "Open",
+      "definition": "Traditional open surgical approach."
+    },
+    {
+      "code": "mini-open",
+      "display": "Mini-open",
+      "definition": "Arthroscopic-assisted approach with a small open incision for the repair/reconstruction step."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 3
+}

@@ -1,0 +1,882 @@
+{
+  "resourceType": "Bundle",
+  "id": "AnnaRegistrationBundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-registration-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "ambulatory"
+        },
+        "resourceType": "Encounter",
+        "id": "AnnaRegistrationEncounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "code": "185349003",
+                "system": "http://snomed.info/sct",
+                "display": "Encounter for check up"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "period": {
+          "start": "2024-01-08T09:00:00+01:00",
+          "end": "2024-01-08T09:45:00+01:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ],
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/AnnaRotatorCuffTear"
+            },
+            "rank": 1
+          },
+          {
+            "condition": {
+              "reference": "Condition/AnnaAcJointOa"
+            },
+            "rank": 2
+          }
+        ]
+      },
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Encounter/AnnaRegistrationEncounter",
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Patient/AnnaMueller",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "AnnaMueller",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+          ]
+        },
+        "identifier": [
+          {
+            "system": "https://maxpurk.github.io/shoulder-on-fhir/identifier/patient",
+            "value": "PAT-LONG-001"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Müller",
+            "given": [
+              "Anna"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1971-04-12",
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Bertha-von-Suttner-Allee 7"
+            ],
+            "city": "Potsdam",
+            "postalCode": "14471",
+            "country": "DE"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Condition/AnnaRotatorCuffTear",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "AnnaRotatorCuffTear",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "code": "confirmed",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "encounter-diagnosis",
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "926335004",
+              "system": "http://snomed.info/sct",
+              "display": "Rupture of rotator cuff of shoulder"
+            }
+          ],
+          "text": "Full-thickness supraspinatus tendon tear, right shoulder"
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/condition-dueTo",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "code": "362975008",
+                  "system": "http://snomed.info/sct",
+                  "display": "Degenerative disorder"
+                }
+              ]
+            }
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+            }
+          ]
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "code": "91774008",
+                "system": "http://snomed.info/sct",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "onsetDateTime": "2023-12-22",
+        "recordedDate": "2024-01-08",
+        "stage": [
+          {
+            "assessment": [
+              {
+                "reference": "Observation/AnnaPatte"
+              },
+              {
+                "reference": "Observation/AnnaGoutallier"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "detail": [
+              {
+                "reference": "Observation/AnnaTendonSupraspinatus"
+              },
+              {
+                "reference": "Observation/AnnaTearLocation"
+              },
+              {
+                "reference": "Observation/AnnaTearThickness"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Condition/AnnaAcJointOa",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "AnnaAcJointOa",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "encounter-diagnosis",
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+              }
+            ]
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "code": "active",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "code": "confirmed",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "code": "239865003",
+              "system": "http://snomed.info/sct",
+              "display": "Osteoarthritis of acromioclavicular joint"
+            }
+          ],
+          "text": "Mild AC joint osteoarthritis, right shoulder"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "code": "91774008",
+                "system": "http://snomed.info/sct",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "recordedDate": "2024-01-08"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/ImagingStudy/AnnaShoulderMri",
+      "resource": {
+        "resourceType": "ImagingStudy",
+        "id": "AnnaShoulderMri",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+          ]
+        },
+        "status": "available",
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "started": "2024-01-22T11:00:00+01:00",
+        "modality": [
+          {
+            "code": "MR",
+            "system": "http://dicom.nema.org/resources/ontology/DCM",
+            "display": "Magnetic Resonance"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "ImagingStudy"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaTendonSupraspinatus",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaTendonSupraspinatus",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tendons-involved-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "imaging",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "tendons-involved",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Tendons Involved"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "5580002",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of tendon of supraspinatus muscle"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "method": {
+          "text": "MRI assessment"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaTearLocation",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaTearLocation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-location-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "imaging",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "tear-location",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Tear Location"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "insertion-near",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+              "display": "Near the insertion (footprint)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "method": {
+          "text": "MRI assessment"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaTearThickness",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaTearThickness",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-thickness-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "imaging",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "tear-thickness",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Tear Thickness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "202843000",
+              "system": "http://snomed.info/sct",
+              "display": "Full thickness rotator cuff tear"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "method": {
+          "text": "MRI assessment"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaPatte",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaPatte",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patte-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "imaging",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "patte-classification",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Patte Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "II",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+              "display": "Stage II - Retracted tendon end at the humeral head"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "method": {
+          "text": "MRI assessment"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaGoutallier",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaGoutallier",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/goutallier-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "imaging",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "goutallier-classification",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Goutallier Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "1",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/goutallier-classification",
+              "display": "Grade 1 – Some fatty streaks"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "method": {
+          "text": "MRI assessment - supraspinatus muscle"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFlexionBaseline",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFlexionBaseline",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "41389-8",
+              "system": "http://loinc.org",
+              "display": "Shoulder Flexion Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 110,
+          "code": "deg",
+          "system": "http://unitsofmeasure.org",
+          "unit": "degrees"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaHandDominance",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaHandDominance",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "social-history",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "57427004",
+              "system": "http://snomed.info/sct",
+              "display": "Handedness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "code": "46669005",
+              "system": "http://snomed.info/sct",
+              "display": "Right handed"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaConstantBaseline",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaConstantBaseline",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "survey",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "273383002",
+              "system": "http://snomed.info/sct",
+              "display": "Constant and Murley shoulder assessment score"
+            }
+          ]
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "constant-score-pain",
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 4,
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "unit": "points"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "constant-score-adl",
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 4,
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "unit": "points"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "constant-score-rom",
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 20,
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "unit": "points"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "code": "constant-score-strength",
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 10,
+              "code": "{score}",
+              "system": "http://unitsofmeasure.org",
+              "unit": "points"
+            }
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "focus": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ],
+        "valueQuantity": {
+          "value": 38,
+          "code": "{score}",
+          "system": "http://unitsofmeasure.org",
+          "unit": "points"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

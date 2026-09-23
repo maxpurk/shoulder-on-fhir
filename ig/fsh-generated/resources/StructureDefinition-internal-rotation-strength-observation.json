@@ -1,0 +1,76 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "internal-rotation-strength-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation",
+  "version": "0.1.0",
+  "name": "InternalRotationStrengthObservation",
+  "title": "Internal Rotation Strength Observation",
+  "status": "draft",
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting composite internal-rotation strength on the 0–5\nmanual muscle testing scale (Janda grading; equivalent to MRC /\nDaniels-Worthingham 0–5). Tested at 0° abduction with elbow flexed at 90°;\nresisted internal rotation, the structural mirror of\nExternalRotationStrengthObservation's tested position. Reflects combined\nsubscapularis + secondary internal rotator (pectoralis major / latissimus\ndorsi / teres major) function.\n\nClinically distinct from subscapularis-specific isolation testing\n(#subscapularis-strength, lift-off/belly-press), which uses\nan internally-rotated/behind-the-back position to unload the secondary\ninternal rotators and isolate subscapularis tendon integrity specifically.\nComposite resisted-IR-at-neutral strength is sensitive to global\ninternal-rotator weakness; lift-off/belly-press is sensitive to\nsubscapularis-tendon-specific competence, a positive lift-off/belly-press\nwith normal composite IR strength points specifically at the subscapularis.\nBoth are captured as independent sibling profiles; neither is redundant with\nthe other.\n\nCovers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d\n(post-treatment). No LOINC or SNOMED CT code exists\nfor a \"Janda\" grading eponym (verified July 2026; nearest standard concept\nis the generic SNOMED CT observable entity `249956007` \"MRC grade - muscle\npower\", not bound here since this IG's local axis-per-muscle codes are more\nclinically specific), a local code is used.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "internal-rotation-strength",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 5,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "{score}"
+      }
+    ]
+  }
+}

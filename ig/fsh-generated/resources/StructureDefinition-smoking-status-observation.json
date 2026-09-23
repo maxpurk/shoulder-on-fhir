@@ -1,0 +1,61 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "smoking-status-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/smoking-status-observation",
+  "version": "0.1.0",
+  "name": "SmokingStatusObservation",
+  "title": "Smoking Status Observation",
+  "status": "draft",
+  "date": "2026-05-22",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the patient's tobacco smoking status, expert consensus\nQ1.d (unanimous consensus, required patient-history element).\n\n`Observation.code` is LOINC `72166-2` (Tobacco smoking status), matching the\nIPS `Observation-tobaccouse-uv-ips` profile. `valueCodeableConcept` is\nextensible-bound to IPS `CurrentSmokingStatusUvIps`, which IPS 1.1.0\npublishes as a LOINC answer-list value set (8 `LA*` codes). The IG tightens\nIPS's `preferred` to `extensible` for registry-comparability: a single-jurisdiction\nsurgical registry needs the validator to enforce the encoding, not merely\nencourage it. IPS ships a `loinc-smoking-status-to-snomed-ct-uv-ips` concept\nmap for exporters that need SNOMED downstream; that translation is not\ninline in this profile.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "social-history",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Social History"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "72166-2",
+              "system": "http://loinc.org",
+              "display": "Tobacco smoking status"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "http://hl7.org/fhir/uv/ips/ValueSet/current-smoking-status-uv-ips"
+        }
+      }
+    ]
+  }
+}

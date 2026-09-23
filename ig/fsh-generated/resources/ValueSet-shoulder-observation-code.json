@@ -1,0 +1,90 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ShoulderObservationCode",
+  "id": "shoulder-observation-code",
+  "title": "Shoulder Observation Code ValueSet",
+  "description": "Codes for shoulder-related observations: all local ShoulderObservationCodes concepts plus the LOINC and SNOMED CT codes fixed by derived Observation profiles (ROM, PROMs, and patient-history items).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-observation-code",
+  "version": "0.1.9",
+  "experimental": true,
+  "date": "2026-08-03",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+      },
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "41389-8",
+            "display": "Shoulder Flexion Active Range of Motion Quantitative"
+          },
+          {
+            "code": "41390-6",
+            "display": "Shoulder Flexion Passive Range of Motion Quantitative"
+          },
+          {
+            "code": "41381-5",
+            "display": "Shoulder Abduction Active Range of Motion Quantitative"
+          },
+          {
+            "code": "41382-3",
+            "display": "Shoulder Abduction Passive Range of Motion Quantitative"
+          },
+          {
+            "code": "41387-2",
+            "display": "Shoulder External rotation Active Range of Motion Quantitative"
+          },
+          {
+            "code": "41388-0",
+            "display": "Shoulder External rotation Passive Range of Motion Quantitative"
+          },
+          {
+            "code": "72166-2",
+            "display": "Tobacco smoking status"
+          },
+          {
+            "code": "67875-5",
+            "display": "Employment status - current"
+          },
+          {
+            "code": "77218-6",
+            "display": "Patient satisfaction with healthcare delivery"
+          }
+        ]
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "273383002",
+            "display": "Constant and Murley shoulder assessment score"
+          },
+          {
+            "code": "111263009",
+            "display": "Acquired deformity of shoulder"
+          },
+          {
+            "code": "57427004",
+            "display": "Handedness"
+          },
+          {
+            "code": "1231437004",
+            "display": "Empty can test"
+          },
+          {
+            "code": "1231510004",
+            "display": "Lift-off test"
+          },
+          {
+            "code": "782516008",
+            "display": "Number of calculated smoking pack years"
+          }
+        ]
+      }
+    ]
+  }
+}

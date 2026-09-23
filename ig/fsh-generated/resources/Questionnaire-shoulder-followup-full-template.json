@@ -1,0 +1,3837 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "shoulder-followup-full-template",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extr-template"
+    ]
+  },
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/Questionnaire/shoulder-followup-full-template",
+  "title": "Shoulder Registry Follow-Up (SDC, complete template extraction)",
+  "description": "The complete follow-up visit submission, extracted from a contained Bundle template.\nProduces a Bundle labelled with the profile it claims, carrying the resources\nthe example it was generated from contains. That is a subset of what the profile\nallows, not all of it.",
+  "name": "ShoulderFollowUpFullTemplate",
+  "version": "0.1.0",
+  "status": "draft",
+  "subjectType": [
+    "Patient"
+  ],
+  "derivedFrom": [
+    "https://maxpurk.github.io/shoulder-on-fhir/Questionnaire/shoulder-follow-up"
+  ],
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/StructureDefinition/artifact-versionAlgorithm",
+      "valueCoding": {
+        "code": "semver",
+        "system": "http://hl7.org/fhir/version-algorithm"
+      }
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-launchContext",
+      "extension": [
+        {
+          "url": "name",
+          "valueCoding": {
+            "code": "patient",
+            "system": "http://hl7.org/fhir/uv/sdc/CodeSystem/launchContext",
+            "display": "Patient"
+          }
+        },
+        {
+          "url": "type",
+          "valueCode": "Patient"
+        },
+        {
+          "url": "description",
+          "valueString": "The patient this submission is about."
+        }
+      ]
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "encounterId"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderFlexion1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderAbduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "SupraspinatusStrength1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "PainAverage1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ConstantScore1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "SsvScore1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "PatientSatisfaction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ReturnToActivity1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderExternalRotation1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderInternalRotation1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderExternalRotation90Abduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderInternalRotation90Abduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "SupraspinatusStrengthDynamometry1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ExternalRotationStrength1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "InternalRotationStrength1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "SubscapularisStrength1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "JobeTest1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "LiftOffTest1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "BellyPressTest1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveFlexion1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveAbduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveExternalRotation1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveInternalRotation1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveExternalRotation90Abduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "ShoulderPassiveInternalRotation90Abduction1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "PainActiveMovement1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "PainPassiveMovement1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "PainRest1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-extractAllocateId",
+      "valueString": "SaneScore1"
+    },
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractBundle",
+      "valueReference": {
+        "reference": "#submissionBundle"
+      }
+    }
+  ],
+  "contained": [
+    {
+      "resourceType": "Bundle",
+      "id": "submissionBundle",
+      "meta": {
+        "profile": [
+          "http://hl7.org/fhir/StructureDefinition/Bundle"
+        ],
+        "_profile": [
+          {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "'https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-follow-up-bundle'"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "transaction",
+      "entry": [
+        {
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000000",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%encounterId"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Encounter",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+              ]
+            },
+            "status": "finished",
+            "class": {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "AMB",
+              "display": "ambulatory"
+            },
+            "type": [
+              {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "390906007",
+                    "display": "Follow-up encounter"
+                  }
+                ]
+              }
+            ],
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "period": {
+              "start": "2025-04-15T11:00:00+02:00",
+              "_start": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                  }
+                ]
+              },
+              "end": "2025-04-15T11:35:00+02:00",
+              "_end": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='encounter.endDate').answer.value"
+                  }
+                ]
+              }
+            },
+            "reasonReference": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "request": {
+            "method": "POST",
+            "url": "Encounter"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-flexion').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000001",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderFlexion1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41389-8",
+                  "display": "Shoulder Flexion Active Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 170,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-flexion').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000002",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderAbduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41381-5",
+                  "display": "Shoulder Abduction Active Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 165,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.supraspinatus-strength').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000003",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%SupraspinatusStrength1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "supraspinatus-strength",
+                  "display": "Supraspinatus Strength"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 5,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.supraspinatus-strength').answer.value"
+                  }
+                ]
+              },
+              "unit": "MMT grade",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.pain-average').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000004",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%PainAverage1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "pain-average",
+                  "display": "Pain Severity — On Average"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 1,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.pain-average').answer.value"
+                  }
+                ]
+              },
+              "unit": "pain score",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.constant-score').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000005",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ConstantScore1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "survey",
+                    "display": "Survey"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "273383002",
+                  "display": "Constant and Murley shoulder assessment score"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "focus": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ],
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 86,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.constant-score').answer.value"
+                  }
+                ]
+              },
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "component": [
+              {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                      "code": "constant-score-pain",
+                      "display": "Constant-Murley: Pain (0-15)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": 13,
+                  "_value": {
+                    "extension": [
+                      {
+                        "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                        "valueString": "%resource.repeat(item).where(linkId='obs.constant-score.constant-score-pain').answer.value"
+                      }
+                    ]
+                  },
+                  "unit": "points",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              },
+              {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                      "code": "constant-score-adl",
+                      "display": "Constant-Murley: Activities of Daily Living (0-20)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": 18,
+                  "_value": {
+                    "extension": [
+                      {
+                        "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                        "valueString": "%resource.repeat(item).where(linkId='obs.constant-score.constant-score-adl').answer.value"
+                      }
+                    ]
+                  },
+                  "unit": "points",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              },
+              {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                      "code": "constant-score-rom",
+                      "display": "Constant-Murley: Range of Motion (0-40)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": 36,
+                  "_value": {
+                    "extension": [
+                      {
+                        "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                        "valueString": "%resource.repeat(item).where(linkId='obs.constant-score.constant-score-rom').answer.value"
+                      }
+                    ]
+                  },
+                  "unit": "points",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              },
+              {
+                "code": {
+                  "coding": [
+                    {
+                      "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                      "code": "constant-score-strength",
+                      "display": "Constant-Murley: Strength (0-25)"
+                    }
+                  ]
+                },
+                "valueQuantity": {
+                  "value": 19,
+                  "_value": {
+                    "extension": [
+                      {
+                        "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                        "valueString": "%resource.repeat(item).where(linkId='obs.constant-score.constant-score-strength').answer.value"
+                      }
+                    ]
+                  },
+                  "unit": "points",
+                  "system": "http://unitsofmeasure.org",
+                  "code": "{score}"
+                }
+              }
+            ]
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000006",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%SsvScore1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "survey",
+                    "display": "Survey"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "ssv-score",
+                  "display": "Subjective Shoulder Value"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "focus": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ],
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 88,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.ssv-score').answer.value"
+                  }
+                ]
+              },
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.patient-satisfaction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000007",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%PatientSatisfaction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "survey",
+                    "display": "Survey"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "77218-6",
+                  "display": "Patient satisfaction with healthcare delivery"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "focus": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ],
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "LA27754-3",
+                  "display": "Completely satisfied",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.patient-satisfaction').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.return-to-activity').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000008",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ReturnToActivity1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "survey",
+                    "display": "Survey"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "return-to-sport-work",
+                  "display": "Return to Sport/Work"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "focus": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ],
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/return-to-activity",
+                  "code": "returned-full",
+                  "display": "Returned to Full Activities",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.return-to-activity').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-external-rotation').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000009",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderExternalRotation1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41387-2",
+                  "display": "Shoulder External rotation Active Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 75,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-external-rotation').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-internal-rotation').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000010",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderInternalRotation1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "internal-rotation",
+                  "display": "Internal Rotation (at side, active)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+                  "code": "l3",
+                  "display": "L3 (waist)",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-internal-rotation').answer.value"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-external-rotation-90-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000011",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderExternalRotation90Abduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "external-rotation-90-abduction",
+                  "display": "External Rotation at 90° Abduction (active)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 85,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-external-rotation-90-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-internal-rotation-90-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000012",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderInternalRotation90Abduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "internal-rotation-90-abduction",
+                  "display": "Internal Rotation at 90° Abduction (active)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 55,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-internal-rotation-90-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.supraspinatus-strength-dynamometry').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000013",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%SupraspinatusStrengthDynamometry1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "supraspinatus-strength-dynamometry",
+                  "display": "Supraspinatus Strength (Dynamometry)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 9.5,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.supraspinatus-strength-dynamometry').answer.value"
+                  }
+                ]
+              },
+              "unit": "kilograms",
+              "system": "http://unitsofmeasure.org",
+              "code": "kg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.external-rotation-strength').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000014",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ExternalRotationStrength1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "external-rotation-strength",
+                  "display": "External Rotation Strength (Composite: Infraspinatus + Teres Minor)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 5,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.external-rotation-strength').answer.value"
+                  }
+                ]
+              },
+              "unit": "MMT grade",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.internal-rotation-strength').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000015",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%InternalRotationStrength1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "internal-rotation-strength",
+                  "display": "Internal Rotation Strength (Composite)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 5,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.internal-rotation-strength').answer.value"
+                  }
+                ]
+              },
+              "unit": "MMT grade",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.subscapularis-strength').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000016",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%SubscapularisStrength1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "subscapularis-strength",
+                  "display": "Subscapularis Strength"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 5,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.subscapularis-strength').answer.value"
+                  }
+                ]
+              },
+              "unit": "MMT grade",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.jobe-test').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000017",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%JobeTest1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "1231437004",
+                  "display": "Empty can test"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "260385009",
+                  "display": "Negative",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.jobe-test').answer.value"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.lift-off-test').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000018",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%LiftOffTest1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "1231510004",
+                  "display": "Lift-off test"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "260385009",
+                  "display": "Negative",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.lift-off-test').answer.value"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.belly-press-test').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000019",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%BellyPressTest1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "belly-press-test",
+                  "display": "Belly Press Test"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "260385009",
+                  "display": "Negative",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.belly-press-test').answer.value"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-flexion').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000020",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveFlexion1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41390-6",
+                  "display": "Shoulder Flexion Passive Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 180,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-flexion').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000021",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveAbduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41382-3",
+                  "display": "Shoulder Abduction Passive Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 175,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-external-rotation').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000022",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveExternalRotation1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "http://loinc.org",
+                  "code": "41388-0",
+                  "display": "Shoulder External rotation Passive Range of Motion Quantitative"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 85,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-external-rotation').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-internal-rotation').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000023",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveInternalRotation1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "passive-internal-rotation",
+                  "display": "Internal Rotation (at side, passive)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+                  "code": "t12",
+                  "display": "T12 (thoracolumbar junction)",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-internal-rotation').answer.value"
+                    }
+                  ]
+                }
+              ]
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-external-rotation-90-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000024",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveExternalRotation90Abduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "passive-external-rotation-90-abduction",
+                  "display": "External Rotation at 90° Abduction (passive)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 95,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-external-rotation-90-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-internal-rotation-90-abduction').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000025",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%ShoulderPassiveInternalRotation90Abduction1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "passive-internal-rotation-90-abduction",
+                  "display": "Internal Rotation at 90° Abduction (passive)"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 65,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.shoulder-passive-internal-rotation-90-abduction').answer.value"
+                  }
+                ]
+              },
+              "unit": "degrees",
+              "system": "http://unitsofmeasure.org",
+              "code": "deg"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.pain-active-movement').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000026",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%PainActiveMovement1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "pain-active-movement",
+                  "display": "Pain Severity — With Active Movement"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 2,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.pain-active-movement').answer.value"
+                  }
+                ]
+              },
+              "unit": "pain score",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.pain-passive-movement').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000027",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%PainPassiveMovement1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "pain-passive-movement",
+                  "display": "Pain Severity — With Passive Movement"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 1,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.pain-passive-movement').answer.value"
+                  }
+                ]
+              },
+              "unit": "pain score",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.pain-rest').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000028",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%PainRest1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "exam",
+                    "display": "Exam"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "pain-rest",
+                  "display": "Pain Severity — At Rest"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 0,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.pain-rest').answer.value"
+                  }
+                ]
+              },
+              "unit": "pain score",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            },
+            "bodySite": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "91774008",
+                  "display": "Structure of right shoulder region",
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "%resource.repeat(item).where(linkId='cond.laterality').answer.value"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        },
+        {
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractContext",
+              "valueString": "%resource.repeat(item).where(linkId='obs.sane-score').answer.value"
+            }
+          ],
+          "fullUrl": "urn:uuid:00000000-0000-4000-8000-000000000029",
+          "_fullUrl": {
+            "extension": [
+              {
+                "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                "valueString": "%SaneScore1"
+              }
+            ]
+          },
+          "resource": {
+            "resourceType": "Observation",
+            "meta": {
+              "profile": [
+                "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation"
+              ]
+            },
+            "status": "final",
+            "category": [
+              {
+                "coding": [
+                  {
+                    "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                    "code": "survey",
+                    "display": "Survey"
+                  }
+                ]
+              }
+            ],
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "sane-score",
+                  "display": "SANE Score"
+                }
+              ]
+            },
+            "subject": {
+              "reference": "Patient/AnnaMueller",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "'Patient/' + %resource.repeat(item).where(linkId='context.patientId').answer.value"
+                  }
+                ]
+              }
+            },
+            "focus": [
+              {
+                "reference": "Condition/AnnaRotatorCuffTear",
+                "_reference": {
+                  "extension": [
+                    {
+                      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                      "valueString": "'Condition/' + %resource.repeat(item).where(linkId='context.conditionId').answer.value"
+                    }
+                  ]
+                }
+              }
+            ],
+            "effectiveDateTime": "2025-04-15T11:00:00+02:00",
+            "_effectiveDateTime": {
+              "extension": [
+                {
+                  "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                  "valueString": "iif(%resource.repeat(item).where(linkId='encounter.date').answer.value.exists(), %resource.repeat(item).where(linkId='encounter.date').answer.value, now())"
+                }
+              ]
+            },
+            "encounter": {
+              "reference": "urn:uuid:00000000-0000-4000-8000-000000000000",
+              "_reference": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%encounterId"
+                  }
+                ]
+              }
+            },
+            "valueQuantity": {
+              "value": 90,
+              "_value": {
+                "extension": [
+                  {
+                    "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-templateExtractValue",
+                    "valueString": "%resource.repeat(item).where(linkId='obs.sane-score').answer.value"
+                  }
+                ]
+              },
+              "unit": "%",
+              "system": "http://unitsofmeasure.org",
+              "code": "%"
+            }
+          },
+          "request": {
+            "method": "POST",
+            "url": "Observation"
+          }
+        }
+      ]
+    }
+  ],
+  "item": [
+    {
+      "linkId": "context",
+      "text": "Registered Patient",
+      "type": "group",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemPopulationContext",
+          "valueExpression": {
+            "name": "rotatorCuffCondition",
+            "language": "application/x-fhir-query",
+            "expression": "Condition?subject={{%patient.id}}&_profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+          }
+        }
+      ],
+      "item": [
+        {
+          "linkId": "context.conditionId",
+          "text": "Rotator Cuff Condition ID (from the registration)",
+          "type": "string",
+          "required": true,
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%rotatorCuffCondition.id"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "context.patientId",
+          "text": "Patient Resource ID (from the registration)",
+          "type": "string",
+          "required": true,
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "%patient.id"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "linkId": "encounter",
+      "text": "Visit",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "encounter.date",
+          "text": "Visit / Incision Date and Time",
+          "type": "dateTime"
+        },
+        {
+          "linkId": "encounter.endDate",
+          "text": "Visit / Closure Date and Time",
+          "type": "dateTime"
+        }
+      ]
+    },
+    {
+      "linkId": "cond",
+      "text": "Diagnoses",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "cond.laterality",
+          "text": "Affected Side",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality"
+        }
+      ]
+    },
+    {
+      "linkId": "obs",
+      "text": "Clinical Assessment",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "obs.shoulder-flexion",
+          "text": "Shoulder Flexion Active Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-abduction",
+          "text": "Shoulder Abduction Active Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-external-rotation",
+          "text": "Shoulder External rotation Active Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-internal-rotation",
+          "text": "Internal Rotation (at side, active)",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level"
+        },
+        {
+          "linkId": "obs.shoulder-passive-flexion",
+          "text": "Shoulder Flexion Passive Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.supraspinatus-strength",
+          "text": "Supraspinatus Strength (MMT grade)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.supraspinatus-strength-dynamometry",
+          "text": "Supraspinatus Strength (Dynamometry) (kilograms)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.external-rotation-strength",
+          "text": "External Rotation Strength (Composite: Infraspinatus + Teres Minor) (MMT grade)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.internal-rotation-strength",
+          "text": "Internal Rotation Strength (Composite) (MMT grade)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.subscapularis-strength",
+          "text": "Subscapularis Strength (MMT grade)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.jobe-test",
+          "text": "Empty can test",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative"
+        },
+        {
+          "linkId": "obs.lift-off-test",
+          "text": "Lift-off test",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative"
+        },
+        {
+          "linkId": "obs.belly-press-test",
+          "text": "Belly Press Test",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative"
+        },
+        {
+          "linkId": "obs.pain-average",
+          "text": "Pain Severity — On Average (pain score)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.constant-score.constant-score-adl",
+          "text": "Constant and Murley shoulder assessment score: Constant-Murley: Activities of Daily Living (0-20)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.constant-score.constant-score-pain",
+          "text": "Constant and Murley shoulder assessment score: Constant-Murley: Pain (0-15)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.constant-score.constant-score-rom",
+          "text": "Constant and Murley shoulder assessment score: Constant-Murley: Range of Motion (0-40)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.constant-score.constant-score-strength",
+          "text": "Constant and Murley shoulder assessment score: Constant-Murley: Strength (0-25)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.constant-score",
+          "text": "Constant and Murley shoulder assessment score (points)",
+          "type": "decimal",
+          "readOnly": true,
+          "extension": [
+            {
+              "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-calculatedExpression",
+              "valueExpression": {
+                "language": "text/fhirpath",
+                "expression": "iif((%resource.repeat(item).where(linkId='obs.constant-score.constant-score-pain').answer.value).exists() and (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-adl').answer.value).exists() and (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-rom').answer.value).exists() and (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-strength').answer.value).exists(), (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-pain').answer.value).first() + (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-adl').answer.value).first() + (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-rom').answer.value).first() + (%resource.repeat(item).where(linkId='obs.constant-score.constant-score-strength').answer.value).first(), {})"
+              }
+            }
+          ]
+        },
+        {
+          "linkId": "obs.ssv-score",
+          "text": "Subjective Shoulder Value (%)",
+          "type": "decimal",
+          "required": true
+        },
+        {
+          "linkId": "obs.pain-active-movement",
+          "text": "Pain Severity — With Active Movement (pain score)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.pain-passive-movement",
+          "text": "Pain Severity — With Passive Movement (pain score)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.pain-rest",
+          "text": "Pain Severity — At Rest (pain score)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.patient-satisfaction",
+          "text": "Patient satisfaction with healthcare delivery",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/satisfaction-scale"
+        },
+        {
+          "linkId": "obs.return-to-activity",
+          "text": "Return to Sport/Work",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/return-to-activity"
+        },
+        {
+          "linkId": "obs.sane-score",
+          "text": "SANE Score (%)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-external-rotation-90-abduction",
+          "text": "External Rotation at 90° Abduction (active) (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-internal-rotation-90-abduction",
+          "text": "Internal Rotation at 90° Abduction (active) (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-passive-abduction",
+          "text": "Shoulder Abduction Passive Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-passive-external-rotation",
+          "text": "Shoulder External rotation Passive Range of Motion Quantitative (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-passive-external-rotation-90-abduction",
+          "text": "External Rotation at 90° Abduction (passive) (degrees)",
+          "type": "decimal"
+        },
+        {
+          "linkId": "obs.shoulder-passive-internal-rotation",
+          "text": "Internal Rotation (at side, passive)",
+          "type": "choice",
+          "answerValueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/internal-rotation-vertebral-level"
+        },
+        {
+          "linkId": "obs.shoulder-passive-internal-rotation-90-abduction",
+          "text": "Internal Rotation at 90° Abduction (passive) (degrees)",
+          "type": "decimal"
+        }
+      ]
+    }
+  ]
+}

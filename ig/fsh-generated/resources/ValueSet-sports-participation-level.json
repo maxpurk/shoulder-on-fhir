@@ -1,0 +1,38 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "SportsParticipationLevel",
+  "id": "sports-participation-level",
+  "title": "Sports Participation Level ValueSet",
+  "description": "ValueSet containing the four sports-participation level grades (expert consensus Q1.j).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/sports-participation-level",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sports-participation-level",
+        "concept": [
+          {
+            "code": "none",
+            "display": "Does not participate in sport"
+          },
+          {
+            "code": "recreational",
+            "display": "Recreational / leisure sport"
+          },
+          {
+            "code": "competitive",
+            "display": "Competitive / organized sport"
+          },
+          {
+            "code": "professional",
+            "display": "Professional / elite sport"
+          }
+        ]
+      }
+    ]
+  }
+}

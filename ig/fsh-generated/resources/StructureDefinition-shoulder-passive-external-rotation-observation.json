@@ -1,0 +1,77 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-passive-external-rotation-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation",
+  "version": "0.2.0",
+  "name": "ShoulderPassiveExternalRotationObservation",
+  "title": "Shoulder External Rotation Passive Range of Motion Observation",
+  "status": "draft",
+  "date": "2026-07-19",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting passive shoulder external rotation range of motion\nat the side (adducted position) in degrees, coded with LOINC 41388-0.\nCovers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\n`maxValueQuantity` is 360°, a permissive data-entry bound rather than a\nphysiological ceiling. A 90° ceiling would silently reject legitimate\nexternal-rotation values above 90° (around 100–110° in throwers). 360° is not\na claim that such a range is achievable; no single shoulder rotation\nmeasurement reaches 360°.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "41388-0",
+              "system": "http://loinc.org",
+              "display": "Shoulder External rotation Passive Range of Motion Quantitative"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "maxValueQuantity": {
+          "value": 360,
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "deg"
+      }
+    ]
+  }
+}

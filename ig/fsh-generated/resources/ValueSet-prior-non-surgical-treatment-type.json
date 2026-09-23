@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PriorNonSurgicalTreatmentType",
+  "id": "prior-non-surgical-treatment-type",
+  "title": "Prior Non-Surgical Treatment Type ValueSet",
+  "description": "SNOMED CT codes for prior non-surgical shoulder treatments (physical therapy, injections), the non-surgical subset of RotatorCuffProcedureType. Binding is extensible, matching the parent enumeration's own tolerance.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/prior-non-surgical-treatment-type",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-08-03",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "91251008",
+            "display": "Physical therapy procedure"
+          },
+          {
+            "code": "27813003",
+            "display": "Intra-articular injection"
+          },
+          {
+            "code": "290035003",
+            "display": "Injection into shoulder joint"
+          }
+        ]
+      }
+    ]
+  }
+}

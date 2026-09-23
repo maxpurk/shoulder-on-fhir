@@ -1,0 +1,58 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "InternalRotationVertebralLevelCodes",
+  "id": "internal-rotation-vertebral-level",
+  "title": "Internal Rotation Vertebral Level",
+  "description": "Eight-tier ordinal recording at-side (adducted) shoulder internal rotation\nby the highest vertebral landmark the patient's hand can reach behind the\nback (\"hand behind back\" test), worst to best. Standard clinical\nconvention. It reuses most of the landmarks of the Constant-Murley score's own\nIR grading (the expert consensus Q12 preferred instrument already modeled in\nthis IG via ConstantScoreObservation) and adds finer rungs, so deriving that\nscore's range-of-motion sub-score applies a documented lossy remapping.\n\nShoulderInternalRotationObservation and\nShoulderPassiveInternalRotationObservation bind this scale instead of a\ndegree-valued (`valueQuantity`) measurement: at-side internal rotation is\nconfounded by scapulothoracic substitution and trunk rotation, so a\ngoniometric degree value is clinically unreliable, and the reachable-level\ntest is what is used in practice. Distinct from IR measured at 90° abduction\n(ShoulderInternalRotation90AbductionObservation), which is a controlled,\ngoniometer-reliable position and stays degree-valued.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nvertebral-level IR scale as of authoring (verified July 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+  "concept": [
+    {
+      "code": "unable",
+      "display": "Unable to reach behind back",
+      "definition": "Patient cannot bring the hand behind the back far enough to reach the lateral thigh / greater trochanter."
+    },
+    {
+      "code": "greater-trochanter",
+      "display": "Greater trochanter (lateral thigh)",
+      "definition": "Hand reaches the lateral thigh at the level of the greater trochanter, the lowest scored rung of the scale."
+    },
+    {
+      "code": "buttock",
+      "display": "Buttock",
+      "definition": "Hand reaches the buttock."
+    },
+    {
+      "code": "sacrum",
+      "display": "Sacrum",
+      "definition": "Hand reaches the sacrum."
+    },
+    {
+      "code": "l5",
+      "display": "L5 (belt line)",
+      "definition": "Hand reaches the fifth lumbar vertebra, approximately the belt line."
+    },
+    {
+      "code": "l3",
+      "display": "L3 (waist)",
+      "definition": "Hand reaches the third lumbar vertebra, approximately the waist."
+    },
+    {
+      "code": "t12",
+      "display": "T12 (thoracolumbar junction)",
+      "definition": "Hand reaches the twelfth thoracic vertebra, the thoracolumbar junction."
+    },
+    {
+      "code": "t7-or-above",
+      "display": "T7 or above (inferior scapular angle / interscapular)",
+      "definition": "Hand reaches the seventh thoracic vertebra (inferior scapular angle) or higher, up to the interscapular region, the highest scored rung of the scale."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-19",
+  "caseSensitive": true,
+  "count": 8
+}

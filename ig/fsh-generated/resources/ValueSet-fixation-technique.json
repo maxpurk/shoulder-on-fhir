@@ -1,0 +1,42 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "FixationTechnique",
+  "id": "fixation-technique",
+  "title": "Fixation Technique ValueSet",
+  "description": "ValueSet containing the five fixation-technique categories.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/fixation-technique",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/fixation-technique",
+        "concept": [
+          {
+            "code": "single-row",
+            "display": "Single-row fixation"
+          },
+          {
+            "code": "double-row",
+            "display": "Double-row fixation"
+          },
+          {
+            "code": "suture-bridge",
+            "display": "Suture-bridge / transosseous-equivalent fixation"
+          },
+          {
+            "code": "transosseous-no-anchor",
+            "display": "Transosseous repair without anchors"
+          },
+          {
+            "code": "not-applicable",
+            "display": "Not applicable"
+          }
+        ]
+      }
+    ]
+  }
+}

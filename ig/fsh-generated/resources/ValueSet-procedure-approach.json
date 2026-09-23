@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ProcedureApproach",
+  "id": "procedure-approach",
+  "title": "Procedure Approach ValueSet",
+  "description": "ValueSet containing the three surgical-approach categories (arthroscopic / open / mini-open).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/procedure-approach",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/procedure-approach",
+        "concept": [
+          {
+            "code": "arthroscopic",
+            "display": "Arthroscopic"
+          },
+          {
+            "code": "open",
+            "display": "Open"
+          },
+          {
+            "code": "mini-open",
+            "display": "Mini-open"
+          }
+        ]
+      }
+    ]
+  }
+}

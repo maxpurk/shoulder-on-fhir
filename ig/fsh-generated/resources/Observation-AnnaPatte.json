@@ -1,0 +1,58 @@
+{
+  "resourceType": "Observation",
+  "id": "AnnaPatte",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patte-observation"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "imaging",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "display": "Imaging"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "patte-classification",
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+        "display": "Patte Classification"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaRegistrationEncounter"
+  },
+  "effectiveDateTime": "2024-01-22",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "II",
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+        "display": "Stage II - Retracted tendon end at the humeral head"
+      }
+    ]
+  },
+  "bodySite": {
+    "coding": [
+      {
+        "code": "91774008",
+        "system": "http://snomed.info/sct",
+        "display": "Structure of right shoulder region"
+      }
+    ]
+  },
+  "method": {
+    "text": "MRI assessment"
+  }
+}

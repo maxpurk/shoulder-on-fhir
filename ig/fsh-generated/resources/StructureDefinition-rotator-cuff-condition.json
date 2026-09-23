@@ -1,0 +1,191 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-condition",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition",
+  "version": "0.2.0",
+  "name": "RotatorCuffCondition",
+  "title": "Rotator Cuff Condition",
+  "status": "draft",
+  "date": "2026-07-28",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting rotator cuff tears and related shoulder pathology.\nDerives from HL7 Europe Core `condition-eu-core`, which preferred-\nbinds `code` to IPS `problems-uv-ips` plus a secondary preferred binding to\n`eHDSIIllnessandDisorder` and pins `subject` to `Reference(patient-eu-core)`\n, the chain is satisfied because `ShoulderPatient` parents from `patient-eu-\ncore`. Our local `code` is fixed to a single RotatorCuffDiagnosis concept, a\ntighter constraint than the inherited preferred binding (FHIR-legal).\n\nCaptures the diagnosis with laterality and chronicity, and links to detailed\nclassification observations via two buckets: formal grading observations\n(Patte retraction, Goutallier fatty infiltration, Cofield tear-size\nclassification) link via `stage.assessment`; diagnostic-evidence observations\n(**tendons involved**, **tear location**, tear thickness) link via\n`evidence.detail`. The raw tear-size measurement (cm) is neither, it is\nreachable through the encounter chain.\n\n`code` is fixed to the registry's single inclusion diagnosis, a rotator\ncuff tear (thickness-neutral SNOMED concept). It is not a clinician\nchoice. Hurley et al. 2024 (SECEC Delphi) defines no disease-entity\nselection at all: every consensus question is scoped \"in the setting of a\nsuspected/known rotator cuff tear,\" i.e. the tear is this registry's\ninclusion criterion, not a variable. Tendon involvement, partial/full\nthickness, tear location, and traumatic/non-traumatic etiology are each\ncaptured on their own separate element instead of being folded into\noverlapping pre-coordinated `code` choices, see TendonsInvolvedObservation,\nTearThicknessObservation, TearLocationObservation, and the `condition-dueTo`\nextension below.\n\nMultiple `RotatorCuffCondition` instances may coexist in one registration\n(e.g. a combined supraspinatus + infraspinatus tear coded as two Conditions,\nor a re-evaluation superseding an earlier one), see\nRotatorCuffRegistrationBundle's `condition 1..*` slice. Which one is the\nprincipal diagnosis for the visit is recorded on\n`ShoulderEncounter.diagnosis.rank`, not here; a Condition carries no opinion\nabout its own rank. Coexisting **non-rotator-cuff** shoulder pathology (e.g.\nAC joint arthritis, long head of biceps pathology) uses the separate\nShoulderDiagnosisCondition profile instead of this one.\n\nOne registration entry always corresponds to exactly one patient and one\nshoulder side, a bilateral case is two separate registrations, one per side,\neach anchored by its own `bodySite`.\n\nbodySite (1..1, required): laterality of the affected shoulder (left or right\nshoulder region, pre-coordinated SNOMED region code, ShoulderLaterality ValueSet).\nTendon involvement is NOT carried here, it is captured in\nTendonsInvolvedObservation (one per affected tendon) linked from this\nCondition via evidence.detail.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.eu/fhir/base/StructureDefinition/condition-eu-core",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition.extension",
+        "path": "Condition.extension",
+        "min": 1
+      },
+      {
+        "id": "Condition.extension:dueTo",
+        "path": "Condition.extension",
+        "sliceName": "dueTo",
+        "short": "Etiology classifier (expert consensus Q1.e)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/condition-dueTo"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.extension:dueTo.value[x]",
+        "path": "Condition.extension.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-etiology"
+        }
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "comment": "Registry-specific guidance for the four values exposed by the frontend\n(`relapse` and `remission` are not offered, insufficiently distinct from\n`recurrence` and `inactive` for this registry's purposes):\n\n- **active**, the tear is currently present and clinically relevant\n  (symptomatic and/or structurally confirmed, not yet surgically addressed).\n  Default at registration; surgery itself does not change this status,   treatment outcome does.\n- **recurrence**, a new tear (re-tear) at a repair site previously marked\n  `resolved`.\n- **inactive**, the patient is currently asymptomatic despite a structurally\n  persistent or unrepaired tear (e.g. compensated on conservative\n  management). Imaging may still show the defect; symptoms could return.\n  Distinct from `resolved`, which implies the underlying pathology itself is\n  gone, not merely quiet.\n- **resolved**, the repair is confirmed intact and healed on follow-up\n  exam or imaging, with no ongoing symptoms expected to recur.",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "confirmed",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.category",
+        "path": "Condition.category",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "encounter-diagnosis",
+              "system": "http://terminology.hl7.org/CodeSystem/condition-category"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "short": "Rotator cuff tear (fixed inclusion diagnosis; character carried by decomposed axes)",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "926335004",
+              "system": "http://snomed.info/sct",
+              "display": "Rupture of rotator cuff of shoulder"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.bodySite",
+        "path": "Condition.bodySite",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality"
+        }
+      },
+      {
+        "id": "Condition.subject",
+        "path": "Condition.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.onset[x]",
+        "path": "Condition.onset[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Age"
+          },
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.recordedDate",
+        "path": "Condition.recordedDate",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.stage",
+        "path": "Condition.stage",
+        "short": "Formal staging assessments: Patte classification, Goutallier grade, Cofield tear-size bucket",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.stage.assessment",
+        "path": "Condition.stage.assessment",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.evidence",
+        "path": "Condition.evidence",
+        "short": "Diagnostic evidence: TendonsInvolvedObservation, TearLocationObservation, and provocation tests (Jobe, Lift-off, Belly Press, Bear Hug, Hornblower)",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.evidence.detail",
+        "path": "Condition.evidence.detail",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation"
+            ]
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "ConstantCalculatorInputCodes",
+  "id": "constant-calculator-input",
+  "title": "Constant-Murley Worksheet Input",
+  "description": "The answer categories a Constant-Murley worksheet question offers, which the form turns\ninto that question's points before the total is summed. These are inputs to a calculation\nand never leave the form: what is extracted is the numeric sub-score on\n`ConstantScoreObservation.component`, so no code from here reaches a stored Observation.\n\nAn ordinal category takes its axis from the question that asks it. `none`, `moderate` and\n`severe` are the zero, middle and highest categories of whichever axis the question names,\nso the same code reads as no pain on the pain question and as not limited on an\nactivity-limitation question, and each question supplies the wording that applies to it.\nThe positional codes name a height the hand reaches or a posture it reaches it in.\n\nTwo forms use these: the registration and follow-up Questionnaires, on the sub-score\nquestions of the Constant-Murley group.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/constant-calculator-input",
+  "concept": [
+    {
+      "code": "none",
+      "display": "None",
+      "definition": "The zero category of the axis the question names: no pain, or not limited."
+    },
+    {
+      "code": "mild",
+      "display": "Mild",
+      "definition": "The category above none: mild pain."
+    },
+    {
+      "code": "moderate",
+      "display": "Moderate",
+      "definition": "The middle category: moderate pain, or moderately limited."
+    },
+    {
+      "code": "severe",
+      "display": "Severe",
+      "definition": "The highest category: severe or permanent pain, or severely limited."
+    },
+    {
+      "code": "unaffected",
+      "display": "Unaffected",
+      "definition": "Sleep is not disturbed by the shoulder."
+    },
+    {
+      "code": "occasional",
+      "display": "Occasionally disturbed",
+      "definition": "Sleep is occasionally disturbed by the shoulder."
+    },
+    {
+      "code": "nightly",
+      "display": "Nightly disturbed",
+      "definition": "Sleep is disturbed by the shoulder every night."
+    },
+    {
+      "code": "waist",
+      "display": "Waist",
+      "definition": "The hand reaches the waist."
+    },
+    {
+      "code": "xiphoid",
+      "display": "Xiphoid",
+      "definition": "The hand reaches the xiphoid, at the sternum."
+    },
+    {
+      "code": "neck",
+      "display": "Neck",
+      "definition": "The hand reaches the neck."
+    },
+    {
+      "code": "head",
+      "display": "Head",
+      "definition": "The hand reaches the head."
+    },
+    {
+      "code": "above-head",
+      "display": "Above head",
+      "definition": "The hand reaches above the head."
+    },
+    {
+      "code": "full-elevation",
+      "display": "Full elevation",
+      "definition": "The arm reaches full elevation."
+    },
+    {
+      "code": "behind-head-elbow-forward",
+      "display": "Hand behind head, elbow forward",
+      "definition": "The hand reaches behind the head with the elbow forward."
+    },
+    {
+      "code": "behind-head-elbow-back",
+      "display": "Hand behind head, elbow back",
+      "definition": "The hand reaches behind the head with the elbow back."
+    },
+    {
+      "code": "above-head-elbow-forward",
+      "display": "Hand above head, elbow forward",
+      "definition": "The hand reaches above the head with the elbow forward."
+    },
+    {
+      "code": "above-head-elbow-back",
+      "display": "Hand above head, elbow back",
+      "definition": "The hand reaches above the head with the elbow back."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-09-23",
+  "publisher": "Hasso Plattner Institute",
+  "caseSensitive": true,
+  "count": 17
+}

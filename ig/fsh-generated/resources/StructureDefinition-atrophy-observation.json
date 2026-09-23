@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "atrophy-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation",
+  "version": "0.3.0",
+  "name": "AtrophyObservation",
+  "title": "Atrophy Observation",
+  "status": "draft",
+  "date": "2026-07-30",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting whether visible muscle atrophy (e.g. supraspinatus or\ninfraspinatus fossa hollowing) is present on visual inspection of the\nshoulder. Visual inspection is captured as three structured findings\n(alongside DeformityObservation and NormalShoulderContourObservation) rather\nthan as free text, which could not be analysed across the registry.\n\nSNOMED CT 1119438000 \"Atrophy of muscle of shoulder\" is a laterality-neutral\ndisorder/finding-hierarchy concept for this axis, but it does not resolve\nagainst the SNOMED CT International Edition snapshot (version 20250201)\nserved by this IG's pinned terminology server, tx.fhir.org: `$lookup` returns\n\"Unable to find code '1119438000'\". The concept was introduced in a later\nSNOMED release than the edition currently served. A local code\n(ShoulderObservationCodes#atrophy) is therefore used pending re-verification\nonce the served edition catches up; the value is bound to the standard SNOMED\npresent/absent qualifiers either way. Laterality is carried separately via\nObservation.bodySite, not folded into the code. Pre-treatment and\npost-treatment inspection are distinguished by effectiveDateTime relative to\nthe index procedure, so a single profile covers both expert consensus Q2.a\nand Q9.a.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "atrophy",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/present-absent"
+        }
+      }
+    ]
+  }
+}

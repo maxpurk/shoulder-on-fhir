@@ -1,0 +1,42 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "FunctionalLimitationSeverity",
+  "id": "functional-limitation-severity",
+  "title": "Functional Limitation Severity ValueSet",
+  "description": "ValueSet containing the five functional-limitation severity tiers (expert consensus Q1.n).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/functional-limitation-severity",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/functional-limitation-severity",
+        "concept": [
+          {
+            "code": "no-limitation",
+            "display": "No functional limitation"
+          },
+          {
+            "code": "overhead-limitation",
+            "display": "Overhead activity limited"
+          },
+          {
+            "code": "shoulder-level-limitation",
+            "display": "At-shoulder-level activity limited"
+          },
+          {
+            "code": "below-shoulder-limitation",
+            "display": "Below-shoulder-level activity limited"
+          },
+          {
+            "code": "unable-to-use-arm",
+            "display": "Unable to use the arm functionally"
+          }
+        ]
+      }
+    ]
+  }
+}

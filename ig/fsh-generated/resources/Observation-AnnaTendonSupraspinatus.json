@@ -1,0 +1,58 @@
+{
+  "resourceType": "Observation",
+  "id": "AnnaTendonSupraspinatus",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tendons-involved-observation"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "imaging",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "display": "Imaging"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "tendons-involved",
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+        "display": "Tendons Involved"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaRegistrationEncounter"
+  },
+  "effectiveDateTime": "2024-01-22",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "5580002",
+        "system": "http://snomed.info/sct",
+        "display": "Structure of tendon of supraspinatus muscle"
+      }
+    ]
+  },
+  "bodySite": {
+    "coding": [
+      {
+        "code": "91774008",
+        "system": "http://snomed.info/sct",
+        "display": "Structure of right shoulder region"
+      }
+    ]
+  },
+  "method": {
+    "text": "MRI assessment"
+  }
+}

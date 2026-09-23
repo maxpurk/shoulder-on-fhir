@@ -1,0 +1,28 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PriorTreatmentCategory",
+  "id": "prior-treatment-category",
+  "title": "Prior Non-Surgical Treatment Category ValueSet",
+  "description": "SNOMED CT category codes for expert consensus Q1.f (prior treatment including physical therapy / injections). Required binding on RotatorCuffRegistrationBundle.entry[priorTreatment].resource.category, enforces that surgical procedures cannot be placed in the Registration bundle.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/prior-treatment-category",
+  "version": "0.1.0",
+  "experimental": true,
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "91251008",
+            "display": "Physical therapy procedure"
+          },
+          {
+            "code": "18629005",
+            "display": "Administration of medication"
+          }
+        ]
+      }
+    ]
+  }
+}

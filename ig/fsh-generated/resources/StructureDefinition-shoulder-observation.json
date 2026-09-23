@@ -1,0 +1,112 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "version": "0.2.0",
+  "name": "ShoulderObservation",
+  "title": "Shoulder Observation (Base)",
+  "status": "draft",
+  "date": "2026-04-09",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Abstract base profile for all shoulder-related clinical observations.\nShared constraints (status, category, code, subject, encounter, effective[x], value[x],\nbodySite, method, interpretation) are defined here.\n\nObservation subtypes are captured in derived child profiles under profiles/observations/,\neach fixing the code and tightening value[x] to the appropriate type and ValueSet binding.\nChild profiles follow the same base + derived pattern FHIR core itself uses for Vital\nSigns (the Vital Signs profile as base, Body Height/Body Weight/Blood Pressure etc. as\nderived children) and that HL7 US Core uses for its own Vital Signs family.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": true,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.status",
+        "path": "Observation.status",
+        "patternCode": "final",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/observation-category"
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-observation-code"
+        }
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.encounter",
+        "path": "Observation.encounter",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.effective[x]",
+        "path": "Observation.effective[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          },
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.interpretation",
+        "path": "Observation.interpretation",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.bodySite",
+        "path": "Observation.bodySite",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-laterality"
+        }
+      },
+      {
+        "id": "Observation.method",
+        "path": "Observation.method",
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "OccupationalOverheadExposure",
+  "id": "occupational-overhead-exposure",
+  "title": "Occupational Overhead Exposure ValueSet",
+  "description": "ValueSet containing the three occupational overhead-exposure categories (expert consensus Q1.k).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/occupational-overhead-exposure",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-overhead-exposure",
+        "concept": [
+          {
+            "code": "yes",
+            "display": "Regular overhead work"
+          },
+          {
+            "code": "no",
+            "display": "No regular overhead work"
+          },
+          {
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        ]
+      }
+    ]
+  }
+}

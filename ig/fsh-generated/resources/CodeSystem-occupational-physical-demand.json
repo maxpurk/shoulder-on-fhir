@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "OccupationalPhysicalDemandCodes",
+  "id": "occupational-physical-demand",
+  "title": "Occupational Physical Demand",
+  "description": "Physical demand (intensity) category of the patient's occupation, part of\n\"Occupation\" (expert consensus Q1.k). Intensity is one of two independent occupational\naxes, the other, whether the occupation involves regular overhead work, is\ncaptured separately by `OccupationalOverheadExposureObservation` /\n`OccupationalOverheadExposureCodes`. The two are kept as independent axes\nrather than folded into a single enum because an occupation can be\nsimultaneously heavy and overhead (a roofer, for example); one enum would\nforce an artificial either/or choice.\n\nNo SNOMED CT or LOINC concept exists for occupational physical demand\nintensity level as of authoring (SNOMED CT and LOINC both checked, July 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-physical-demand",
+  "concept": [
+    {
+      "code": "sedentary",
+      "display": "Sedentary / desk-based work",
+      "definition": "No regular manual physical demand (Schreibtischtätigkeit)."
+    },
+    {
+      "code": "light-manual",
+      "display": "Light manual work",
+      "definition": "Occasional light lifting/carrying."
+    },
+    {
+      "code": "heavy-manual",
+      "display": "Heavy manual work",
+      "definition": "Regular heavy lifting/carrying (Körperliche Arbeit)."
+    }
+  ],
+  "version": "0.2.0",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-27",
+  "caseSensitive": true,
+  "count": 3
+}

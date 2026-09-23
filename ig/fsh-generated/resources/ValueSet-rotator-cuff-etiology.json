@@ -1,0 +1,43 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "RotatorCuffEtiology",
+  "id": "rotator-cuff-etiology",
+  "title": "Rotator Cuff Etiology ValueSet",
+  "description": "Mutually-exclusive causation classifier for rotator cuff pathology, used in Condition.extension[condition-dueTo] on RotatorCuffCondition. Required binding.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-etiology",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-19",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "773760007",
+            "display": "Traumatic event"
+          },
+          {
+            "code": "362975008",
+            "display": "Degenerative disorder"
+          },
+          {
+            "code": "54690008",
+            "display": "Unknown (origin)"
+          }
+        ]
+      },
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-etiology",
+        "concept": [
+          {
+            "code": "acute-on-chronic",
+            "display": "Acute-on-chronic (mixed) etiology"
+          }
+        ]
+      }
+    ]
+  }
+}

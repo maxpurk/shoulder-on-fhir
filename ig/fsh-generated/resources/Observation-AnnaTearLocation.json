@@ -1,0 +1,58 @@
+{
+  "resourceType": "Observation",
+  "id": "AnnaTearLocation",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-location-observation"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "imaging",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "display": "Imaging"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "tear-location",
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+        "display": "Tear Location"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaRegistrationEncounter"
+  },
+  "effectiveDateTime": "2024-01-22",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "insertion-near",
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+        "display": "Near the insertion (footprint)"
+      }
+    ]
+  },
+  "bodySite": {
+    "coding": [
+      {
+        "code": "91774008",
+        "system": "http://snomed.info/sct",
+        "display": "Structure of right shoulder region"
+      }
+    ]
+  },
+  "method": {
+    "text": "MRI assessment"
+  }
+}

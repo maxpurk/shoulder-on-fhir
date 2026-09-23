@@ -1,0 +1,282 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-research-care-plan",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-research-care-plan",
+  "version": "0.4.0",
+  "name": "RotatorCuffResearchCarePlan",
+  "title": "Rotator Cuff Research Care Plan",
+  "status": "draft",
+  "date": "2026-08-04",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting the planned follow-up schedule for a rotator cuff\nsurgery registry participant (expert consensus Q11, research follow-up at 5 named\ntimepoints Q11.a–e: 6 weeks, 3 months, 6 months, 1 year, 2 years). Encodes the\nminimum follow-up duration and research-defined assessment timepoints (e.g.\n6 weeks, 3 months, 6 months, 12 months, 2 years post-surgery) so that\ncompleteness of follow-up can be tracked and reported.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "CarePlan",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/CarePlan",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "CarePlan.status",
+        "path": "CarePlan.status",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.intent",
+        "path": "CarePlan.intent",
+        "patternCode": "plan",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.subject",
+        "path": "CarePlan.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.period",
+        "path": "CarePlan.period",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.period.start",
+        "path": "CarePlan.period.start",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.period.end",
+        "path": "CarePlan.period.end",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity",
+        "path": "CarePlan.activity",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "detail.code"
+            }
+          ],
+          "rules": "open",
+          "description": "One activity per expert consensus Q11 research follow-up timepoint"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail",
+        "path": "CarePlan.activity.detail",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/q11-timepoint"
+        }
+      },
+      {
+        "id": "CarePlan.activity.detail.status",
+        "path": "CarePlan.activity.detail.status",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "CarePlan.activity.detail.scheduled[x]:scheduledTiming",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "sliceName": "scheduledTiming",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity.detail.description",
+        "path": "CarePlan.activity.detail.description",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:sixWeeks",
+        "path": "CarePlan.activity",
+        "sliceName": "sixWeeks",
+        "short": "Expert consensus Q11.a, 6 weeks post-surgery",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:sixWeeks.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "6-weeks",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "CarePlan.activity:sixWeeks.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ]
+      },
+      {
+        "id": "CarePlan.activity:threeMonths",
+        "path": "CarePlan.activity",
+        "sliceName": "threeMonths",
+        "short": "Expert consensus Q11.b, 3 months post-surgery",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:threeMonths.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "3-months",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "CarePlan.activity:threeMonths.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ]
+      },
+      {
+        "id": "CarePlan.activity:sixMonths",
+        "path": "CarePlan.activity",
+        "sliceName": "sixMonths",
+        "short": "Expert consensus Q11.c, 6 months post-surgery",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:sixMonths.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "6-months",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "CarePlan.activity:sixMonths.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ]
+      },
+      {
+        "id": "CarePlan.activity:oneYear",
+        "path": "CarePlan.activity",
+        "sliceName": "oneYear",
+        "short": "Expert consensus Q11.d, 1 year post-surgery",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:oneYear.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "1-year",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "CarePlan.activity:oneYear.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ]
+      },
+      {
+        "id": "CarePlan.activity:twoYears",
+        "path": "CarePlan.activity",
+        "sliceName": "twoYears",
+        "short": "Expert consensus Q11.e, 2 years post-surgery",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.activity:twoYears.detail.code",
+        "path": "CarePlan.activity.detail.code",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "2-years",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint"
+            }
+          ]
+        }
+      },
+      {
+        "id": "CarePlan.activity:twoYears.detail.scheduled[x]",
+        "path": "CarePlan.activity.detail.scheduled[x]",
+        "type": [
+          {
+            "code": "Timing"
+          }
+        ]
+      }
+    ]
+  }
+}

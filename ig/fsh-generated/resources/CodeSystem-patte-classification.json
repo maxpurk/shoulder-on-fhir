@@ -1,0 +1,33 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "PatteClassificationCodes",
+  "id": "patte-classification",
+  "title": "Patte Classification",
+  "description": "The Patte classification describes the degree of tendon retraction in rotator cuff tears.\nThis classification is used to assess the severity of tendon retraction on imaging studies\n(MRI or CT arthrography) and helps guide surgical planning.\n\nReference: Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;254:81-86.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+  "concept": [
+    {
+      "code": "I",
+      "display": "Stage I - Retracted tendon end at the bony insertion",
+      "definition": "Minimal retraction: the retracted (medial) end of the torn tendon lies at or near the level of the bony insertion (footprint), close to its anatomical attachment site."
+    },
+    {
+      "code": "II",
+      "display": "Stage II - Retracted tendon end at the humeral head",
+      "definition": "Moderate retraction: the retracted tendon end lies at the level of the humeral head, retracted medially away from the footprint but still lateral to the glenoid."
+    },
+    {
+      "code": "III",
+      "display": "Stage III - Retracted tendon end at the glenoid",
+      "definition": "Severe retraction: the retracted tendon end lies at the level of the glenoid, i.e. at or medial to the glenoid rim."
+    }
+  ],
+  "version": "0.1.1",
+  "experimental": true,
+  "publisher": "Hasso Plattner Institute",
+  "date": "2026-07-18",
+  "caseSensitive": true,
+  "count": 3
+}

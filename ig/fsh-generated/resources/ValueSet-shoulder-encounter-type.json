@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ShoulderEncounterType",
+  "id": "shoulder-encounter-type",
+  "title": "Shoulder Encounter Type ValueSet",
+  "description": "ValueSet of SNOMED CT codes for ShoulderEncounter.type, covering all three\nbundle contexts of the three-bundle architecture:\n\n* **Pre-operative registration (T0):** 185349003 \"Encounter for check up\"\n* **Surgical admission (T1):** 308335008 \"Patient encounter procedure\" —\n  semantically accurate because the encounter frames a surgical procedure.\n  No dedicated surgical-admission code is included: the enclosing\n  RotatorCuffSurgeryBundle profile and its RotatorCuffProcedure entries\n  (category=Surgical) already identify the surgical context unambiguously;\n  Encounter.type is a secondary queryability label, not the primary\n  discriminator. SNOMED 305408004 \"Admission to surgical ward\" was\n  considered and rejected, it incorrectly implies inpatient admission\n  for procedures commonly performed as day surgery.\n* **Routine post-operative follow-up (Tn):** 390906007 \"Follow-up encounter\"\n  (expert consensus Q10).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-encounter-type",
+  "version": "0.2.0",
+  "experimental": true,
+  "date": "2026-05-18",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "185349003",
+            "display": "Encounter for check up"
+          },
+          {
+            "code": "390906007",
+            "display": "Follow-up encounter"
+          },
+          {
+            "code": "308335008",
+            "display": "Patient encounter procedure"
+          }
+        ]
+      }
+    ]
+  }
+}

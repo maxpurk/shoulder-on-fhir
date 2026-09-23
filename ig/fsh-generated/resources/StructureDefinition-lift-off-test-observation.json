@@ -1,0 +1,61 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "lift-off-test-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation",
+  "version": "0.2.0",
+  "name": "LiftOffTestObservation",
+  "title": "Lift-off Test Observation",
+  "status": "draft",
+  "date": "2026-07-29",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the result of the Gerber Lift-off subscapularis\nprovocation test. Coded via SNOMED CT 1231510004 \"Lift-off test\" (procedure;\nsynonym \"Gerber test\"), a verified SNOMED procedure concept for this test.\nCovers expert consensus Q2.f (pre-treatment) and Q9.f\n(post-treatment); pre/post differentiation is by effectiveDateTime.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "1231510004",
+              "system": "http://snomed.info/sct",
+              "display": "Lift-off test"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative"
+        }
+      }
+    ]
+  }
+}

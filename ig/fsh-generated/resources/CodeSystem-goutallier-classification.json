@@ -1,0 +1,48 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "GoutallierClassificationCodes",
+  "id": "goutallier-classification",
+  "title": "Goutallier Classification",
+  "description": "Ordinal classification of fatty infiltration of skeletal muscle (originally of the rotator\ncuff musculature) as defined by Goutallier et al. (1994) based on CT imaging, and adapted\nfor MRI by Fuchs et al. (1999). Grades range from 0 (normal muscle) to 4 (more fat than\nmuscle). This CodeSystem is authored because no equivalent codes exist in SNOMED CT, LOINC,\nRadLex, or NCI Thesaurus as of the authoring date of this IG (exhaustive search documented\nin the IG source repository).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/goutallier-classification",
+  "concept": [
+    {
+      "code": "0",
+      "display": "Grade 0 – Normal muscle",
+      "definition": "Normal muscle with no fatty deposits. The muscle appears homogeneous with no areas of\ndecreased attenuation on CT or increased T1 signal on MRI. Corresponds to Grade 0 of the\nGoutallier (1994) and Fuchs (1999) systems."
+    },
+    {
+      "code": "1",
+      "display": "Grade 1 – Some fatty streaks",
+      "definition": "Normal muscle with some fatty streaks. A few foci of decreased radiodensity on CT or\nincreased T1 signal on MRI are present within the muscle belly, but the muscle is still\npredominantly normal in appearance. Corresponds to Grade 1 of the Goutallier (1994) and\nFuchs (1999) systems."
+    },
+    {
+      "code": "2",
+      "display": "Grade 2 – More muscle than fat",
+      "definition": "Definite fatty infiltration is present but the muscle cross-sectional area contains more\nmuscle tissue than fat. Decreased radiodensity on CT or increased T1 signal on MRI occupies\nless than 50% of the muscle cross-section. Corresponds to Grade 2 of the Goutallier (1994)\nand Fuchs (1999) systems."
+    },
+    {
+      "code": "3",
+      "display": "Grade 3 – Equal amounts of fat and muscle",
+      "definition": "The muscle cross-section contains approximately equal proportions of fat and muscle tissue.\nDecreased radiodensity on CT or increased T1 signal on MRI occupies approximately 50% of\nthe muscle cross-section. Corresponds to Grade 3 of the Goutallier (1994) and Fuchs (1999)\nsystems."
+    },
+    {
+      "code": "4",
+      "display": "Grade 4 – More fat than muscle",
+      "definition": "Severe fatty infiltration in which fat predominates. The muscle cross-section contains more\nfat than muscle tissue; decreased radiodensity on CT or increased T1 signal on MRI occupies\nmore than 50% of the muscle cross-section. Generally associated with irreversible muscle\ndegeneration and poor surgical prognosis. Corresponds to Grade 4 of the Goutallier (1994)\nand Fuchs (1999) systems."
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-04-03",
+  "publisher": "Hasso Plattner Institute",
+  "purpose": "To enable coded representation of the Goutallier fatty infiltration grade in FHIR Observation resources within the Shoulder on FHIR Implementation Guide.",
+  "copyright": "This CodeSystem is authored by the Shoulder on FHIR IG project. Clinical classification originates from: Goutallier D, et al. Clin Orthop Relat Res. 1994;304:78–83 and Fuchs B, et al. J Shoulder Elbow Surg. 1999;8:599–605.",
+  "caseSensitive": true,
+  "hierarchyMeaning": "is-a",
+  "compositional": false,
+  "versionNeeded": false,
+  "count": 5
+}

@@ -1,0 +1,60 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "functional-limitations-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/functional-limitations-observation",
+  "version": "0.2.0",
+  "name": "FunctionalLimitationsObservation",
+  "title": "Functional Limitations Observation",
+  "status": "draft",
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting a five-tier functional-ceiling ordinal, the highest\nplane at which the patient's shoulder still limits activity (overhead /\nat-shoulder-level / below-shoulder-level / unable to use the arm), matching\nexpert consensus Q1.n \"Functional limitations\" (unanimous consensus, no mechanism\nspecified).\n\n`valueCodeableConcept` is `required`-bound to `FunctionalLimitationSeverity`\n(fully local, no SNOMED CT or LOINC concept exists for this axis, verified\nJuly 2026). Shared with\nexpert consensus Q12.c (function/limitations PROM component).\n\n`Observation.code` is a local `ShoulderObservationCodes` entry. The nearest\nLOINC candidate, `10158-4` \"History of Functional status Narrative\", carries\nthe `Nar` scale type, which does not match a coded ordinal value.\n\nA coded ordinal is used so that the answer is analysable across the registry.\n\nFor instrument-grade quantification of limitations, use the Constant-Murley\nscore (`ConstantScoreObservation`'s `component[ADL]`) or one of the SSV/SANE\ninstruments. This profile complements those with a quick, one-item\nbaseline gestalt, not a duplicate multi-domain instrument.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "social-history",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Social History"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "functional-limitation-severity",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/functional-limitation-severity"
+        }
+      }
+    ]
+  }
+}

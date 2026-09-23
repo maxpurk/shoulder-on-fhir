@@ -1,0 +1,94 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "RotatorCuffProcedureType",
+  "id": "rotator-cuff-procedure-type",
+  "title": "Rotator Cuff Procedure Type ValueSet",
+  "description": "Enumerated SNOMED CT codes for rotator cuff procedures (surgical, concomitant, prior non-surgical). Editorial baseline; binding is extensible.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/rotator-cuff-procedure-type",
+  "version": "0.3.0",
+  "experimental": true,
+  "date": "2026-07-21",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "699120002",
+            "display": "Arthroscopic repair of rotator cuff"
+          },
+          {
+            "code": "56060000",
+            "display": "Repair of musculotendinous cuff of shoulder"
+          },
+          {
+            "code": "304384006",
+            "display": "Complete repair of rotator cuff"
+          },
+          {
+            "code": "304385007",
+            "display": "Partial repair of rotator cuff"
+          },
+          {
+            "code": "429598009",
+            "display": "Revision of repair of rotator cuff"
+          },
+          {
+            "code": "18856005",
+            "display": "Arthroscopy of shoulder with extensive debridement"
+          },
+          {
+            "code": "29563005",
+            "display": "Arthroscopy of shoulder with limited debridement"
+          },
+          {
+            "code": "281812007",
+            "display": "Arthroscopy of shoulder"
+          },
+          {
+            "code": "77474007",
+            "display": "Acromioplasty of shoulder"
+          },
+          {
+            "code": "298672007",
+            "display": "Anterior decompression of shoulder joint"
+          },
+          {
+            "code": "430263007",
+            "display": "Arthroscopic shoulder decompression"
+          },
+          {
+            "code": "439861005",
+            "display": "Arthroscopy of shoulder with biceps tenodesis"
+          },
+          {
+            "code": "734057006",
+            "display": "Excision of distal clavicle"
+          },
+          {
+            "code": "308681004",
+            "display": "Prosthetic arthroplasty of shoulder"
+          },
+          {
+            "code": "785850002",
+            "display": "Reverse total shoulder arthroplasty"
+          },
+          {
+            "code": "91251008",
+            "display": "Physical therapy procedure"
+          },
+          {
+            "code": "27813003",
+            "display": "Intra-articular injection"
+          },
+          {
+            "code": "290035003",
+            "display": "Injection into shoulder joint"
+          }
+        ]
+      }
+    ]
+  }
+}

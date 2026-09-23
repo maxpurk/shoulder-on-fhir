@@ -1,0 +1,131 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-surgery-bundle",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-surgery-bundle",
+  "version": "0.4.0",
+  "name": "RotatorCuffSurgeryBundle",
+  "title": "Rotator Cuff Surgery Bundle",
+  "status": "draft",
+  "date": "2026-09-12",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Transaction bundle wrapping the surgical event for an already-registered\nrotator-cuff-surgery patient. This is the second of three named submissions\nper patient (Registration → Surgery → Follow-Up×N) and corresponds to the\nimplicit surgical phase in Hurley et al. (2024).\n\nPer submission the bundle contains:\n- exactly one ShoulderEncounter, the surgical admission/encounter\n- one or more RotatorCuffProcedure entries (category = surgical), the index\n  procedure and any concomitant surgical procedures (biceps tenodesis, distal\n  clavicle resection, etc.). A concomitant procedure carries `partOf` pointing\n  at the index procedure it accompanies; the index procedure is the one with no\n  `partOf`. The link is carried on the resources themselves rather than implied\n  by entry order, so it still holds once the bundle is persisted and each entry\n  has its own identity.\n- zero or more ShoulderObservation entries, intra-operative findings\n  (confirmed tear size, intra-articular findings, etc.)\n- an optional RotatorCuffResearchCarePlan, the Q11 research follow-up\n  schedule (6 weeks / 3 months / 6 months / 1 year / 2 years), anchored to\n  this submission's index procedure date. Carried here, not on\n  RotatorCuffRegistrationBundle, because the schedule cannot be computed\n  before the surgery date is known.\n\nThe bundle does NOT contain Patient, Condition, or prior non-surgical\ntreatments: these were established by the prior RotatorCuffRegistrationBundle\nand are referenced via their already-persisted IDs\n(Encounter.subject → Patient/{id}; Encounter.reasonReference → Condition/{id};\nProcedure.subject → Patient/{id}; Procedure.encounter →\nurn-uuid-of-this-bundle-entry).\n\nSlicing follows the IPS two-discriminator pattern (resource type + profile).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Bundle",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Bundle",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Bundle.type",
+        "path": "Bundle.type",
+        "fixedCode": "transaction"
+      },
+      {
+        "id": "Bundle.entry",
+        "path": "Bundle.entry",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "resource"
+            },
+            {
+              "type": "profile",
+              "path": "resource"
+            }
+          ],
+          "rules": "open"
+        },
+        "short": "Entry resources in a single rotator cuff surgery submission",
+        "min": 2
+      },
+      {
+        "id": "Bundle.entry.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:encounter",
+        "path": "Bundle.entry",
+        "sliceName": "encounter",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:encounter.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Encounter",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:procedure",
+        "path": "Bundle.entry",
+        "sliceName": "procedure",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:procedure.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Procedure",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:observation",
+        "path": "Bundle.entry",
+        "sliceName": "observation",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:observation.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Observation",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:carePlan",
+        "path": "Bundle.entry",
+        "sliceName": "carePlan",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:carePlan.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "CarePlan",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-research-care-plan"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

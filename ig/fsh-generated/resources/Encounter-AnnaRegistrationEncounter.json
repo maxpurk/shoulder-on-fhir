@@ -1,0 +1,52 @@
+{
+  "resourceType": "Encounter",
+  "id": "AnnaRegistrationEncounter",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+    ]
+  },
+  "status": "finished",
+  "class": {
+    "code": "AMB",
+    "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+    "display": "ambulatory"
+  },
+  "type": [
+    {
+      "coding": [
+        {
+          "code": "185349003",
+          "system": "http://snomed.info/sct",
+          "display": "Encounter for check up"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "period": {
+    "start": "2024-01-08T09:00:00+01:00",
+    "end": "2024-01-08T09:45:00+01:00"
+  },
+  "reasonReference": [
+    {
+      "reference": "Condition/AnnaRotatorCuffTear"
+    }
+  ],
+  "diagnosis": [
+    {
+      "condition": {
+        "reference": "Condition/AnnaRotatorCuffTear"
+      },
+      "rank": 1
+    },
+    {
+      "condition": {
+        "reference": "Condition/AnnaAcJointOa"
+      },
+      "rank": 2
+    }
+  ]
+}

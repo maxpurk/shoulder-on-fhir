@@ -1,0 +1,43 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "Q11TimepointCodes",
+  "id": "q11-timepoint",
+  "title": "Q11 Research Follow-Up Timepoint",
+  "description": "Discriminator for which of the 5 expert consensus Q11.a–e research follow-up timepoints\n(6 weeks, 3 months, 6 months, 1 year, 2 years post-surgery) a\n`RotatorCuffResearchCarePlan.activity` represents, bound to\n`activity.detail.code`. Fixed by the consensus (Hurley et al. 2024, Q11), not\na clinician choice; both frontends stamp this automatically when\nauto-generating the 5-activity schedule from the index procedure date.\nNo SNOMED CT or LOINC concept exists for this axis (verified\nAugust 2026).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+  "concept": [
+    {
+      "code": "6-weeks",
+      "display": "6 Weeks",
+      "definition": "Expert consensus Q11.a — 6 weeks post-surgery"
+    },
+    {
+      "code": "3-months",
+      "display": "3 Months",
+      "definition": "Expert consensus Q11.b — 3 months post-surgery"
+    },
+    {
+      "code": "6-months",
+      "display": "6 Months",
+      "definition": "Expert consensus Q11.c — 6 months post-surgery"
+    },
+    {
+      "code": "1-year",
+      "display": "1 Year",
+      "definition": "Expert consensus Q11.d — 1 year post-surgery"
+    },
+    {
+      "code": "2-years",
+      "display": "2 Years",
+      "definition": "Expert consensus Q11.e — 2 years post-surgery"
+    }
+  ],
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-08-04",
+  "publisher": "Hasso Plattner Institute",
+  "caseSensitive": true,
+  "count": 5
+}

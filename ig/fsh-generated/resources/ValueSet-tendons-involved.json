@@ -1,0 +1,38 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "TendonsInvolved",
+  "id": "tendons-involved",
+  "title": "Tendons Involved ValueSet",
+  "description": "SNOMED CT anatomical concepts for the four rotator cuff tendons. Bound to\n`TendonsInvolvedObservation.value[x]` to record which tendon or tendons are\ntorn (expert consensus element Q4.b). One Observation is recorded per\naffected tendon, each linked from the index `RotatorCuffCondition` through\n`evidence.detail`.\n\nThe codes are laterality-neutral. The affected side is carried once, on\n`RotatorCuffCondition.bodySite`.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/tendons-involved",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-12",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "5580002",
+            "display": "Structure of tendon of supraspinatus muscle"
+          },
+          {
+            "code": "59713001",
+            "display": "Structure of tendon of infraspinatus muscle"
+          },
+          {
+            "code": "80108009",
+            "display": "Structure of tendon of subscapularis muscle"
+          },
+          {
+            "code": "700027005",
+            "display": "Structure of tendon of teres minor"
+          }
+        ]
+      }
+    ]
+  }
+}

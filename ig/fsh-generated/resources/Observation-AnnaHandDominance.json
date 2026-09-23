@@ -1,0 +1,46 @@
+{
+  "resourceType": "Observation",
+  "id": "AnnaHandDominance",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation"
+    ]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "code": "social-history",
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "display": "Social History"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "57427004",
+        "system": "http://snomed.info/sct",
+        "display": "Handedness"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaRegistrationEncounter"
+  },
+  "effectiveDateTime": "2024-01-08",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "code": "46669005",
+        "system": "http://snomed.info/sct",
+        "display": "Right handed"
+      }
+    ]
+  }
+}

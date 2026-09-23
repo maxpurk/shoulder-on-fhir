@@ -1,0 +1,335 @@
+{
+  "resourceType": "Bundle",
+  "id": "AnnaFollowUpBundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-follow-up-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "status": "finished",
+        "class": {
+          "code": "AMB",
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "ambulatory"
+        },
+        "resourceType": "Encounter",
+        "id": "AnnaFu6wEncounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "code": "390906007",
+                "system": "http://snomed.info/sct",
+                "display": "Follow-up encounter"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "period": {
+          "start": "2024-05-27T10:00:00+02:00",
+          "end": "2024-05-27T10:25:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ]
+      },
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Encounter/AnnaFu6wEncounter",
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFu6wFlexion",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFu6wFlexion",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "41389-8",
+              "system": "http://loinc.org",
+              "display": "Shoulder Flexion Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "effectiveDateTime": "2024-05-27",
+        "valueQuantity": {
+          "value": 80,
+          "code": "deg",
+          "system": "http://unitsofmeasure.org",
+          "unit": "degrees"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFu6wPassiveFlexion",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFu6wPassiveFlexion",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "41390-6",
+              "system": "http://loinc.org",
+              "display": "Shoulder Flexion Passive Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "effectiveDateTime": "2024-05-27",
+        "valueQuantity": {
+          "value": 120,
+          "code": "deg",
+          "system": "http://unitsofmeasure.org",
+          "unit": "degrees"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "code": "91774008",
+              "system": "http://snomed.info/sct",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFu6wPain",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFu6wPain",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "exam",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "pain-average",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Pain Severity — On Average"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "effectiveDateTime": "2024-05-27",
+        "valueQuantity": {
+          "value": 5,
+          "code": "{score}",
+          "system": "http://unitsofmeasure.org",
+          "unit": "pain score"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFu6wConstant",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFu6wConstant",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "survey",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "273383002",
+              "system": "http://snomed.info/sct",
+              "display": "Constant and Murley shoulder assessment score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "effectiveDateTime": "2024-05-27",
+        "focus": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ],
+        "valueQuantity": {
+          "value": 44,
+          "code": "{score}",
+          "system": "http://unitsofmeasure.org",
+          "unit": "points"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "https://maxpurk.github.io/shoulder-on-fhir/Observation/AnnaFu6wSsv",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "AnnaFu6wSsv",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "code": "survey",
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "code": "ssv-score",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "display": "Subjective Shoulder Value"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "encounter": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "effectiveDateTime": "2024-05-27",
+        "focus": [
+          {
+            "reference": "Condition/AnnaRotatorCuffTear"
+          }
+        ],
+        "valueQuantity": {
+          "value": 45,
+          "code": "%",
+          "system": "http://unitsofmeasure.org",
+          "unit": "%"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

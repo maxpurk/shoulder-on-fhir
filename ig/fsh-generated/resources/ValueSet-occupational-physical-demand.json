@@ -1,0 +1,34 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "OccupationalPhysicalDemand",
+  "id": "occupational-physical-demand",
+  "title": "Occupational Physical Demand ValueSet",
+  "description": "ValueSet containing the three occupational physical-demand intensity categories (expert consensus Q1.k). Overhead work exposure is a separate, independent axis, see OccupationalOverheadExposure.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/occupational-physical-demand",
+  "version": "0.2.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-physical-demand",
+        "concept": [
+          {
+            "code": "sedentary",
+            "display": "Sedentary / desk-based work"
+          },
+          {
+            "code": "light-manual",
+            "display": "Light manual work"
+          },
+          {
+            "code": "heavy-manual",
+            "display": "Heavy manual work"
+          }
+        ]
+      }
+    ]
+  }
+}

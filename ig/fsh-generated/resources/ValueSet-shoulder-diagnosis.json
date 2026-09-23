@@ -1,0 +1,50 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ShoulderDiagnosis",
+  "id": "shoulder-diagnosis",
+  "title": "Shoulder Diagnosis (Non-Rotator-Cuff) ValueSet",
+  "description": "Enumerated SNOMED CT codes for shoulder pathology commonly coexisting with a\nrotator cuff tear but distinct from it, long head of biceps pathology, AC\njoint osteoarthritis, glenoid labrum tear, adhesive capsulitis, glenohumeral\nosteoarthritis, shoulder instability. The expert consensus does not name this\nelement. The list is an editorial baseline covering the pathologies most often\nrecorded as a secondary diagnosis alongside a rotator cuff tear. Binding is\nextensible, a site may add further codes without a profile change.\n\nEvery code in this list is laterality-neutral, the same convention as\n`TendonsInvolved`. The affected side is carried on `Condition.bodySite`, so a\ndeployer extending this list should also choose laterality-neutral concepts.",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/shoulder-diagnosis",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-13",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "202856007",
+            "display": "Biceps tendinitis"
+          },
+          {
+            "code": "86128003",
+            "display": "Rupture of tendon of biceps, long head"
+          },
+          {
+            "code": "239865003",
+            "display": "Osteoarthritis of acromioclavicular joint"
+          },
+          {
+            "code": "202332000",
+            "display": "Glenoid labrum tear"
+          },
+          {
+            "code": "399114005",
+            "display": "Adhesive capsulitis of shoulder"
+          },
+          {
+            "code": "373623009",
+            "display": "Osteoarthritis of glenohumeral joint"
+          },
+          {
+            "code": "298854003",
+            "display": "Shoulder joint unstable"
+          }
+        ]
+      }
+    ]
+  }
+}

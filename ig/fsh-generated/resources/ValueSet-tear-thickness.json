@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "TearThickness",
+  "id": "tear-thickness",
+  "title": "Tear Thickness ValueSet",
+  "description": "SNOMED CT concepts for rotator cuff tear thickness, full-thickness vs.\npartial-thickness, decoupled from `RotatorCuffCondition.code`.\nBoth concepts are precoordinated SNOMED disorder-level codes, reused here as\nObservation values (the same precoordinated-concept-reuse pattern already\nused by `TendonsInvolved`'s anatomy codes).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/tear-thickness",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-07-27",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "202843000",
+            "display": "Full thickness rotator cuff tear"
+          },
+          {
+            "code": "202842005",
+            "display": "Partial thickness rotator cuff tear"
+          }
+        ]
+      }
+    ]
+  }
+}

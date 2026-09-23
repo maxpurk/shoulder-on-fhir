@@ -1,0 +1,268 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rotator-cuff-registration-bundle",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-registration-bundle",
+  "version": "0.5.0",
+  "name": "RotatorCuffRegistrationBundle",
+  "title": "Rotator Cuff Registration Bundle",
+  "status": "draft",
+  "date": "2026-07-13",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Transaction bundle defining the pre-operative submission for a patient entering\na rotator cuff surgery research registry. This is the first of three named\nsubmissions per patient (Registration → Surgery → Follow-Up×N), corresponding\nto the pre-operative phase implied by Hurley et al. (2024): patient history\n(Q1), pre-op physical examination (Q2), classification (Q4), imaging\n(Q3 / Q5 / Q6, plus optional ultrasound), recorded as which modality was\nobtained (`ImagingStudy.modality`), one `ImagingStudy` per modality, prior\nnon-surgical treatments (expert consensus Q1.f, PT / injection) and baseline\nPROMs (Q8). The Q11 research follow-up schedule is carried by\nRotatorCuffSurgeryBundle, because it is computed from the surgery date.\n\nThe bundle establishes the patient context that subsequent submissions\n(RotatorCuffSurgeryBundle, RotatorCuffFollowUpBundle) reference by persisted\nID. It MUST NOT contain the surgical procedure, that belongs in\nRotatorCuffSurgeryBundle. The `priorTreatment` slice is bound to\n`PriorTreatmentCategory` so the validator rejects any surgical-category\nProcedure entry in this bundle.\n\nA `ShoulderEncounter` is **required (1..1)** as the registration consultation\nvisit. It serves as the cross-resource anchor: every Observation\nin the bundle sets `Observation.encounter → Encounter`, and every prior\ntreatment Procedure sets `Procedure.encounter → Encounter` and\n`Procedure.reasonReference → Condition`. Imaging-derived classification\nobservations (Goutallier, Patte, tear size) additionally populate\n`Condition.evidence.detail`. This matches the Encounter-as-anchor pattern\nalready used by `RotatorCuffSurgeryBundle` and `RotatorCuffFollowUpBundle`.\n\nThe bundle still enforces the rotator-cuff pathology binding via the\n`condition` slice (`only RotatorCuffCondition`) even though\n`ShoulderEncounter.reasonReference` was relaxed to `Reference(Condition)`. The\ncomposition guarantee that `Encounter.reasonReference` resolves to a\n`RotatorCuffCondition` holds because that Condition is the only one allowed in\nthe bundle's Condition slice.\n\n**Multiple diagnoses (`condition 1..*`, `otherDiagnosis 0..*`):** a\nregistration may carry more than one `RotatorCuffCondition` (e.g. a combined\nsupraspinatus + infraspinatus tear coded as two Conditions) and, separately,\nzero or more coexisting non-rotator-cuff shoulder diagnoses\n(`ShoulderDiagnosisCondition`, AC joint arthritis, biceps tendinopathy,\nadhesive capsulitis, etc.) via `otherDiagnosis`. Which single Condition is\nthe principal reason for the visit is recorded on\n`ShoulderEncounter.diagnosis.rank` (`1` = principal); `reasonReference`\ncontinues to point at that same principal Condition, and the pathology\nbinding is still enforced structurally by the `condition` slice type\nconstraint regardless of how many entries it holds.\n\n**One patient, one shoulder per registration.** Every Condition in a given\nregistration bundle, RC or non-RC, MUST carry the same `bodySite`\nlaterality. A registration entry is always scoped to one patient and one\nshoulder side; a bilateral case is submitted as two separate registrations,\none per side.\n\nSlicing follows the IPS two-discriminator pattern (resource type + profile)\ninherited from BundleUvIps.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Bundle",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Bundle",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Bundle.type",
+        "path": "Bundle.type",
+        "fixedCode": "transaction"
+      },
+      {
+        "id": "Bundle.entry",
+        "path": "Bundle.entry",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "resource"
+            },
+            {
+              "type": "profile",
+              "path": "resource"
+            }
+          ],
+          "rules": "open"
+        },
+        "short": "Entry resources in the pre-operative registration submission",
+        "min": 3
+      },
+      {
+        "id": "Bundle.entry.fullUrl",
+        "path": "Bundle.entry.fullUrl",
+        "min": 1
+      },
+      {
+        "id": "Bundle.entry:patient",
+        "path": "Bundle.entry",
+        "sliceName": "patient",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:patient.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Patient",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:encounter",
+        "path": "Bundle.entry",
+        "sliceName": "encounter",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:encounter.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Encounter",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:encounter.resource.class",
+        "path": "Bundle.entry.resource.class",
+        "patternCoding": {
+          "code": "AMB",
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "display": "ambulatory"
+        }
+      },
+      {
+        "id": "Bundle.entry:condition",
+        "path": "Bundle.entry",
+        "sliceName": "condition",
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:condition.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Condition",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:otherDiagnosis",
+        "path": "Bundle.entry",
+        "sliceName": "otherDiagnosis",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:otherDiagnosis.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Condition",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:comorbidity",
+        "path": "Bundle.entry",
+        "sliceName": "comorbidity",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:comorbidity.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Condition",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:priorTreatment",
+        "path": "Bundle.entry",
+        "sliceName": "priorTreatment",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:priorTreatment.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Procedure",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:priorTreatment.resource.category",
+        "path": "Bundle.entry.resource.category",
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/prior-treatment-category"
+        }
+      },
+      {
+        "id": "Bundle.entry:observation",
+        "path": "Bundle.entry",
+        "sliceName": "observation",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:observation.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Observation",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:imagingStudy",
+        "path": "Bundle.entry",
+        "sliceName": "imagingStudy",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:imagingStudy.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "ImagingStudy",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:coverage",
+        "path": "Bundle.entry",
+        "sliceName": "coverage",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Bundle.entry:coverage.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "Coverage",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-coverage"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Bundle.entry:questionnaireResponse",
+        "path": "Bundle.entry",
+        "sliceName": "questionnaireResponse",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "Bundle.entry:questionnaireResponse.resource",
+        "path": "Bundle.entry.resource",
+        "min": 1,
+        "type": [
+          {
+            "code": "QuestionnaireResponse",
+            "profile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-questionnaire-response"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

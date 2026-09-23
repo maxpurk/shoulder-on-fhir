@@ -1,0 +1,24 @@
+{
+  "resourceType": "ImagingStudy",
+  "id": "AnnaShoulderMri",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+    ]
+  },
+  "status": "available",
+  "subject": {
+    "reference": "Patient/AnnaMueller"
+  },
+  "encounter": {
+    "reference": "Encounter/AnnaRegistrationEncounter"
+  },
+  "started": "2024-01-22T11:00:00+01:00",
+  "modality": [
+    {
+      "code": "MR",
+      "system": "http://dicom.nema.org/resources/ontology/DCM",
+      "display": "Magnetic Resonance"
+    }
+  ]
+}

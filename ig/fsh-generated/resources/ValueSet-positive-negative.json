@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PositiveNegative",
+  "id": "positive-negative",
+  "title": "Positive/Negative Test Result ValueSet",
+  "description": "ValueSet for recording binary (positive/negative) clinical test results, used in shoulder provocation tests (Jobe, Lift-off, Belly press, Bear hug, Hornblower).",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ValueSet/positive-negative",
+  "version": "0.1.0",
+  "experimental": true,
+  "date": "2026-05-12",
+  "publisher": "Hasso Plattner Institute",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "10828004",
+            "display": "Positive"
+          },
+          {
+            "code": "260385009",
+            "display": "Negative"
+          }
+        ]
+      }
+    ]
+  }
+}

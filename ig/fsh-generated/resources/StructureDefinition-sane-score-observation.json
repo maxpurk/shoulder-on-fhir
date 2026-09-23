@@ -1,0 +1,90 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "sane-score-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation",
+  "version": "0.3.0",
+  "name": "SaneScoreObservation",
+  "title": "SANE Score Observation",
+  "status": "draft",
+  "date": "2026-05-12",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the Single Assessment Numeric Evaluation (SANE): a single-item patient self-rating of current shoulder function as a percentage of a normal shoulder (0 = worst, 100 = normal). Covers the expert consensus Q12 preferred score, element `Q12-SSV-SANE` in the mapping, which the consensus names together with the Subjective Shoulder Value and counts once. The two are separately published instruments, each carried by its own profile here. No equivalent code exists in SNOMED CT International Edition or LOINC at time of authoring; local code used.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "survey",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Survey"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "sane-score",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.focus",
+        "path": "Observation.focus",
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "maxValueQuantity": {
+          "value": 100,
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "%"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1473 @@
+{
+  "resourceType": "ImplementationGuide",
+  "id": "shoulder-on-fhir",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/ImplementationGuide/shoulder-on-fhir",
+  "version": "1.0.0-thesis",
+  "name": "ShoulderOnFHIR",
+  "title": "Shoulder on FHIR Implementation Guide",
+  "status": "draft",
+  "publisher": "Maximilian Purk",
+  "contact": [
+    {
+      "name": "Maximilian Purk",
+      "telecom": [
+        {
+          "system": "url",
+          "value": "https://github.com/maxpurk/shoulder-on-fhir"
+        }
+      ]
+    }
+  ],
+  "description": "FHIR Implementation Guide for standardised documentation of rotator cuff injuries and surgical treatments, developed as a master thesis at the Hasso Plattner Institute. ShoulderPatient, the Condition family, and RotatorCuffProcedure derive from HL7 Europe Core 2.0.0 (hl7.fhir.eu.base) for EHDS realm alignment. Applicable instances additionally claim IPS conformance via meta.profile[] for Patient, the comorbidity Condition, every Procedure, and the smoking Observation. The guide depends on the HL7 Structured Data Capture IG v4.0.0 (hl7.fhir.uv.sdc) for its six Questionnaire artifacts, one per transaction bundle under each of the two declarative extraction mechanisms the specification provides, definition-based and template-based. Extraction runs client-side; the guide does not require a server $extract operation.",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "code": "150",
+          "system": "http://unstats.un.org/unsd/methods/m49/m49.htm",
+          "display": "Europe"
+        }
+      ]
+    }
+  ],
+  "packageId": "shoulder-on-fhir",
+  "license": "CC-BY-4.0",
+  "fhirVersion": [
+    "4.0.1"
+  ],
+  "dependsOn": [
+    {
+      "packageId": "hl7.terminology.r4",
+      "version": "7.1.0",
+      "uri": "http://terminology.hl7.org/ImplementationGuide/hl7.terminology",
+      "id": "hl7_terminology_r4",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-ImplementationGuide.dependsOn.reason",
+          "valueMarkdown": "Standard HL7 terminology bindings (value sets and code systems). Transitively required by EU Core and IPS; declared explicitly to pin the version."
+        }
+      ]
+    },
+    {
+      "packageId": "hl7.fhir.eu.base",
+      "version": "2.0.0",
+      "uri": "http://hl7.eu/fhir/base/ImplementationGuide/hl7.fhir.eu.base",
+      "id": "hl7_fhir_eu_base",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-ImplementationGuide.dependsOn.reason",
+          "valueMarkdown": "Profile parents: ShoulderPatient from patient-eu-core, RotatorCuffCondition, ShoulderComorbidityCondition and ShoulderDiagnosisCondition from condition-eu-core, RotatorCuffProcedure from procedure-eu-core. Provides EHDS realm alignment, the EU Address format, and inherits condition-assertedDate and the Procedure.recorded R5 backport."
+        }
+      ]
+    },
+    {
+      "packageId": "hl7.fhir.uv.xver-r5.r4",
+      "version": "0.1.0",
+      "uri": "http://hl7.org/fhir/uv/xver/ImplementationGuide/hl7.fhir.uv.xver-r5.r4",
+      "id": "hl7_fhir_uv_xver_r5_r4",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-ImplementationGuide.dependsOn.reason",
+          "valueMarkdown": "R4 to R5 cross-version extension pack; required to reference the Procedure.recorded R5 backport extension on RotatorCuffProcedure."
+        }
+      ]
+    },
+    {
+      "packageId": "hl7.fhir.uv.sdc",
+      "version": "4.0.0",
+      "uri": "http://hl7.org/fhir/uv/sdc/ImplementationGuide/hl7.fhir.uv.sdc",
+      "id": "hl7_fhir_uv_sdc",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-ImplementationGuide.dependsOn.reason",
+          "valueMarkdown": "Structured Data Capture; six Questionnaire artifacts, three conforming to sdc-questionnaire-extr-defn for definition-based client-side extraction and three to sdc-questionnaire-extr-template, which carries the whole submission inside the form."
+        }
+      ]
+    },
+    {
+      "packageId": "hl7.fhir.uv.ips",
+      "version": "1.1.0",
+      "uri": "http://hl7.org/fhir/uv/ips/ImplementationGuide/hl7.fhir.uv.ips",
+      "id": "hl7_fhir_uv_ips",
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/5.0/StructureDefinition/extension-ImplementationGuide.dependsOn.reason",
+          "valueMarkdown": "Instance-level IPS claims via meta.profile[] on Patient (Patient-uv-ips), ShoulderComorbidityCondition (Condition-uv-ips), Procedure (Procedure-uv-ips), and the smoking Observation (Observation-tobaccouse-uv-ips)."
+        }
+      ]
+    }
+  ],
+  "definition": {
+    "resource": [
+      {
+        "reference": {
+          "reference": "Patient/AnnaMueller"
+        },
+        "name": "Anna Müller (example patient)",
+        "description": "Example rotator cuff patient: a 52-year-old woman with a degenerative right supraspinatus tear. The instance also claims IPS Patient-uv-ips conformance.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFu6wFlexion"
+        },
+        "name": "Anna Müller: 6-week active shoulder flexion",
+        "description": "Active shoulder flexion of 80° at 6 weeks; active motion is limited during the early sling-protected phase.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFu6wPain"
+        },
+        "name": "Anna Müller: 6-week average pain",
+        "description": "Average pain of 5 out of 10 at 6 weeks.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFu6wConstant"
+        },
+        "name": "Anna Müller: 6-week Constant-Murley score",
+        "description": "Constant-Murley total of 44 at 6 weeks, up from the pre-operative 38. Entered directly as a total.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+      },
+      {
+        "reference": {
+          "reference": "Encounter/AnnaFu6wEncounter"
+        },
+        "name": "Anna Müller: 6-week follow-up encounter",
+        "description": "The 6-week post-operative follow-up visit on 2024-05-27.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFu6wPassiveFlexion"
+        },
+        "name": "Anna Müller: 6-week passive shoulder flexion",
+        "description": "Passive shoulder flexion of 120° at 6 weeks, ahead of active motion under the early protocol.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFu6wSsv"
+        },
+        "name": "Anna Müller: 6-week Subjective Shoulder Value",
+        "description": "Subjective Shoulder Value of 45 out of 100 at 6 weeks.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+      },
+      {
+        "reference": {
+          "reference": "Condition/AnnaAcJointOa"
+        },
+        "name": "Anna Müller: AC joint osteoarthritis (coexisting diagnosis)",
+        "description": "Incidental osteoarthritis of the acromioclavicular joint of the same shoulder, found on MRI. A coexisting non-rotator-cuff diagnosis, carried in the registration bundle's otherDiagnosis slice and ranked below the tear.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFlexionBaseline"
+        },
+        "name": "Anna Müller: baseline active shoulder flexion",
+        "description": "Active shoulder flexion of 110° at the registration consultation (reduced; normal is about 180°).",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaConstantBaseline"
+        },
+        "name": "Anna Müller: baseline Constant-Murley score",
+        "description": "Pre-operative Constant-Murley total of 38, entered from its four sub-scores (Pain 4/15, ADL 4/20, ROM 20/40, Strength 10/25).",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+      },
+      {
+        "reference": {
+          "reference": "Procedure/AnnaConcomitantMumford"
+        },
+        "name": "Anna Müller: concomitant distal clavicle excision",
+        "description": "A concomitant distal clavicle excision (Mumford) performed in the same operative session. It treats the AC-joint osteoarthritis, so its reason is the coexisting diagnosis, not the rotator cuff tear. Linked to the index repair through Procedure.partOf.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaFixation"
+        },
+        "name": "Anna Müller: fixation technique (single-row)",
+        "description": "Single-row suture-anchor fixation, recorded as a technique axis linked to the index repair.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/fixation-technique-observation"
+      },
+      {
+        "reference": {
+          "reference": "Bundle/AnnaFollowUpBundle"
+        },
+        "name": "Anna Müller: follow-up bundle (6 weeks)",
+        "description": "Transaction bundle for the 6-week post-operative visit: one Encounter and the visit Observations (range of motion, average pain, and the Constant-Murley and SSV scores). Patient, Condition, and Procedure are referenced by persisted ID.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-follow-up-bundle"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaGoutallier"
+        },
+        "name": "Anna Müller: Goutallier classification (Grade 1)",
+        "description": "Goutallier grade 1 fatty infiltration of the supraspinatus, read from the pre-operative MRI.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/goutallier-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaHandDominance"
+        },
+        "name": "Anna Müller: hand dominance (right)",
+        "description": "Right-hand dominant. The tear is on the dominant side.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation"
+      },
+      {
+        "reference": {
+          "reference": "Procedure/AnnaIndexRepair"
+        },
+        "name": "Anna Müller: index repair (arthroscopic)",
+        "description": "The index surgical procedure: arthroscopic repair of the right supraspinatus. The instance also claims IPS Procedure-uv-ips conformance.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaIntraopTearSize"
+        },
+        "name": "Anna Müller: intra-operative tear size",
+        "description": "Tear size measured intra-operatively at 3.2 cm, larger than the 2.5 cm pre-operative MRI estimate. The two measurements are kept as distinct Observations, a well-recognised imaging-versus-direct-view pattern.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaIntraopCofield"
+        },
+        "name": "Anna Müller: intra-operative tear size class (Cofield large)",
+        "description": "The Cofield bucket for the 3.2 cm intra-operative measurement: a large tear (3–5 cm).",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-classification-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaPatte"
+        },
+        "name": "Anna Müller: Patte classification (Stage II)",
+        "description": "Patte stage II supraspinatus retraction, read from the pre-operative MRI.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patte-observation"
+      },
+      {
+        "reference": {
+          "reference": "ImagingStudy/AnnaShoulderMri"
+        },
+        "name": "Anna Müller: pre-operative shoulder MRI",
+        "description": "MRI of the right shoulder on 2024-01-22. The modality, its date, and the visit it belongs to are recorded; the imaging findings are carried as separate classification Observations.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaApproach"
+        },
+        "name": "Anna Müller: procedure approach (arthroscopic)",
+        "description": "Surgical approach recorded as a technique axis linked to the index repair.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/procedure-approach-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaReconstructionExtent"
+        },
+        "name": "Anna Müller: reconstruction extent (complete repair)",
+        "description": "A complete repair of the rotator cuff, recorded as a technique axis linked to the index repair.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/reconstruction-extent-observation"
+      },
+      {
+        "reference": {
+          "reference": "Bundle/AnnaRegistrationBundle"
+        },
+        "name": "Anna Müller: registration bundle (T0)",
+        "description": "Transaction bundle for the pre-operative registration: Patient, consultation Encounter, the rotator cuff tear and the coexisting AC-joint diagnosis, the pre-operative MRI, and the baseline assessment Observations. The surgical procedure is submitted later, in the surgery bundle.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-registration-bundle"
+      },
+      {
+        "reference": {
+          "reference": "Encounter/AnnaRegistrationEncounter"
+        },
+        "name": "Anna Müller: registration consultation",
+        "description": "Pre-operative registration consultation on 2024-01-08. It ranks the two diagnoses: the rotator cuff tear as the principal diagnosis (rank 1), the AC-joint osteoarthritis second (rank 2).",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+      },
+      {
+        "reference": {
+          "reference": "Condition/AnnaRotatorCuffTear"
+        },
+        "name": "Anna Müller: rotator cuff tear (principal diagnosis)",
+        "description": "Degenerative full-thickness supraspinatus tendon tear of the right shoulder, the principal registration diagnosis. Tendon involvement, tear location, and tear thickness are linked evidence Observations; Patte and Goutallier grading link as staging assessments.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+      },
+      {
+        "reference": {
+          "reference": "Bundle/AnnaSurgeryBundle"
+        },
+        "name": "Anna Müller: surgery bundle (T1)",
+        "description": "Transaction bundle for the surgical event: the surgical Encounter, the index repair and a concomitant distal clavicle excision, and the intra-operative Observations (procedure-technique axes and the confirmed tear size). Patient and Condition are referenced by persisted ID.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-surgery-bundle"
+      },
+      {
+        "reference": {
+          "reference": "Encounter/AnnaSurgeryEncounter"
+        },
+        "name": "Anna Müller: surgical encounter",
+        "description": "Inpatient encounter for the index rotator cuff repair on 2024-04-15.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaTearLocation"
+        },
+        "name": "Anna Müller: tear location (near insertion)",
+        "description": "The tear sits near the tendon insertion (footprint), read from MRI.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-location-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaTearThickness"
+        },
+        "name": "Anna Müller: tear thickness (full thickness)",
+        "description": "A full-thickness tear, read from MRI. The thickness is captured as its own Observation, separate from the diagnosis code.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-thickness-observation"
+      },
+      {
+        "reference": {
+          "reference": "Observation/AnnaTendonSupraspinatus"
+        },
+        "name": "Anna Müller: tendon involved (supraspinatus)",
+        "description": "Supraspinatus tendon involvement, read from MRI. One Observation is emitted per affected tendon; here only the supraspinatus is torn.",
+        "exampleCanonical": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tendons-involved-observation"
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/atrophy-observation"
+        },
+        "name": "Atrophy Observation",
+        "description": "Observation documenting whether visible muscle atrophy (e.g. supraspinatus or\ninfraspinatus fossa hollowing) is present on visual inspection of the\nshoulder. Visual inspection is captured as three structured findings\n(alongside DeformityObservation and NormalShoulderContourObservation) rather\nthan as free text, which could not be analysed across the registry.\n\nSNOMED CT 1119438000 \"Atrophy of muscle of shoulder\" is a laterality-neutral\ndisorder/finding-hierarchy concept for this axis, but it does not resolve\nagainst the SNOMED CT International Edition snapshot (version 20250201)\nserved by this IG's pinned terminology server, tx.fhir.org: `$lookup` returns\n\"Unable to find code '1119438000'\". The concept was introduced in a later\nSNOMED release than the edition currently served. A local code\n(ShoulderObservationCodes#atrophy) is therefore used pending re-verification\nonce the served edition catches up; the value is bound to the standard SNOMED\npresent/absent qualifiers either way. Laterality is carried separately via\nObservation.bodySite, not folded into the code. Pre-treatment and\npost-treatment inspection are distinguished by effectiveDateTime relative to\nthe index procedure, so a single profile covers both expert consensus Q2.a\nand Q9.a.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/bear-hug-test-observation"
+        },
+        "name": "Bear Hug Test Observation",
+        "description": "Observation documenting the result of the Bear Hug subscapularis provocation test. Covers expert consensus Q2.h (pre-treatment; the post-op exam set Q9.a–g does not include Bear Hug, so post-op use is informative).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/belly-press-test-observation"
+        },
+        "name": "Belly Press Test Observation",
+        "description": "Observation documenting the result of the Belly Press subscapularis provocation test. Covers expert consensus Q2.g (pre-treatment) and Q9.g (post-treatment); pre/post differentiation is by effectiveDateTime.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/cofield-tear-size-classification"
+        },
+        "name": "Cofield Tear Size Classification",
+        "description": "Categorical classification of rotator cuff tear size as defined by DeOrio and Cofield\n(1984) and universally adopted in shoulder surgery literature: small (<1 cm), medium (1–3 cm),\nlarge (3–5 cm), massive (>5 cm). The bucket boundaries are measured on the maximum\ntear diameter, either on MRI or intra-operatively. This CodeSystem is authored because\nno equivalent codes exist in SNOMED CT, LOINC, RadLex, or NCI Thesaurus as of the\nauthoring date of this IG (exhaustive search documented in the IG source repository).\nSibling concept to the linear-cm `TearSizeObservation`, both encode expert consensus Q4.a\n(\"Size\") and are intended to be captured together when known.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/cofield-tear-size-classification"
+        },
+        "name": "Cofield Tear Size Classification ValueSet",
+        "description": "ValueSet containing all four Cofield rotator cuff tear-size categories (small / medium / large / massive). Bound to Observation.valueCodeableConcept in TearSizeClassificationObservation (pre-operative, from imaging) and IntraopTearSizeClassificationObservation (intra-operative).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/constant-score-observation"
+        },
+        "name": "Constant-Murley Score Observation",
+        "description": "Observation documenting the Constant-Murley composite shoulder outcome\nscore (0–100). Covers expert consensus Q12 preferred instrument (Constant, element `Q12-Constant` in the mapping). Bound to SNOMED CT 273383002\n\"Constant and Murley shoulder assessment score (assessment scale)\".\n\nTwo entry modes, distinguished by whether `component[]` is populated:\n\n1. **Direct total entry**, `valueQuantity` only, no `component[]`. Used\n   when a site has only a previously published total on hand and did not\n   re-collect the four sub-scores; a common, legitimate registry pattern.\n2. **Component-derived entry**, all four `component[]` slices populated\n   (Pain / ADL / ROM / Strength, matching the original Constant & Murley\n   1987 15/20/40/25-point breakdown), with `valueQuantity` set to their\n   sum. All four are required together when this mode is used, to avoid\n   a partial sum silently masquerading as a real total.\n\nThe four component sub-scores are **directly captured clinical/patient\ninput, not derived from this IG's other clinical Observations**\n(`Shoulder*RotationObservation`, strength MMT profiles, etc.). Such a\nderivation would be clinically illegitimate: the Constant ROM sub-score (0–40) grades external rotation by functional\nhand-position milestones and internal rotation by a 6-level vertebral\nladder distinct from this IG's own 8-tier `InternalRotationVertebralLevel`,\nscored on *active, painless* motion specifically, not a\nlinear degrees-to-points conversion of the degree-valued ROM Observations\ncaptured elsewhere. The Constant Strength sub-score (0–25) is a single\nspring-balance/dynamometer-derived point value, clinically distinct from\n`SupraspinatusStrengthDynamometryObservation`, which is a\ndifferent clinical test entirely. No LOINC or SNOMED CT code exists for\nany of the four sub-components, so local codes are used.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/constant-calculator-input"
+        },
+        "name": "Constant-Murley Worksheet Input",
+        "description": "The answer categories a Constant-Murley worksheet question offers, which the form turns\ninto that question's points before the total is summed. These are inputs to a calculation\nand never leave the form: what is extracted is the numeric sub-score on\n`ConstantScoreObservation.component`, so no code from here reaches a stored Observation.\n\nAn ordinal category takes its axis from the question that asks it. `none`, `moderate` and\n`severe` are the zero, middle and highest categories of whichever axis the question names,\nso the same code reads as no pain on the pain question and as not limited on an\nactivity-limitation question, and each question supplies the wording that applies to it.\nThe positional codes name a height the hand reaches or a posture it reaches it in.\n\nTwo forms use these: the registration and follow-up Questionnaires, on the sub-score\nquestions of the Constant-Murley group.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/deformity-observation"
+        },
+        "name": "Deformity Observation",
+        "description": "Observation documenting whether a visible shoulder deformity (e.g. superior\nhumeral head prominence, asymmetry) is present on visual inspection of the\nshoulder. Visual inspection is captured as three structured findings\n(alongside AtrophyObservation and NormalShoulderContourObservation) rather\nthan as free text, which could not be analysed across the registry.\n\nCoded via SNOMED CT 111263009 \"Acquired deformity of shoulder\", a\nlaterality-neutral disorder/finding-hierarchy concept, used as\nObservation.code paired with the standard SNOMED present/absent value\nqualifiers, a recognised FHIR pattern when no observable-entity concept\nexists for an axis. Laterality is carried separately via\nObservation.bodySite, not folded into the code. Pre-treatment and\npost-treatment inspection are distinguished by effectiveDateTime relative to\nthe index procedure, so a single profile covers both expert consensus Q2.a\nand Q9.a.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/employment-status-observation"
+        },
+        "name": "Employment Status Observation",
+        "description": "Observation documenting the patient's current employment status. Part of\nthe unanimous-consensus Q1.k \"Occupation,\" which names no mechanism, decomposed here into employment status (this profile) and occupational\nphysical demand (`OccupationalPhysicalDemandObservation`) rather than a\nfree-text job title, which has low analytical value across a registry.\n\n`Observation.code` is the standard LOINC 67875-5 \"Employment status -\ncurrent\". `valueCodeableConcept` is bound to `EmploymentStatus`, LOINC's\nown official answer list (LL1901-9) plus one local addition\n(self-employed), which no LOINC answer list captures (verified July 2026).\n",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/employment-status-supplement"
+        },
+        "name": "Employment Status Supplement",
+        "description": "Local code for employment-status distinctions with no apt concept in LOINC's\nofficial answer list for \"Employment status - current\" (67875-5, answer list\nLL1901-9: Unemployed / Employed full time / Employed part time / Homemaker /\nRetired due to age-preference / Retired due to disability / Medical leave of\nabsence / Student, no self-employed distinction). Used together with the\nLOINC LA answer codes in `EmploymentStatus` for\n`EmploymentStatusObservation.valueCodeableConcept`. Same pattern as\n`ShoulderEtiology` supplying `#acute-on-chronic` alongside SNOMED concepts\nfor `RotatorCuffEtiology`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/employment-status"
+        },
+        "name": "Employment Status ValueSet",
+        "description": "Current employment status (expert consensus Q1.k, part of \"Occupation\"). LOINC's\nofficial answer list for 67875-5 \"Employment status - current\" (LL1901-9)\nplus one local addition (self-employed) that list is missing. See\n`EmploymentStatusSupplement` for why the local code is needed. Same hybrid\npattern as `RotatorCuffEtiology`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/external-rotation-strength-observation"
+        },
+        "name": "External Rotation Strength Observation",
+        "description": "Observation documenting composite external-rotation strength on the 0–5 manual muscle testing scale (Janda grading; equivalent to MRC / Daniels-Worthingham 0–5). Tested at 0° abduction with elbow flexed at 90°; resisted external rotation. Reflects combined infraspinatus + teres minor function, these two muscles are not isolated by manual muscle testing in clinical practice (isolated teres minor involvement flagged separately via the Hornblower test, #hornblower-test). Covers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d (post-treatment). Structural mirror of InternalRotationStrengthObservation, which tests the same position for the opposite rotation direction.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/fixation-technique"
+        },
+        "name": "Fixation Technique",
+        "description": "Suture-anchor fixation construct used for rotator cuff repair, single-row,\ndouble-row, or suture-bridge (transosseous-equivalent), plus two catch-all\ntiers for repairs without anchors and procedures where the axis does not\napply. Layer 2 (IG-operational) addition, out-of-consensus: the expert\nconsensus (Q1-Q13) never names fixation technique.\n\nSingle-row, double-row, and suture-bridge are the three biomechanically and\nclinically distinct fixation philosophies used throughout current rotator cuff\nrepair literature and by peer surgical registries, not an arbitrary cut of a\ncontinuum. Suture-bridge is kept as\nits own tier rather than merged into \"double-row\" because it is a specific\ndouble-row sub-variant with its own distinct compressive mechanism\n(lateral-row sutures/tapes pass over the tendon surface before anchoring,\ncompressing the tendon against the footprint), a distinction registries\nthat lump it into plain double-row lose.\n\nNo SNOMED CT concept exists for any of these five tiers as a standalone\nfixation-technique axis (verified July 2026), only whole-procedure fused\nconcepts (e.g. SNOMED `699120002` \"Arthroscopic repair of rotator cuff\")\nexist, with no separate axis for anchor configuration.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/fixation-technique-observation"
+        },
+        "name": "Fixation Technique Observation",
+        "description": "Observation documenting the suture-anchor fixation construct used for\nrotator cuff repair, single-row, double-row, suture-bridge\n(transosseous-equivalent), transosseous without anchors, or not applicable\n(non-repair procedures). Linked to the specific `RotatorCuffProcedure` it\ndescribes via `Observation.partOf`.\n\nLayer 2 (IG-operational) addition, out-of-consensus: the expert consensus\nnever names fixation technique. `valueCodeableConcept` is `required`-bound to\n`FixationTechnique`, which is fully local because no SNOMED CT concept exists\nfor any of the five tiers as a standalone axis.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/fixation-technique"
+        },
+        "name": "Fixation Technique ValueSet",
+        "description": "ValueSet containing the five fixation-technique categories.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/functional-limitation-severity"
+        },
+        "name": "Functional Limitation Severity",
+        "description": "Five-tier ordinal grading the highest functional plane at which the patient's\nshoulder still limits activity: overhead, at shoulder level, below shoulder\nlevel, and unable to use the arm. Each tier names an observable functional\nplane, so the grading is anchored to what the patient can do.\n\nEach tier is a strict functional subset of the one above it. A patient unable\nto use the arm is, by construction, also overhead-limited and\nshoulder-level-limited. That subset relation is what makes the scale ordinal\nfor registry analysis, not merely categorical. The tiers match how rotator\ncuff patients are already triaged verbally in clinic.\n\nThe CodeSystem realises expert consensus Q1.n \"Functional limitations\" (unanimous\nconsensus, no mechanism specified). A coded ordinal is used so that the\nanswer is analysable across the registry.\n\nIt is distinct from the Constant-Murley score's own ADL sub-score\n(`ConstantScoreObservation` `component[ADL]`, 0-20 points, the expert consensus Q12\npreferred outcome instrument, captured at follow-up): this is a quick\none-item baseline gestalt captured once at registration, not a multi-domain\ninstrument.\n\nNo SNOMED CT or LOINC concept exists for this functional-ceiling axis as of\nauthoring (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/functional-limitation-severity"
+        },
+        "name": "Functional Limitation Severity ValueSet",
+        "description": "ValueSet containing the five functional-limitation severity tiers (expert consensus Q1.n).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/functional-limitations-observation"
+        },
+        "name": "Functional Limitations Observation",
+        "description": "Observation documenting a five-tier functional-ceiling ordinal, the highest\nplane at which the patient's shoulder still limits activity (overhead /\nat-shoulder-level / below-shoulder-level / unable to use the arm), matching\nexpert consensus Q1.n \"Functional limitations\" (unanimous consensus, no mechanism\nspecified).\n\n`valueCodeableConcept` is `required`-bound to `FunctionalLimitationSeverity`\n(fully local, no SNOMED CT or LOINC concept exists for this axis, verified\nJuly 2026). Shared with\nexpert consensus Q12.c (function/limitations PROM component).\n\n`Observation.code` is a local `ShoulderObservationCodes` entry. The nearest\nLOINC candidate, `10158-4` \"History of Functional status Narrative\", carries\nthe `Nar` scale type, which does not match a coded ordinal value.\n\nA coded ordinal is used so that the answer is analysable across the registry.\n\nFor instrument-grade quantification of limitations, use the Constant-Murley\nscore (`ConstantScoreObservation`'s `component[ADL]`) or one of the SSV/SANE\ninstruments. This profile complements those with a quick, one-item\nbaseline gestalt, not a duplicate multi-domain instrument.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/goutallier-classification"
+        },
+        "name": "Goutallier Classification",
+        "description": "Ordinal classification of fatty infiltration of skeletal muscle (originally of the rotator\ncuff musculature) as defined by Goutallier et al. (1994) based on CT imaging, and adapted\nfor MRI by Fuchs et al. (1999). Grades range from 0 (normal muscle) to 4 (more fat than\nmuscle). This CodeSystem is authored because no equivalent codes exist in SNOMED CT, LOINC,\nRadLex, or NCI Thesaurus as of the authoring date of this IG (exhaustive search documented\nin the IG source repository).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/goutallier-observation"
+        },
+        "name": "Goutallier Classification Observation",
+        "description": "Observation documenting Goutallier fatty infiltration grade (0–4). Covers expert consensus Q4.e (Goutallier grading of fatty infiltration).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/goutallier-classification"
+        },
+        "name": "Goutallier Classification ValueSet",
+        "description": "ValueSet containing all Goutallier classification grades (0–4) for fatty infiltration of rotator cuff muscles. Bound to Observation.valueCodeableConcept in ShoulderObservation instances that record Goutallier findings.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/hand-dominance-observation"
+        },
+        "name": "Hand Dominance Observation",
+        "description": "Observation recording the patient's hand dominance (handedness), clinically\nrelevant for shoulder surgery planning and outcome interpretation. Injuries to\nthe dominant arm may have greater functional impact and influence treatment\ndecisions and rehabilitation planning.\n\nCoded via SNOMED CT 57427004 \"Handedness\" (observable entity), the\ntextbook code=question / value=answer pairing. Value is bound to\nHandDominance (SNOMED CT codes: right-handed, left-handed, ambidextrous,\nand an explicit unknown). Category is social-history as handedness is a\nstable patient characteristic. No LOINC code exists for handedness.\n\nCovers expert consensus Q1.m (hand dominance / handedness). Handedness is a\nclinical finding, so it is carried as an Observation rather than as a Patient\nextension.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/hand-dominance"
+        },
+        "name": "Hand Dominance ValueSet",
+        "description": "ValueSet containing SNOMED CT codes for hand dominance (handedness), including\nan explicit `Unknown` answer for when the patient/clinician cannot state\ndominance, distinct from the field being left unanswered (which emits no\nHandDominanceObservation at all; see StepPatient.tsx).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/hornblower-test-observation"
+        },
+        "name": "Hornblower Test Observation",
+        "description": "Observation documenting the result of the Hornblower (Signe du Clairon) teres minor provocation test. Covers expert consensus Q2.i (pre-treatment; the post-op exam set Q9.a–g does not include Hornblower, so post-op use is informative).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/imaging-modality"
+        },
+        "name": "Imaging Modality ValueSet",
+        "description": "DICOM acquisition-modality codes for shoulder imaging: DX for a plain radiograph (Q3), and MR, CT, or US for the advanced-imaging choice (Q5, Q6, and the Q7 ultrasound recording pattern). A patient can have both a radiograph and an advanced study, so both frontends consume this ValueSet as a multi-select. The binding is extensible, so any other DICOM modality code is also valid.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/internal-rotation-strength-observation"
+        },
+        "name": "Internal Rotation Strength Observation",
+        "description": "Observation documenting composite internal-rotation strength on the 0–5\nmanual muscle testing scale (Janda grading; equivalent to MRC /\nDaniels-Worthingham 0–5). Tested at 0° abduction with elbow flexed at 90°;\nresisted internal rotation, the structural mirror of\nExternalRotationStrengthObservation's tested position. Reflects combined\nsubscapularis + secondary internal rotator (pectoralis major / latissimus\ndorsi / teres major) function.\n\nClinically distinct from subscapularis-specific isolation testing\n(#subscapularis-strength, lift-off/belly-press), which uses\nan internally-rotated/behind-the-back position to unload the secondary\ninternal rotators and isolate subscapularis tendon integrity specifically.\nComposite resisted-IR-at-neutral strength is sensitive to global\ninternal-rotator weakness; lift-off/belly-press is sensitive to\nsubscapularis-tendon-specific competence, a positive lift-off/belly-press\nwith normal composite IR strength points specifically at the subscapularis.\nBoth are captured as independent sibling profiles; neither is redundant with\nthe other.\n\nCovers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d\n(post-treatment). No LOINC or SNOMED CT code exists\nfor a \"Janda\" grading eponym (verified July 2026; nearest standard concept\nis the generic SNOMED CT observable entity `249956007` \"MRC grade - muscle\npower\", not bound here since this IG's local axis-per-muscle codes are more\nclinically specific), a local code is used.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/internal-rotation-vertebral-level"
+        },
+        "name": "Internal Rotation Vertebral Level",
+        "description": "Eight-tier ordinal recording at-side (adducted) shoulder internal rotation\nby the highest vertebral landmark the patient's hand can reach behind the\nback (\"hand behind back\" test), worst to best. Standard clinical\nconvention. It reuses most of the landmarks of the Constant-Murley score's own\nIR grading (the expert consensus Q12 preferred instrument already modeled in\nthis IG via ConstantScoreObservation) and adds finer rungs, so deriving that\nscore's range-of-motion sub-score applies a documented lossy remapping.\n\nShoulderInternalRotationObservation and\nShoulderPassiveInternalRotationObservation bind this scale instead of a\ndegree-valued (`valueQuantity`) measurement: at-side internal rotation is\nconfounded by scapulothoracic substitution and trunk rotation, so a\ngoniometric degree value is clinically unreliable, and the reachable-level\ntest is what is used in practice. Distinct from IR measured at 90° abduction\n(ShoulderInternalRotation90AbductionObservation), which is a controlled,\ngoniometer-reliable position and stays degree-valued.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nvertebral-level IR scale as of authoring (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/internal-rotation-vertebral-level"
+        },
+        "name": "Internal Rotation Vertebral Level ValueSet",
+        "description": "ValueSet containing the eight-tier 'hand behind back' internal rotation scale (expert consensus Q2.b/Q2.c, Q9.b/Q9.c).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/intraop-tear-size-classification-observation"
+        },
+        "name": "Intra-operative Tear Size Classification Observation (Cofield)",
+        "description": "Observation documenting the categorical Cofield bucket (small / medium / large / massive) of rotator cuff tear size determined directly during surgery (intra-operative exam). Covers expert consensus Q4.a (size, categorical decomposition, surgical context). Sibling to TearSizeClassificationObservation, which captures the pre-operative imaging-derived bucket of the same concept; paired with IntraopTearSizeObservation for the continuous cm measurement in the same surgical context.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/intraop-tear-size-observation"
+        },
+        "name": "Intra-operative Tear Size Observation",
+        "description": "Observation documenting maximum rotator cuff tear diameter in centimetres measured directly during surgery (intra-operative exam). Covers expert consensus Q4.a (size, continuous decomposition, surgical context). Sibling to TearSizeObservation, which captures the pre-operative imaging-derived measurement of the same concept; discrepancies between the pre-operative imaging estimate and the intra-operative direct measurement are clinically expected and meaningful, which is why both are modelled as distinct Observations differing only by acquisition context (category).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/jobe-test-observation"
+        },
+        "name": "Jobe Test (Empty Can) Observation",
+        "description": "Observation documenting the result of the Jobe (Empty Can) supraspinatus\nprovocation test. Coded via SNOMED CT 1231437004 \"Empty can test\"\n(procedure; synonym \"Jobe test\"), a verified SNOMED procedure concept for this\ntest. Covers expert consensus Q2.e (pre-treatment) and\nQ9.e (post-treatment); pre/post differentiation is by effectiveDateTime.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/lift-off-test-observation"
+        },
+        "name": "Lift-off Test Observation",
+        "description": "Observation documenting the result of the Gerber Lift-off subscapularis\nprovocation test. Coded via SNOMED CT 1231510004 \"Lift-off test\" (procedure;\nsynonym \"Gerber test\"), a verified SNOMED procedure concept for this test.\nCovers expert consensus Q2.f (pre-treatment) and Q9.f\n(post-treatment); pre/post differentiation is by effectiveDateTime.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/normal-shoulder-contour-observation"
+        },
+        "name": "Normal Shoulder Contour Observation",
+        "description": "Observation documenting the examiner's overall gestalt assessment of whether\nthe shoulder contour is normal on visual inspection, distinct from, and\ncomplementary to, the two specific findings AtrophyObservation and\nDeformityObservation. Visual inspection is captured as three structured\nfindings rather than as free text, which could not be analysed across the\nregistry.\n\nNo laterality-neutral SNOMED CT concept exists for this axis. Both the\nobservable-entity and the disorder/finding hierarchies were checked (July\n2026); they yield usable concepts for the sibling AtrophyObservation and\nDeformityObservation profiles, but only the over-generic \"Finding of shoulder\nregion\" 116308004 here. A local code\n(ShoulderObservationCodes#normal-shoulder-contour) is used, with the value\nbound to the standard SNOMED present/absent qualifiers. Pre-treatment and\npost-treatment inspection are distinguished by effectiveDateTime relative to\nthe index procedure, so a single profile covers both expert consensus Q2.a\nand Q9.a.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/occupational-overhead-exposure"
+        },
+        "name": "Occupational Overhead Exposure",
+        "description": "Whether the patient's occupation regularly involves overhead reaching or\nrepetitive shoulder-loading tasks (Überkopfarbeit), split off from\n`OccupationalPhysicalDemandCodes` as its own independent yes/no/unknown axis\nso that intensity and overhead exposure can be recorded\nsimultaneously (a roofer is both heavy-manual and overhead-exposed; a single\nenum would force an artificial either/or choice).\n\nPart of the unanimous-consensus Q1.k \"Occupation,\" which names no\nmechanism. No SNOMED CT or LOINC concept exists for occupational overhead\nexposure as of authoring (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/occupational-overhead-exposure-observation"
+        },
+        "name": "Occupational Overhead Exposure Observation",
+        "description": "Observation documenting whether the patient's occupation regularly involves\noverhead reaching or repetitive shoulder-loading tasks, independent of\noccupational physical-demand intensity (`OccupationalPhysicalDemandObservation`).\nIt is a separate axis because intensity and overhead exposure can co-occur\n(a roofer is both heavy-manual and overhead-exposed), which a single enum\ncould not represent simultaneously.\n\nPart of the unanimous-consensus Q1.k \"Occupation,\" which names no\nmechanism. `Observation.code` is a local `ShoulderObservationCodes` catalog\nentry; `valueCodeableConcept` is bound to `OccupationalOverheadExposure`\n(fully local), no SNOMED CT or LOINC concept exists for this axis (verified\nJuly 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/occupational-overhead-exposure"
+        },
+        "name": "Occupational Overhead Exposure ValueSet",
+        "description": "ValueSet containing the three occupational overhead-exposure categories (expert consensus Q1.k).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/occupational-physical-demand"
+        },
+        "name": "Occupational Physical Demand",
+        "description": "Physical demand (intensity) category of the patient's occupation, part of\n\"Occupation\" (expert consensus Q1.k). Intensity is one of two independent occupational\naxes, the other, whether the occupation involves regular overhead work, is\ncaptured separately by `OccupationalOverheadExposureObservation` /\n`OccupationalOverheadExposureCodes`. The two are kept as independent axes\nrather than folded into a single enum because an occupation can be\nsimultaneously heavy and overhead (a roofer, for example); one enum would\nforce an artificial either/or choice.\n\nNo SNOMED CT or LOINC concept exists for occupational physical demand\nintensity level as of authoring (SNOMED CT and LOINC both checked, July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/occupational-physical-demand-observation"
+        },
+        "name": "Occupational Physical Demand Observation",
+        "description": "Observation documenting the physical demand category of the patient's\noccupation (sedentary / light manual / heavy manual). Part of the unanimous-consensus\nQ1.k \"Occupation,\" which names no mechanism, added as a second axis\nalongside `EmploymentStatusObservation`, motivated by overhead/repetitive\nshoulder loading being a well-established rotator-cuff risk and\nreturn-to-work factor. No comparable registry (DART, EPRD, IRD, SEPR)\ncaptures this axis (verified against the DART, EPRD, IRD and SEPR dataset\nspecifications).\n\n`Observation.code` is a local `ShoulderObservationCodes` catalog entry, no\nSNOMED CT or LOINC concept exists for occupational physical demand level\n(verified July 2026). `valueCodeableConcept` is bound to\n`OccupationalPhysicalDemand` (fully local, same reason).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/occupational-physical-demand"
+        },
+        "name": "Occupational Physical Demand ValueSet",
+        "description": "ValueSet containing the three occupational physical-demand intensity categories (expert consensus Q1.k). Overhead work exposure is a separate, independent axis, see OccupationalOverheadExposure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/pain-rest-observation"
+        },
+        "name": "Pain At Rest Observation",
+        "description": "Observation documenting the patient's shoulder pain severity at rest\n(no movement or loading), on a 0–10 numeric rating scale. One of four\ncontext-specific pain measurements (alongside PainAverageObservation,\nPainActiveMovementObservation, PainPassiveMovementObservation). Pain is decomposed by\ncontext rather than captured as a single generic \"pain severity\" field.\n\nNo precoordinated LOINC or SNOMED CT concept exists for \"pain at rest\" as a\ndistinct question-level clinical variable (verified July 2026); a local code\n(ShoulderObservationCodes#pain-rest) is used. valueQuantity uses UCUM\n{score} unit with allowed range 0–10.\n\nReused symmetrically across three expert consensus elements:\n- Q1.h, pain at presentation (patient history)\n- Q8.a, improved pain (treatment-success criterion a)\n- Q12.a, pain component of the PROM (expert consensus required component Q12.a)\n\nPre/post discrimination is via effectiveDateTime relative to the index procedure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/pain-average-observation"
+        },
+        "name": "Pain Average Observation",
+        "description": "Observation documenting the patient's average shoulder pain severity on a\n0–10 numeric rating scale. One of four context-specific pain measurements\n(alongside PainActiveMovementObservation, PainPassiveMovementObservation,\nPainRestObservation). Pain is decomposed by context\nrather than captured as a single generic \"pain severity\" field.\n\nNo precoordinated LOINC or SNOMED CT concept exists for \"average pain\" as a\ndistinct question-level clinical variable (verified July 2026); a local code\n(ShoulderObservationCodes#pain-average) is used. valueQuantity uses UCUM\n{score} unit with allowed range 0–10.\n\nReused symmetrically across three expert consensus elements:\n- Q1.h, pain at presentation (patient history)\n- Q8.a, improved pain (treatment-success criterion a)\n- Q12.a, pain component of the PROM (expert consensus required component Q12.a)\n\nPre/post discrimination is via effectiveDateTime relative to the index procedure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/pain-active-movement-observation"
+        },
+        "name": "Pain With Active Movement Observation",
+        "description": "Observation documenting the patient's shoulder pain severity during\npatient-generated active movement, on a 0–10 numeric rating scale. One of\nfour context-specific pain measurements (alongside PainAverageObservation,\nPainPassiveMovementObservation, PainRestObservation). Pain is decomposed by\ncontext rather than captured as a single generic \"pain severity\" field.\n\nDistinguished from PainPassiveMovementObservation because pain reproduced by\nactive (patient-generated) motion versus passive (examiner-generated) motion\nhelps differentiate mechanical/structural pathology from muscular guarding, the same active/passive distinction this IG already applies throughout its\nrange-of-motion profiles (e.g. ShoulderFlexionObservation vs.\nShoulderPassiveFlexionObservation).\n\nNo precoordinated LOINC or SNOMED CT concept exists for \"pain with active\nmovement\" as a distinct question-level clinical variable (verified July\n2026); a local code (ShoulderObservationCodes#pain-active-movement) is used.\nvalueQuantity uses UCUM {score} unit with allowed range 0–10.\n\nReused symmetrically across three expert consensus elements:\n- Q1.h, pain at presentation (patient history)\n- Q8.a, improved pain (treatment-success criterion a)\n- Q12.a, pain component of the PROM (expert consensus required component Q12.a)\n\nPre/post discrimination is via effectiveDateTime relative to the index procedure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/pain-passive-movement-observation"
+        },
+        "name": "Pain With Passive Movement Observation",
+        "description": "Observation documenting the patient's shoulder pain severity during\nexaminer-generated passive movement, on a 0–10 numeric rating scale. One of\nfour context-specific pain measurements (alongside PainAverageObservation,\nPainActiveMovementObservation, PainRestObservation). Pain is decomposed by\ncontext rather than captured as a single generic \"pain severity\" field.\n\nDistinguished from PainActiveMovementObservation because pain reproduced by\npassive (examiner-generated) motion versus active (patient-generated) motion\nhelps differentiate mechanical/structural pathology from muscular guarding, the same active/passive distinction this IG already applies throughout its\nrange-of-motion profiles (e.g. ShoulderFlexionObservation vs.\nShoulderPassiveFlexionObservation).\n\nNo precoordinated LOINC or SNOMED CT concept exists for \"pain with passive\nmovement\" as a distinct question-level clinical variable (verified July\n2026); a local code (ShoulderObservationCodes#pain-passive-movement) is\nused. valueQuantity uses UCUM {score} unit with allowed range 0–10.\n\nReused symmetrically across three expert consensus elements:\n- Q1.h, pain at presentation (patient history)\n- Q8.a, improved pain (treatment-success criterion a)\n- Q12.a, pain component of the PROM (expert consensus required component Q12.a)\n\nPre/post discrimination is via effectiveDateTime relative to the index procedure.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/patient-satisfaction-observation"
+        },
+        "name": "Patient Satisfaction Observation",
+        "description": "Observation documenting overall patient satisfaction with treatment outcome using the 5-point LOINC satisfaction scale (LL4543-6). Covers expert consensus Q8.e (patient satisfaction with treatment) and Q12.g (PROM, patient satisfaction). Observation code: LOINC 77218-6.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/satisfaction-scale"
+        },
+        "name": "Patient Satisfaction Scale ValueSet",
+        "description": "ValueSet containing the five LOINC answer codes from LL4543-6. Bound to Observation.valueCodeableConcept when code = LOINC 77218-6 (patient satisfaction with healthcare delivery).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/patte-classification"
+        },
+        "name": "Patte Classification",
+        "description": "The Patte classification describes the degree of tendon retraction in rotator cuff tears.\nThis classification is used to assess the severity of tendon retraction on imaging studies\n(MRI or CT arthrography) and helps guide surgical planning.\n\nReference: Patte D. Classification of rotator cuff lesions. Clin Orthop Relat Res. 1990;254:81-86.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/patte-observation"
+        },
+        "name": "Patte Classification Observation",
+        "description": "Observation documenting Patte tendon retraction stage (I–III). Covers expert consensus Q4.d (Patte staging of tendon retraction).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/patte-classification"
+        },
+        "name": "Patte Classification ValueSet",
+        "description": "ValueSet containing all Patte classification stages for rotator cuff tendon retraction.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/positive-negative"
+        },
+        "name": "Positive/Negative Test Result ValueSet",
+        "description": "ValueSet for recording binary (positive/negative) clinical test results, used in shoulder provocation tests (Jobe, Lift-off, Belly press, Bear hug, Hornblower).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/present-absent"
+        },
+        "name": "Present/Absent Finding ValueSet",
+        "description": "ValueSet for recording binary (present/absent) visual inspection findings, used for shoulder atrophy, deformity, and normal-contour exam items (expert consensus Q2.a / Q9.a).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/prior-treatment-category"
+        },
+        "name": "Prior Non-Surgical Treatment Category ValueSet",
+        "description": "SNOMED CT category codes for expert consensus Q1.f (prior treatment including physical therapy / injections). Required binding on RotatorCuffRegistrationBundle.entry[priorTreatment].resource.category, enforces that surgical procedures cannot be placed in the Registration bundle.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/prior-non-surgical-treatment-type"
+        },
+        "name": "Prior Non-Surgical Treatment Type ValueSet",
+        "description": "SNOMED CT codes for prior non-surgical shoulder treatments (physical therapy, injections), the non-surgical subset of RotatorCuffProcedureType. Binding is extensible, matching the parent enumeration's own tolerance.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/prior-physical-therapy-session-count"
+        },
+        "name": "Prior Physical Therapy Session Count",
+        "description": "Bucketed count of prior physical-therapy sessions received for the shoulder\ncondition being registered, part of the unanimous-consensus Q1.f\n\"Prior treatment (PT/injections),\" which names no mechanism.\n\nThe count is bucketed because exact session counts are rarely recalled\nprecisely and are not analytically useful as an unbounded number. Three tiers\nare enough to distinguish a brief trial of therapy from extended conservative\nmanagement. What matters for treatment history is the amount of therapy\nreceived, not when it was given.\n\nNo SNOMED CT or LOINC concept exists for a bucketed physical-therapy\nsession-count axis as of authoring (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/prior-physical-therapy-session-count-observation"
+        },
+        "name": "Prior Physical Therapy Session Count Observation",
+        "description": "Observation documenting a bucketed count of prior physical-therapy sessions\nreceived for the shoulder condition being registered, part of the\nunanimous-consensus Q1.f \"Prior treatment (PT/injections),\" which names no\nmechanism. Only recorded when the prior-PT `RotatorCuffProcedure`\n(`reasonReference` → the index `RotatorCuffCondition`) is present, this\nObservation is never emitted for a \"no prior PT\" answer.\n\n`valueCodeableConcept` is `required`-bound to `PriorPhysicalTherapySessionCount`\n(fully local, no SNOMED CT or LOINC concept exists for this axis, verified\nJuly 2026). The count is what matters for treatment history; the date the\ntherapy was given is not recorded here.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/prior-physical-therapy-session-count"
+        },
+        "name": "Prior Physical Therapy Session Count ValueSet",
+        "description": "ValueSet containing the three bucketed prior-PT session-count categories (expert consensus Q1.f).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/prior-injection-count"
+        },
+        "name": "Prior Shoulder Injection Count",
+        "description": "Bucketed count of prior shoulder injections received for the condition\nbeing registered, part of the unanimous-consensus Q1.f \"Prior\ntreatment (PT/injections),\" which names no mechanism.\n\nThe count is bucketed rather than captured as free text or as injection dates:\nwhat matters for treatment history is how many injections were given, not\nexactly when. It is only asked when the prior-injection yes/no flag is \"yes\";\nthe \"no injections\" case is already represented by that flag, so this\nCodeSystem carries no redundant zero-count member.\n\nNo SNOMED CT or LOINC concept exists for a bucketed injection-count axis as\nof authoring (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/prior-injection-count-observation"
+        },
+        "name": "Prior Shoulder Injection Count Observation",
+        "description": "Observation documenting a bucketed count of prior shoulder injections\nreceived for the condition being registered, part of the\nunanimous-consensus Q1.f \"Prior treatment (PT/injections),\" which names no\nmechanism. Only recorded when the prior-injection `RotatorCuffProcedure`\n(`reasonReference` → the index `RotatorCuffCondition`) is present, this\nObservation is never emitted for a \"no prior injections\" answer.\n\n`valueCodeableConcept` is `required`-bound to `PriorInjectionCount` (fully\nlocal, no SNOMED CT or LOINC concept exists for this axis, verified July\n2026). The count is what matters for treatment history; the date the\ninjections were given is not recorded here.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/prior-injection-count"
+        },
+        "name": "Prior Shoulder Injection Count ValueSet",
+        "description": "ValueSet containing the two bucketed prior-injection count categories (expert consensus Q1.f).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/procedure-approach"
+        },
+        "name": "Procedure Approach",
+        "description": "Surgical approach used for the procedure, arthroscopic, open, or mini-open\n(arthroscopic-assisted with a small open incision). Layer 2 (IG-operational)\naddition, decoupled from `Procedure.code` in a postcoordination style\nmirroring the diagnosis-side decoupling: `RotatorCuffProcedureType` bakes\napproach into fused codes (e.g. SNOMED `699120002` \"Arthroscopic repair of rotator cuff\" vs.\n`56060000` \"Repair of musculotendinous cuff of shoulder\" for the open\nequivalent), which cannot represent approach and reconstruction-extent\nindependently.\n\nFully local rather than mixed-system: SNOMED CT has a generic `129236007`\n\"Open approach - access\" qualifier, but no equivalent standalone\n\"arthroscopic approach\" qualifier exists, SNOMED instead bakes\n\"arthroscopic\" into whole-procedure concepts (verified July 2026 against a\nlive SNOMED CT terminology server). Keeping all three tiers on one local CodeSystem avoids an\ninternally inconsistent mix of one real code and two invented ones.\n\nLayer 2 (IG-operational) addition: the expert consensus (Q1-Q13) never\nenumerates procedure technique.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/procedure-approach-observation"
+        },
+        "name": "Procedure Approach Observation",
+        "description": "Observation documenting the surgical approach (arthroscopic / open /\nmini-open) used for a specific rotator cuff procedure, decoupled from\n`Procedure.code`, which today bakes approach into fused precoordinated\ncodes (see `ProcedureApproachCodes` for the rationale). Linked to the\nspecific `RotatorCuffProcedure` it describes via `Observation.partOf`\n(base FHIR, a Surgery-bundle encounter can carry an index procedure plus\n0..* concomitant procedures, so the link must be unambiguous).\n\nLayer 2 (IG-operational) addition: the expert consensus never enumerates\nprocedure technique. `valueCodeableConcept` is `required`-bound to\n`ProcedureApproach` (fully local, no SNOMED CT concept exists for a\nstandalone \"arthroscopic approach\" qualifier, verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/procedure-approach"
+        },
+        "name": "Procedure Approach ValueSet",
+        "description": "ValueSet containing the three surgical-approach categories (arthroscopic / open / mini-open).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/q11-timepoint"
+        },
+        "name": "Q11 Research Follow-Up Timepoint",
+        "description": "Discriminator for which of the 5 expert consensus Q11.a–e research follow-up timepoints\n(6 weeks, 3 months, 6 months, 1 year, 2 years post-surgery) a\n`RotatorCuffResearchCarePlan.activity` represents, bound to\n`activity.detail.code`. Fixed by the consensus (Hurley et al. 2024, Q11), not\na clinician choice; both frontends stamp this automatically when\nauto-generating the 5-activity schedule from the index procedure date.\nNo SNOMED CT or LOINC concept exists for this axis (verified\nAugust 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/q11-timepoint"
+        },
+        "name": "Q11 Research Follow-Up Timepoint ValueSet",
+        "description": "ValueSet containing all codes from Q11TimepointCodes. Bound to RotatorCuffResearchCarePlan.activity.detail.code.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/reconstruction-extent-observation"
+        },
+        "name": "Reconstruction Extent Observation",
+        "description": "Observation documenting the extent of the index rotator cuff procedure, partial reconstruction, complete reconstruction, or shoulder prosthesis\n(anatomic or reverse total arthroplasty), decoupled from `Procedure.code`\nin a postcoordination style mirroring the diagnosis-side \"one axis, one\nelement\" pattern. Linked to the specific\n`RotatorCuffProcedure` it describes via `Observation.partOf`.\n\nLayer 2 (IG-operational) addition: the expert consensus never names the\nextent of reconstruction. `valueCodeableConcept` is `required`-bound\nto `ReconstructionExtent`, four precoordinated SNOMED CT concepts, reused\nas Observation values (the same reuse pattern `TearThicknessObservation`\nalready applies).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/reconstruction-extent"
+        },
+        "name": "Reconstruction Extent ValueSet",
+        "description": "SNOMED CT concepts for the extent of the index rotator cuff procedure, partial reconstruction, complete reconstruction, or shoulder prosthesis\n(anatomic or reverse total arthroplasty), decoupled from `Procedure.code`\nin a postcoordination style, mirroring the diagnosis-side \"one axis, one\nelement\" pattern. All four concepts are\nprecoordinated SNOMED disorder/procedure-level codes, reused here as\nObservation values (the same reuse pattern `TearThickness` already applies).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/return-to-activity-observation"
+        },
+        "name": "Return to Activity Observation",
+        "description": "Observation documenting the patient's ability to return to pre-injury sport or occupational activities. Covers expert consensus component Q12.e, return to sport/work.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/return-to-activity"
+        },
+        "name": "Return to Activity Status",
+        "description": "Coded classification of a patient's ability to return to pre-injury sport or\noccupational activities after shoulder surgery (expert consensus component Q12.e).\nNo equivalent codes exist in SNOMED CT or LOINC for this three-category instrument\nas used in shoulder surgery registries; local codes are used in the interim.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/return-to-activity"
+        },
+        "name": "Return to Activity Status ValueSet",
+        "description": "ValueSet containing all codes from ReturnToActivityCodes. Bound to Observation.valueCodeableConcept when code = ShoulderObservationCodes#return-to-sport-work.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-condition"
+        },
+        "name": "Rotator Cuff Condition",
+        "description": "Profile for documenting rotator cuff tears and related shoulder pathology.\nDerives from HL7 Europe Core `condition-eu-core`, which preferred-\nbinds `code` to IPS `problems-uv-ips` plus a secondary preferred binding to\n`eHDSIIllnessandDisorder` and pins `subject` to `Reference(patient-eu-core)`\n, the chain is satisfied because `ShoulderPatient` parents from `patient-eu-\ncore`. Our local `code` is fixed to a single RotatorCuffDiagnosis concept, a\ntighter constraint than the inherited preferred binding (FHIR-legal).\n\nCaptures the diagnosis with laterality and chronicity, and links to detailed\nclassification observations via two buckets: formal grading observations\n(Patte retraction, Goutallier fatty infiltration, Cofield tear-size\nclassification) link via `stage.assessment`; diagnostic-evidence observations\n(**tendons involved**, **tear location**, tear thickness) link via\n`evidence.detail`. The raw tear-size measurement (cm) is neither, it is\nreachable through the encounter chain.\n\n`code` is fixed to the registry's single inclusion diagnosis, a rotator\ncuff tear (thickness-neutral SNOMED concept). It is not a clinician\nchoice. Hurley et al. 2024 (SECEC Delphi) defines no disease-entity\nselection at all: every consensus question is scoped \"in the setting of a\nsuspected/known rotator cuff tear,\" i.e. the tear is this registry's\ninclusion criterion, not a variable. Tendon involvement, partial/full\nthickness, tear location, and traumatic/non-traumatic etiology are each\ncaptured on their own separate element instead of being folded into\noverlapping pre-coordinated `code` choices, see TendonsInvolvedObservation,\nTearThicknessObservation, TearLocationObservation, and the `condition-dueTo`\nextension below.\n\nMultiple `RotatorCuffCondition` instances may coexist in one registration\n(e.g. a combined supraspinatus + infraspinatus tear coded as two Conditions,\nor a re-evaluation superseding an earlier one), see\nRotatorCuffRegistrationBundle's `condition 1..*` slice. Which one is the\nprincipal diagnosis for the visit is recorded on\n`ShoulderEncounter.diagnosis.rank`, not here; a Condition carries no opinion\nabout its own rank. Coexisting **non-rotator-cuff** shoulder pathology (e.g.\nAC joint arthritis, long head of biceps pathology) uses the separate\nShoulderDiagnosisCondition profile instead of this one.\n\nOne registration entry always corresponds to exactly one patient and one\nshoulder side, a bilateral case is two separate registrations, one per side,\neach anchored by its own `bodySite`.\n\nbodySite (1..1, required): laterality of the affected shoulder (left or right\nshoulder region, pre-coordinated SNOMED region code, ShoulderLaterality ValueSet).\nTendon involvement is NOT carried here, it is captured in\nTendonsInvolvedObservation (one per affected tendon) linked from this\nCondition via evidence.detail.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/rotator-cuff-diagnosis"
+        },
+        "name": "Rotator Cuff Diagnosis ValueSet",
+        "description": "Single-code enumeration carrying the registry's fixed inclusion diagnosis, a\nrotator cuff tear (thickness-neutral SNOMED concept). It publishes the\ninclusion criterion in machine-readable form. `RotatorCuffCondition.code`\npins the concept as a pattern rather than binding this ValueSet, so a\ndeploying registry may add further `coding[]` siblings on the same\n`CodeableConcept` where local practice requires it.\n\nThe enumeration is deliberately one code, not a disease-entity list: none of\nthe 13 consensus questions defines a disease-entity selection. Every question\nis scoped \"in the setting of a suspected/known rotator cuff tear,\" so the tear\nis the registry's inclusion criterion, not a variable to be chosen. The only\nclassification axis the consensus names is Q4 (size, tendons involved, partial\nvs. full thickness, Patte, Goutallier), each of which already has its own\nelement in this IG. Neighbouring entities such as \"Rotator cuff tear\narthropathy\" name distinct, disjoint SNOMED concepts (late-stage glenohumeral\njoint destruction secondary to a chronic massive tear, a reverse arthroplasty\nindication, not a repair indication) and are neither sub- nor supertypes of\nthe tear code.\n\nExcludes three axes that are captured elsewhere on\nRotatorCuffCondition, so a case is coded once per axis, not through an\noverlapping choice of pre-coordinated concepts:\n- **which tendon** is torn (supraspinatus / infraspinatus / subscapularis /\n  teres minor), TendonsInvolvedObservation, one per affected tendon, linked\n  via `Condition.evidence.detail`.\n- **traumatic vs. non-traumatic** etiology, the `condition-dueTo` extension,\n  bound to RotatorCuffEtiology (required).\n- **partial vs. full thickness**, TearThicknessObservation, linked via\n  `Condition.evidence.detail`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/rotator-cuff-etiology"
+        },
+        "name": "Rotator Cuff Etiology ValueSet",
+        "description": "Mutually-exclusive causation classifier for rotator cuff pathology, used in Condition.extension[condition-dueTo] on RotatorCuffCondition. Required binding.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-follow-up-bundle"
+        },
+        "name": "Rotator Cuff Follow-Up Bundle",
+        "description": "Transaction bundle defining a single post-operative follow-up visit submission\nfor an already-registered patient in a rotator cuff surgery registry. Third of\nthree named submission profiles in the registry workflow:\nRotatorCuffRegistrationBundle (pre-op, T0) → RotatorCuffSurgeryBundle\n(surgical event, T1) → RotatorCuffFollowUpBundle (per-visit increment, Q11\ntimepoints).\n\nPer visit the bundle contains:\n- exactly one ShoulderEncounter (expert consensus Q10), the realised follow-up visit\n- one or more ShoulderObservation entries, Q9 post-op exam (ROM, MMT,\n  provocation tests) and Q12 PROMs (Constant, SSV/SANE, VAS pain, satisfaction,\n  return-to-activity)\n- optionally one RotatorCuffQuestionnaireResponse, the answered PROM form\n- optionally one ShoulderImagingStudy, only at the research re-imaging\n  timepoint (Q13 exception)\n\nThe bundle does NOT contain Patient, Condition, or Procedure: Patient and\nCondition were established by the prior RotatorCuffRegistrationBundle (T0),\nthe surgical Procedure(s) by the prior RotatorCuffSurgeryBundle (T1). All are\nreferenced via their already-persisted IDs (Encounter.subject -> Patient/{id};\nEncounter.reasonReference -> Condition/{id}; Observation.subject -> Patient/{id};\nObservation.encounter -> Encounter/{urn-uuid-of-this-bundle-entry}).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-procedure"
+        },
+        "name": "Rotator Cuff Procedure",
+        "description": "Profile for documenting rotator cuff surgical interventions (rotator cuff\nrepairs and concomitant procedures) as well as prior non-surgical treatments\n(physical therapy, injections, distinguished by `category` binding).\n\nDerives from HL7 Europe Core `procedure-eu-core`, which preferred-\nbinds `code` to IPS `procedures-uv-ips` and pins `subject` to\n`Reference(patient-eu-core)`. The patient-reference chain is satisfied because\n`ShoulderPatient` parents from `patient-eu-core`. Our local\nextensible binding to `RotatorCuffProcedureType` (SNOMED-first surgical and\nprior-treatment codes) sits on top of the inherited preferred binding.\n\nSurgical Procedure instances additionally claim IPS `Procedure-uv-ips`\nconformance via `meta.profile[]` (both frontends stamp this at bundle assembly).\nThe claim is scoped to surgical procedures, prior non-surgical treatments\n(physical therapy, injections) do not claim IPS, avoiding an over-broad\npatient-summary assertion on conservative care. The IPS profile's\n`subject only Reference(Patient-uv-ips)` is satisfied because ShoulderPatient\ninstances claim PatientUvIps in `meta.profile[]`.\n\nThe `RotatorCuff*` prefix marks a pathology-specific profile; anatomy-region\nprofiles that carry no rotator-cuff-specific constraint are named `Shoulder*`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/rotator-cuff-procedure-category"
+        },
+        "name": "Rotator Cuff Procedure Category ValueSet",
+        "description": "SNOMED CT category codes for RotatorCuffProcedure: surgical procedure, physical therapy procedure, administration of medication. Extends the standard FHIR procedure-category set (which omits PT and injection) to fit the expert consensus scope.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/rotator-cuff-procedure-type"
+        },
+        "name": "Rotator Cuff Procedure Type ValueSet",
+        "description": "Enumerated SNOMED CT codes for rotator cuff procedures (surgical, concomitant, prior non-surgical). Editorial baseline; binding is extensible.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-questionnaire-response"
+        },
+        "name": "Rotator Cuff Questionnaire Response",
+        "description": "Profile for capturing responses to multi-item Patient-Reported Outcome Measure\n(PROM) instruments used in rotator cuff surgery registries. The IG carries only\nthe expert consensus Q12 preferred instruments: the Constant-Murley score and the\nSSV/SANE pair the answer statement names. Each instrument is represented as a FHIR\nQuestionnaire; this profile constrains the corresponding QuestionnaireResponse\nto link it to a ShoulderPatient subject.\n\nFor single-value composite scores (Constant-Murley total, SSV, SANE), use\nShoulderObservation with the corresponding code (SNOMED CT 273383002 for\nConstant-Murley; local ShoulderObservationCodes #ssv-score / #sane-score)\ninstead of a full QuestionnaireResponse.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-registration-bundle"
+        },
+        "name": "Rotator Cuff Registration Bundle",
+        "description": "Transaction bundle defining the pre-operative submission for a patient entering\na rotator cuff surgery research registry. This is the first of three named\nsubmissions per patient (Registration → Surgery → Follow-Up×N), corresponding\nto the pre-operative phase implied by Hurley et al. (2024): patient history\n(Q1), pre-op physical examination (Q2), classification (Q4), imaging\n(Q3 / Q5 / Q6, plus optional ultrasound), recorded as which modality was\nobtained (`ImagingStudy.modality`), one `ImagingStudy` per modality, prior\nnon-surgical treatments (expert consensus Q1.f, PT / injection) and baseline\nPROMs (Q8). The Q11 research follow-up schedule is carried by\nRotatorCuffSurgeryBundle, because it is computed from the surgery date.\n\nThe bundle establishes the patient context that subsequent submissions\n(RotatorCuffSurgeryBundle, RotatorCuffFollowUpBundle) reference by persisted\nID. It MUST NOT contain the surgical procedure, that belongs in\nRotatorCuffSurgeryBundle. The `priorTreatment` slice is bound to\n`PriorTreatmentCategory` so the validator rejects any surgical-category\nProcedure entry in this bundle.\n\nA `ShoulderEncounter` is **required (1..1)** as the registration consultation\nvisit. It serves as the cross-resource anchor: every Observation\nin the bundle sets `Observation.encounter → Encounter`, and every prior\ntreatment Procedure sets `Procedure.encounter → Encounter` and\n`Procedure.reasonReference → Condition`. Imaging-derived classification\nobservations (Goutallier, Patte, tear size) additionally populate\n`Condition.evidence.detail`. This matches the Encounter-as-anchor pattern\nalready used by `RotatorCuffSurgeryBundle` and `RotatorCuffFollowUpBundle`.\n\nThe bundle still enforces the rotator-cuff pathology binding via the\n`condition` slice (`only RotatorCuffCondition`) even though\n`ShoulderEncounter.reasonReference` was relaxed to `Reference(Condition)`. The\ncomposition guarantee that `Encounter.reasonReference` resolves to a\n`RotatorCuffCondition` holds because that Condition is the only one allowed in\nthe bundle's Condition slice.\n\n**Multiple diagnoses (`condition 1..*`, `otherDiagnosis 0..*`):** a\nregistration may carry more than one `RotatorCuffCondition` (e.g. a combined\nsupraspinatus + infraspinatus tear coded as two Conditions) and, separately,\nzero or more coexisting non-rotator-cuff shoulder diagnoses\n(`ShoulderDiagnosisCondition`, AC joint arthritis, biceps tendinopathy,\nadhesive capsulitis, etc.) via `otherDiagnosis`. Which single Condition is\nthe principal reason for the visit is recorded on\n`ShoulderEncounter.diagnosis.rank` (`1` = principal); `reasonReference`\ncontinues to point at that same principal Condition, and the pathology\nbinding is still enforced structurally by the `condition` slice type\nconstraint regardless of how many entries it holds.\n\n**One patient, one shoulder per registration.** Every Condition in a given\nregistration bundle, RC or non-RC, MUST carry the same `bodySite`\nlaterality. A registration entry is always scoped to one patient and one\nshoulder side; a bilateral case is submitted as two separate registrations,\none per side.\n\nSlicing follows the IPS two-discriminator pattern (resource type + profile)\ninherited from BundleUvIps.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-research-care-plan"
+        },
+        "name": "Rotator Cuff Research Care Plan",
+        "description": "Profile for documenting the planned follow-up schedule for a rotator cuff\nsurgery registry participant (expert consensus Q11, research follow-up at 5 named\ntimepoints Q11.a–e: 6 weeks, 3 months, 6 months, 1 year, 2 years). Encodes the\nminimum follow-up duration and research-defined assessment timepoints (e.g.\n6 weeks, 3 months, 6 months, 12 months, 2 years post-surgery) so that\ncompleteness of follow-up can be tracked and reported.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/rotator-cuff-surgery-bundle"
+        },
+        "name": "Rotator Cuff Surgery Bundle",
+        "description": "Transaction bundle wrapping the surgical event for an already-registered\nrotator-cuff-surgery patient. This is the second of three named submissions\nper patient (Registration → Surgery → Follow-Up×N) and corresponds to the\nimplicit surgical phase in Hurley et al. (2024).\n\nPer submission the bundle contains:\n- exactly one ShoulderEncounter, the surgical admission/encounter\n- one or more RotatorCuffProcedure entries (category = surgical), the index\n  procedure and any concomitant surgical procedures (biceps tenodesis, distal\n  clavicle resection, etc.). A concomitant procedure carries `partOf` pointing\n  at the index procedure it accompanies; the index procedure is the one with no\n  `partOf`. The link is carried on the resources themselves rather than implied\n  by entry order, so it still holds once the bundle is persisted and each entry\n  has its own identity.\n- zero or more ShoulderObservation entries, intra-operative findings\n  (confirmed tear size, intra-articular findings, etc.)\n- an optional RotatorCuffResearchCarePlan, the Q11 research follow-up\n  schedule (6 weeks / 3 months / 6 months / 1 year / 2 years), anchored to\n  this submission's index procedure date. Carried here, not on\n  RotatorCuffRegistrationBundle, because the schedule cannot be computed\n  before the surgery date is known.\n\nThe bundle does NOT contain Patient, Condition, or prior non-surgical\ntreatments: these were established by the prior RotatorCuffRegistrationBundle\nand are referenced via their already-persisted IDs\n(Encounter.subject → Patient/{id}; Encounter.reasonReference → Condition/{id};\nProcedure.subject → Patient/{id}; Procedure.encounter →\nurn-uuid-of-this-bundle-entry).\n\nSlicing follows the IPS two-discriminator pattern (resource type + profile).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/sane-score-observation"
+        },
+        "name": "SANE Score Observation",
+        "description": "Observation documenting the Single Assessment Numeric Evaluation (SANE): a single-item patient self-rating of current shoulder function as a percentage of a normal shoulder (0 = worst, 100 = normal). Covers the expert consensus Q12 preferred score, element `Q12-SSV-SANE` in the mapping, which the consensus names together with the Subjective Shoulder Value and counts once. The two are separately published instruments, each carried by its own profile here. No equivalent code exists in SNOMED CT International Edition or LOINC at time of authoring; local code used.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-abduction-observation"
+        },
+        "name": "Shoulder Abduction Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder abduction range of motion in degrees, coded with LOINC 41381-5. Covers expert consensus Q2.b (active range of motion, pre-treatment) and Q9.b (post-treatment); pre/post differentiation is by effectiveDateTime.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-abduction-observation"
+        },
+        "name": "Shoulder Abduction Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder abduction range of motion in degrees, coded with LOINC 41382-3. Covers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c (post-treatment); pre/post differentiation is by effectiveDateTime.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-comorbidity-condition"
+        },
+        "name": "Shoulder Comorbidity Condition",
+        "description": "Profile for pre-existing comorbid Conditions captured alongside a rotator\ncuff registry entry, expert consensus Q1.c. Distinct from RotatorCuffCondition\n(the index encounter diagnosis): a comorbidity is a problem-list item\ncoexisting with the rotator-cuff pathology, not the reason for the surgical\nencounter.\n\nOut of scope: shoulder-region disorders (rotator cuff pathology, AC joint\nosteoarthritis, impingement, etc.) are never comorbidities in this registry\n, they belong on RotatorCuffCondition (the principal diagnosis) or on\nShoulderDiagnosisCondition (a coexisting non-rotator-cuff shoulder finding,\ne.g. incidental AC joint OA). Comorbidities are strictly non-shoulder,\nsystemic or other-body-part conditions. Both demonstration frontends enforce\nthis by excluding, from the comorbidity typeahead, the SNOMED descendants of\nthree anchor concepts: `118944007 |Disorder of shoulder region|`,\n`239960007 |Impingement syndrome of shoulder region|` and\n`359532006 |Rotator cuff impingement syndrome|`. This profile's binding\ndoes not technically forbid a shoulder-region code, since IPS's Problems VS\nhas no anatomical-region exclusion mechanism.\n\nDerives from HL7 Europe Core `condition-eu-core`. Instances\nadditionally claim IPS `Condition-uv-ips` via `meta.profile[]`, the\ncross-resource patient reference chain holds because `subject` ultimately\nresolves to a `Reference(ShoulderPatient)` which is a derived profile of\nboth `patient-eu-core` (parent of `condition-eu-core.subject`) and claims\n`PatientUvIps` via `meta.profile[]` (parent of `Condition-uv-ips.subject`).\n\nCode binding: `code from http://hl7.org/fhir/uv/ips/ValueSet/problems-\nsnomed-absent-unknown-uv-ips (extensible)`. This sits on top of EU Core's\ninherited preferred binding to `problems-uv-ips`, the IG tightens\nEU/IPS's `preferred` to `extensible` for registry-comparability. Where a SNOMED\nconcept exists, clinicians MUST use it; ICD-10 (WHO base, or a national\nmodification such as ICD-10-GM at deployment) and other codings remain\npermitted as additional `coding[]` siblings (dual-coding pattern).\n\nCarried on RotatorCuffRegistrationBundle.entry[comorbidity] (0..*).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-coverage"
+        },
+        "name": "Shoulder Coverage",
+        "description": "Profile for documenting the expert consensus Q1.l \"workmen's compensation\" flag, one of 13 patient-history factors in the unanimous-consensus list (Q1).\nThe expert consensus names this as a single yes/no element with no further decomposition;\nthis IG realises a \"yes\" answer as a Coverage resource with `Coverage.type =\nv3-ActCode#WCBPOL`. When the patient is not under a workers'-compensation\nregime (or the status is unknown), no ShoulderCoverage instance is emitted.\n\nThe clinical/medicolegal rationale for capturing this flag is well-established:\nworkers'-compensation status (German Berufsgenossenschaft) both implies a\nwork-related injury (Arbeitsunfall) and triggers a different documentation\npathway (Durchgangsarzt-Verfahren), with consistently different recovery\ntrajectories in shoulder outcomes literature.\n\n`Coverage.type` is extensible-bound to the FHIR core\n`http://hl7.org/fhir/ValueSet/coverage-type` ValueSet. The expert consensus Q1.l element\nis realised by `v3-ActCode#WCBPOL` (worker's compensation):\n\n| Coding | v3-ActCode | Display | Notes |\n|---|---|---|---|\n| Berufsgenossenschaft (BG) | `WCBPOL` | worker's compensation | **Expert consensus Q1.l, the only code this profile exercises** |\n\nBroader payer categorisation (GKV, PKV, Selbstzahler, etc.) is intentionally\nout of scope. The expert consensus does not name these categories; the v3-ActCode coverage\nof German payer types is partial (no exact code for PKV); and a registry that\nwants to capture them belongs in deployment-time extension or HL7 DE\nBasisprofil parenting. The narrower scope keeps this profile honest to\nthe actual consensus element.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-diagnosis-condition"
+        },
+        "name": "Shoulder Diagnosis (Non-Rotator-Cuff)",
+        "description": "Profile for documenting shoulder pathology that coexists with, but is\ndistinct from, the index rotator cuff tear, e.g. long head of biceps\ntendinopathy, AC joint osteoarthritis, a glenoid labrum tear, adhesive\ncapsulitis, glenohumeral osteoarthritis, or shoulder instability.\n\nAn anatomy-region profile (`Shoulder*`, not `RotatorCuff*`): these\ndiagnoses are not rotator cuff tears and\ncarry none of RotatorCuffCondition's RC-specific apparatus (no required\n`condition-dueTo` etiology classifier, no `stage`/`evidence` staging\nmachinery for Patte/Goutallier/tendons-involved/tear-location, since those\nclassification systems do not apply to e.g. adhesive capsulitis).\n\nUsed via `RotatorCuffRegistrationBundle.otherDiagnosis` (`0..*`) alongside\none or more `RotatorCuffCondition` entries. The registry convention still\nholds: one registration entry = one patient + one shoulder side: a\nShoulderDiagnosisCondition's `bodySite` MUST match the laterality of the\nRotatorCuffCondition(s) in the same bundle, it names a second problem on\nthe same shoulder, not a diagnosis on the other side.\n\nWhich diagnosis in the bundle (RC or non-RC) is the principal reason for the\nvisit is recorded on `ShoulderEncounter.diagnosis.rank`, not on the Condition\nitself.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/shoulder-diagnosis"
+        },
+        "name": "Shoulder Diagnosis (Non-Rotator-Cuff) ValueSet",
+        "description": "Enumerated SNOMED CT codes for shoulder pathology commonly coexisting with a\nrotator cuff tear but distinct from it, long head of biceps pathology, AC\njoint osteoarthritis, glenoid labrum tear, adhesive capsulitis, glenohumeral\nosteoarthritis, shoulder instability. The expert consensus does not name this\nelement. The list is an editorial baseline covering the pathologies most often\nrecorded as a secondary diagnosis alongside a rotator cuff tear. Binding is\nextensible, a site may add further codes without a profile change.\n\nEvery code in this list is laterality-neutral, the same convention as\n`TendonsInvolved`. The affected side is carried on `Condition.bodySite`, so a\ndeployer extending this list should also choose laterality-neutral concepts.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-encounter"
+        },
+        "name": "Shoulder Encounter",
+        "description": "Profile for documenting shoulder-related clinical encounters across all three\nbundle contexts of the three-bundle architecture:\n\n* **Registration consultation (T0)**, pre-operative visit at which the\n  diagnosis is established and the patient is enrolled; 1..1 anchor in\n  `RotatorCuffRegistrationBundle`.\n* **Surgical admission (T1)**, the encounter framing the index procedure in\n  `RotatorCuffSurgeryBundle`.\n* **Routine follow-up (Tn)**, expert consensus Q11 follow-up at 6 wk / 3 mo /\n  6 mo / 1 y / 2 y in `RotatorCuffFollowUpBundle`.\n\n`status` is fixed to `finished`: an encounter is submitted to the registry once\nit has taken place. `period.start` and `period.end` carry the start and the\ncompletion timestamp.\n\n`type` is bound (extensible) to `ShoulderEncounterType`: SNOMED CT\n`185349003` (Encounter for check up) for registration, `390906007` (Follow-up\nencounter) for post-operative visits (expert consensus Q10), `308335008` (Patient\nencounter procedure) for surgical admission (T1).\n\n`reasonReference` is **required (1..1)** and MUST point to a `Condition` that\nmotivates the visit, the type is `Reference(Condition)` so `ShoulderEncounter`\nremains anatomy-region and reusable by sibling shoulder IGs (e.g. a future\narthroplasty IG). Inside the three rotator-cuff bundle profiles the Condition\nslice is constrained to `RotatorCuffCondition`, so `Encounter.reasonReference`\nresolves to a `RotatorCuffCondition` by composition.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/shoulder-encounter-type"
+        },
+        "name": "Shoulder Encounter Type ValueSet",
+        "description": "ValueSet of SNOMED CT codes for ShoulderEncounter.type, covering all three\nbundle contexts of the three-bundle architecture:\n\n* **Pre-operative registration (T0):** 185349003 \"Encounter for check up\"\n* **Surgical admission (T1):** 308335008 \"Patient encounter procedure\" —\n  semantically accurate because the encounter frames a surgical procedure.\n  No dedicated surgical-admission code is included: the enclosing\n  RotatorCuffSurgeryBundle profile and its RotatorCuffProcedure entries\n  (category=Surgical) already identify the surgical context unambiguously;\n  Encounter.type is a secondary queryability label, not the primary\n  discriminator. SNOMED 305408004 \"Admission to surgical ward\" was\n  considered and rejected, it incorrectly implies inpatient admission\n  for procedures commonly performed as day surgery.\n* **Routine post-operative follow-up (Tn):** 390906007 \"Follow-up encounter\"\n  (expert consensus Q10).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/shoulder-etiology"
+        },
+        "name": "Shoulder Etiology",
+        "description": "Local codes for rotator cuff causation classes that have no apt SNOMED concept\nin the cause-of-condition role. SNOMED's `255212004 Acute-on-chronic` is a\nqualifier value, not a cause; a dedicated local code is used to keep the\nclassifier semantics clean. Used together with SNOMED concepts in\n`RotatorCuffEtiology` for `Condition.extension[condition-dueTo]` on\n`RotatorCuffCondition`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-external-rotation-observation"
+        },
+        "name": "Shoulder External Rotation Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder external rotation range of motion\nat the side (adducted position) in degrees, coded with LOINC 41387-2.\nCovers expert consensus Q2.b (active range of motion, pre-treatment) and Q9.b\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\n`maxValueQuantity` is 360°, a permissive data-entry bound rather than a\nphysiological ceiling. A 90° ceiling would silently reject legitimate\nexternal-rotation values above 90° (around 100–110° in throwers). 360° is not\na claim that such a range is achievable; no single shoulder rotation\nmeasurement reaches 360°.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-external-rotation-90-abduction-observation"
+        },
+        "name": "Shoulder External Rotation at 90° Abduction Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder external rotation measured with the\narm abducted to 90° (a controlled, goniometer-reliable position distinct\nfrom at-side/adducted ER, ShoulderExternalRotationObservation), in degrees.\nRecorded alongside the at-side rotation measurements. Together they allow\nassessment of both capsular tightness and rotator-cuff/subscapularis\ncompetence, which at-side measurement alone cannot quantify. ER at 90°\nabduction isolates the glenohumeral rotational arc in the functional\noverhead/throwing position. Covers expert consensus Q2.b\n(active range of motion, pre-treatment) and Q9.b (post-treatment); pre/post\ndifferentiation is by effectiveDateTime.\n\nNo precoordinated LOINC or SNOMED CT code exists for a position-specific\n(\"at 90° abduction\") shoulder rotation measurement (verified July 2026), so a\nlocal code is used. `maxValueQuantity` is set permissively (360°) rather than\nat a strict physiological ceiling: it is a data-entry bound, not a claim that\n360° is an achievable physiological range.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation"
+        },
+        "name": "Shoulder External Rotation at 90° Abduction Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder external rotation measured with\nthe arm abducted to 90° (a controlled, goniometer-reliable position\ndistinct from at-side/adducted ER,\nShoulderPassiveExternalRotationObservation), in degrees. Recorded alongside the\nat-side rotation measurements. Together they allow assessment of both\ncapsular tightness and rotator-cuff/subscapularis competence, which\nat-side measurement alone cannot quantify. Covers expert consensus Q2.c (passive range of motion, pre-treatment)\nand Q9.c (post-treatment); pre/post differentiation is by\neffectiveDateTime.\n\nNo precoordinated LOINC or SNOMED CT code exists for a position-specific\n(\"at 90° abduction\") shoulder rotation measurement (verified July 2026), so a\nlocal code is used. `maxValueQuantity` is set permissively (360°) rather than\nat a strict physiological ceiling: it is a data-entry bound, not a claim that\n360° is an achievable physiological range.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-external-rotation-observation"
+        },
+        "name": "Shoulder External Rotation Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder external rotation range of motion\nat the side (adducted position) in degrees, coded with LOINC 41388-0.\nCovers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\n`maxValueQuantity` is 360°, a permissive data-entry bound rather than a\nphysiological ceiling. A 90° ceiling would silently reject legitimate\nexternal-rotation values above 90° (around 100–110° in throwers). 360° is not\na claim that such a range is achievable; no single shoulder rotation\nmeasurement reaches 360°.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-flexion-observation"
+        },
+        "name": "Shoulder Flexion Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder flexion range of motion in degrees, coded with LOINC 41389-8. Covers expert consensus Q2.b (active range of motion, pre-treatment) and Q9.b (post-treatment); pre/post differentiation is by effectiveDateTime. The expert consensus names this movement 'Forward Flexion'; LOINC uses 'Flexion'.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-flexion-observation"
+        },
+        "name": "Shoulder Flexion Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder flexion range of motion in degrees, coded with LOINC 41390-6. Covers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c (post-treatment); pre/post differentiation is by effectiveDateTime. The expert consensus names this movement 'Forward Flexion'; LOINC uses 'Flexion'.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-imaging-study"
+        },
+        "name": "Shoulder Imaging Study",
+        "description": "Records which shoulder imaging modality was obtained, radiograph, MRI, CT, or\nultrasound (expert consensus elements Q3, Q5, Q6, Q13, plus optional ultrasound).\nOne instance per modality obtained. The registry-capturable fact is the modality\n(and when it was performed), not the DICOM pixel data, a radiology report, or an\nimaging order, none of which the consensus names and none of which a data-entry\nregistry produces. The imaging-derived clinical findings (Goutallier, Patte, tear\nsize, tendons involved, tear location) are carried as separate ShoulderObservation\nresources linked to the RotatorCuffCondition, not as content of this resource.\n\nConstrains the subject to a ShoulderPatient and marks status, modality, the\nperformed date (`started`), and the visit anchor (`encounter`) as Must Support.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-internal-rotation-observation"
+        },
+        "name": "Shoulder Internal Rotation Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder internal rotation at the side\n(adducted position), recorded by the \"hand behind back\" functional reach\ntest, the highest vertebral landmark the patient's hand can reach, on an\neight-tier ordinal (InternalRotationVertebralLevel). Covers expert consensus Q2.b\n(active range of motion, pre-treatment) and Q9.b (post-treatment); pre/post\ndifferentiation is by effectiveDateTime.\n\nThe reach test is the measure used in clinical practice. It reuses most of the\nConstant-Murley score's own internal-rotation landmarks and adds finer rungs, so\nderiving the Constant range-of-motion sub-score from it applies a documented\nlossy remapping. It is preferred here\nbecause at-side internal rotation is confounded by scapulothoracic\nsubstitution and trunk rotation, which makes a goniometric degree value\nclinically unreliable. Internal rotation measured at 90° abduction is a\ncontrolled, goniometer-reliable position and stays degree-valued; see\nShoulderInternalRotation90AbductionObservation.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nvertebral-level internal-rotation scale (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-internal-rotation-90-abduction-observation"
+        },
+        "name": "Shoulder Internal Rotation at 90° Abduction Active Range of Motion Observation",
+        "description": "Observation documenting active shoulder internal rotation measured with the\narm abducted to 90°, in degrees. Distinct from at-side IR\n(ShoulderInternalRotationObservation), which is recorded on a vertebral-level\nordinal because it is confounded by scapulothoracic substitution, at 90°\nabduction the scapula is stabilised and the glenohumeral rotation arc is\nmeasured against a fixed reference, so a goniometric degree value is\nreliable and reproducible here. Together with the at-side\nmeasurements, IR and ER at 90° abduction allow assessment of both capsular\ntightness (GIRD, glenohumeral internal rotation deficit) and rotator-cuff\ncompetence, which at-side measurement alone cannot quantify.\nCovers expert consensus Q2.b (active range of motion, pre-treatment) and Q9.b\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\nNo precoordinated LOINC or SNOMED CT code exists for a position-specific\n(\"at 90° abduction\") shoulder rotation measurement (verified July 2026), so a\nlocal code is used. `maxValueQuantity` is set permissively (360°) rather than\nat a strict physiological ceiling: it is a data-entry bound, not a claim that\n360° is an achievable physiological range.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation"
+        },
+        "name": "Shoulder Internal Rotation at 90° Abduction Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder internal rotation measured with\nthe arm abducted to 90°, in degrees. Distinct from at-side IR\n(ShoulderPassiveInternalRotationObservation), which is recorded on a\nvertebral-level ordinal because it is confounded by scapulothoracic\nsubstitution, at 90° abduction the scapula is stabilised and the\nglenohumeral rotation arc is measured against a fixed reference, so a\ngoniometric degree value is reliable and reproducible here. Together with\nthe at-side measurements, IR/ER at 90°\nabduction allow assessment of both capsular tightness (GIRD, glenohumeral\ninternal rotation deficit) and rotator-cuff competence, which at-side\nmeasurement alone cannot quantify. Covers expert consensus Q2.c (passive range of\nmotion, pre-treatment) and Q9.c (post-treatment); pre/post differentiation\nis by effectiveDateTime.\n\nNo precoordinated LOINC or SNOMED CT code exists for a position-specific\n(\"at 90° abduction\") shoulder rotation measurement (verified July 2026), so a\nlocal code is used. `maxValueQuantity` is set permissively (360°) rather than\nat a strict physiological ceiling: it is a data-entry bound, not a claim that\n360° is an achievable physiological range.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-passive-internal-rotation-observation"
+        },
+        "name": "Shoulder Internal Rotation Passive Range of Motion Observation",
+        "description": "Observation documenting passive shoulder internal rotation at the side\n(adducted position), recorded by the \"hand behind back\" functional reach\ntest, the highest vertebral landmark the examiner can passively bring the\npatient's hand to, on an eight-tier ordinal (InternalRotationVertebralLevel).\nCovers expert consensus Q2.c (passive range of motion, pre-treatment) and Q9.c\n(post-treatment); pre/post differentiation is by effectiveDateTime.\n\nThe reach test is the measure used in clinical practice. It reuses most of the\nConstant-Murley score's own internal-rotation landmarks and adds finer rungs, so\nderiving the Constant range-of-motion sub-score from it applies a documented\nlossy remapping. It is preferred here\nbecause at-side internal rotation is confounded by scapulothoracic\nsubstitution and trunk rotation, which makes a goniometric degree value\nclinically unreliable. Internal rotation measured at 90° abduction is a\ncontrolled, goniometer-reliable position and stays degree-valued; see\nShoulderPassiveInternalRotation90AbductionObservation.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nvertebral-level internal-rotation scale (verified July 2026).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/shoulder-laterality"
+        },
+        "name": "Shoulder Laterality ValueSet",
+        "description": "ValueSet for shoulder laterality (left, right). Used in bodySite to specify which shoulder is affected.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-observation"
+        },
+        "name": "Shoulder Observation (Base)",
+        "description": "Abstract base profile for all shoulder-related clinical observations.\nShared constraints (status, category, code, subject, encounter, effective[x], value[x],\nbodySite, method, interpretation) are defined here.\n\nObservation subtypes are captured in derived child profiles under profiles/observations/,\neach fixing the code and tightening value[x] to the appropriate type and ValueSet binding.\nChild profiles follow the same base + derived pattern FHIR core itself uses for Vital\nSigns (the Vital Signs profile as base, Body Height/Body Weight/Blood Pressure etc. as\nderived children) and that HL7 US Core uses for its own Vital Signs family.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/shoulder-observation-code"
+        },
+        "name": "Shoulder Observation Code ValueSet",
+        "description": "Codes for shoulder-related observations: all local ShoulderObservationCodes concepts plus the LOINC and SNOMED CT codes fixed by derived Observation profiles (ROM, PROMs, and patient-history items).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/shoulder-observation"
+        },
+        "name": "Shoulder Observation CodeSystem",
+        "description": "CodeSystem for shoulder-specific observation types.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/shoulder-patient"
+        },
+        "name": "Shoulder Patient",
+        "description": "Profile for patients undergoing shoulder-related treatment, particularly rotator\ncuff surgery. Derives from HL7 Europe Core `patient-eu-core` (which inherits\noptional EU extension slots for birthPlace, sex-for-clinical-use, gender-identity,\npronouns, citizenship, nationality, birthTime via `patient-eu`, and pins\n`Patient.address` to `Address-eu`).\n\nInstances additionally claim conformance to IPS `Patient-uv-ips` via\n`meta.profile[]`. Both invariants, EU `eu-pat-1` (family ∨ given ∨ text ∨\ndata-absent-reason) and IPS `ips-pat-1` (family ∨ given ∨ text), are\nsatisfied trivially by `name.family 1..1 MS` below.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-follow-up"
+        },
+        "name": "Shoulder Registry Follow-Up (SDC)",
+        "description": "SDC-conformant Questionnaire for the Shoulder on FHIR registry per-visit\n(longitudinal) submission. Captures one Q11 timepoint's worth of data:\nEncounter, post-operative examination Observations (Q9), and outcome-score\nObservations (Q12 instruments + components a–g).\n\nPatient and Condition are NOT captured, they exist from the prior\nRotatorCuffRegistrationBundle submission. The frontend resolves them in its\nPatientLookup step and injects them via launchContext.\n\nSDC features demonstrated:\n- launchContext + itemPopulationContext + initialExpression: encounter.linkedDiagnosis\n  is a read-only field whose value is resolved live, via FHIRPath, from both\n  the launchContext-declared %patient and the itemPopulationContext-declared\n  %rotatorCuffCondition query, a genuine client-side evaluation of all three\n  extensions, not just their declaration. The Encounter.reasonReference /\n  Observation.subject references actually written into the submitted bundle\n  are wired separately, by LaunchContext in bundleAssembler.ts, this\n  mechanism is additive UX/spec-conformance, not the source of truth for\n  those references.\n- calculatedExpression: Constant-Murley total auto-computes from four\n  sub-scores (pain / ADL / ROM / strength), captured as\n  Observation.component[]. Total and sub-scores are all read-only in this\n  form; the ConstantScoreObservation profile itself still permits a\n  direct total with no components, for sites submitting outside these forms.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-followup-full-template"
+        },
+        "name": "Shoulder Registry Follow-Up (SDC, complete template extraction)",
+        "description": "The complete follow-up visit submission, extracted from a contained Bundle template.\nProduces a Bundle labelled with the profile it claims, carrying the resources\nthe example it was generated from contains. That is a subset of what the profile\nallows, not all of it.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-registration"
+        },
+        "name": "Shoulder Registry Registration (SDC)",
+        "description": "SDC-conformant Questionnaire for the Shoulder on FHIR registry T0 (pre-operative)\nsubmission. Captures expert consensus minimum dataset elements (Hurley et al. 2024) that\npopulate a RotatorCuffRegistrationBundle: Patient, RotatorCuffCondition, optional\nprior non-surgical treatments (Q1.f), baseline clinical assessment (Q2),\nbaseline PROMs (Q12 a–g + preferred instruments), and unanimous-consensus Q1\npatient-history items.\n\nSurgical procedures are captured by ShoulderSurgeryQuestionnaire and post-\noperative visits by ShoulderFollowUpQuestionnaire.\n\nExtraction model: definition-based. Groups whose contents map to a single\nresource carry an SDC definitionExtract extension naming the target\nprofile; leaf items carry item.definition pointing at their target element.\n\nThe Constant-Murley total item demonstrates SDC calculatedExpression. The\nfour sub-scores (pain 0–15, ADL 0–20, ROM 0–40, strength 0–25) are\nread-only values computed from the granular worksheet inputs and captured\nas Observation.component[] slices. The 0–100 total auto-computes via\nFHIRPath as their sum, is read-only in the same way, and is captured as\nObservation.valueQuantity.\n",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-registration-full-template"
+        },
+        "name": "Shoulder Registry Registration (SDC, complete template extraction)",
+        "description": "The complete pre-operative registration, extracted from a contained Bundle template.\nProduces a Bundle labelled with the profile it claims, carrying the resources\nthe example it was generated from contains. That is a subset of what the profile\nallows, not all of it.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-surgery"
+        },
+        "name": "Shoulder Registry Surgery (SDC)",
+        "description": "SDC-conformant Questionnaire for the Shoulder on FHIR registry T1 (surgical\nevent) submission. Captures the surgical Encounter, one or more index/\nconcomitant Procedures (category=Surgical per RotatorCuffProcedureCategory),\nand optional intra-operative Observations.\n\nPatient and Condition are NOT captured, they exist from the prior\nRotatorCuffRegistrationBundle submission. The frontend resolves them in its\nPatientLookup step and injects them via launchContext.\n\nExtraction model: definition-based. Groups carry SDC definitionExtract\ndeclaring their target profile; leaf items carry item.definition pointing at\ntheir target element.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "Questionnaire/shoulder-surgery-full-template"
+        },
+        "name": "Shoulder Registry Surgery (SDC, complete template extraction)",
+        "description": "The complete surgical submission, extracted from a contained Bundle template.\nProduces a Bundle labelled with the profile it claims, carrying the resources\nthe example it was generated from contains. That is a subset of what the profile\nallows, not all of it.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/sleep-disturbance-observation"
+        },
+        "name": "Sleep Disturbance Observation",
+        "description": "Observation documenting the degree to which the patient's sleep is disturbed\nspecifically by the shoulder pathology being registered. Three-tier ordinal\n(unaffected / occasionally disturbed / nightly disturbed) matching the sleep\nsub-item of the Constant-Murley score's Activities-of-Daily-Living section, the expert consensus Q12 preferred outcome instrument (Constant JF, Murley AH. A\nclinical method of functional assessment of the shoulder. Clin Orthop Relat\nRes. 1987;214:160-4), already used elsewhere in this IG as\n`ConstantScoreObservation`, which carries the total and, optionally, the four\nsub-scores as `component[]`.\n\nExpert consensus Q1.i (unanimous consensus), required patient-history\nelement. The expert consensus names \"sleep disturbance\" without fixing whether\nit must be generic or attributed to the index pathology. This profile asks\nspecifically about shoulder-caused disturbance, so the attribution is explicit\nrather than left to the reader of a generic \"is your sleep disturbed?\" item.\nNo SNOMED CT or LOINC concept exists for this axis (a graded,\nshoulder-attributed sleep-disturbance scale) as of authoring (verified July\n2026).\n\nLinked to the index RotatorCuffCondition via `Condition.evidence.detail`\n(same pattern as the provocation tests, `TendonsInvolvedObservation`,\n`TearLocationObservation`), nocturnal pain/sleep disruption is a recognized\nsupportive clinical feature of symptomatic rotator cuff tears, and the\nlinkage makes \"attributed to this diagnosis\" a queryable FHIR relationship\nrather than only implied by question wording.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/sleep-disturbance-severity"
+        },
+        "name": "Sleep Disturbance Severity",
+        "description": "Three-tier ordinal grading how much the patient's sleep is disturbed\nspecifically by the shoulder pathology being registered. Matches the sleep\nsub-item of the Constant-Murley score's Activities-of-Daily-Living section, the expert consensus Q12 preferred outcome instrument, rather than inventing a new\nscale.\n\nReference: Constant JF, Murley AH. A clinical method of functional\nassessment of the shoulder. Clin Orthop Relat Res. 1987;214:160-4.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/sleep-disturbance-severity"
+        },
+        "name": "Sleep Disturbance Severity ValueSet",
+        "description": "ValueSet containing the three sleep-disturbance severity grades (expert consensus Q1.i).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/smoking-pack-years-observation"
+        },
+        "name": "Smoking Pack-Years Observation",
+        "description": "Observation quantifying cumulative lifetime tobacco exposure in pack-years\n(packs per day × years smoked), an elaboration of the unanimous-consensus\nQ1.d \"Smoking,\" which names no mechanism beyond current status. Sibling to\n`SmokingStatusObservation`, not a replacement, status captures the current\ncategory (current/former/never smoker), this profile captures cumulative\ndose. Only meaningful for current/former smokers; omitted for never-smokers.\n\n`Observation.code` is SNOMED CT `782516008` \"Number of calculated smoking\npack years\" (observable entity), no LOINC concept exists for cumulative\npack-years as a single reportable value (verified July 2026; LOINC's closest\nmatches, `8663-7`/`74011-8`/`88029-4`, capture current daily rate or generic\nlifetime-use-per-period, not the packs-per-day × years product). `value[x]`\nis `Quantity`, UCUM annotation `{pack-years}` (dimensionless product, same\nannotation convention as this IG's `{score}` PROM/MMT axes).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/smoking-status-observation"
+        },
+        "name": "Smoking Status Observation",
+        "description": "Observation documenting the patient's tobacco smoking status, expert consensus\nQ1.d (unanimous consensus, required patient-history element).\n\n`Observation.code` is LOINC `72166-2` (Tobacco smoking status), matching the\nIPS `Observation-tobaccouse-uv-ips` profile. `valueCodeableConcept` is\nextensible-bound to IPS `CurrentSmokingStatusUvIps`, which IPS 1.1.0\npublishes as a LOINC answer-list value set (8 `LA*` codes). The IG tightens\nIPS's `preferred` to `extensible` for registry-comparability: a single-jurisdiction\nsurgical registry needs the validator to enforce the encoding, not merely\nencourage it. IPS ships a `loinc-smoking-status-to-snomed-ct-uv-ips` concept\nmap for exporters that need SNOMED downstream; that translation is not\ninline in this profile.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/sports-participation-level"
+        },
+        "name": "Sports Participation Level",
+        "description": "Four-tier ordinal grading the patient's pre-treatment level of sports\nparticipation, the sports-medicine return-to-sport stratification\n(none / recreational / competitive / professional), coarsely comparable to\nDART's `DEM-08` \"Activity level (pre-injury)\" enum and to the Tegner\nActivity Scale, without importing Tegner's lower-limb-oriented item\ndescriptors, which do not transfer to a shoulder registry.\n\nNo precoordinated SNOMED CT or LOINC ordinal value codes exist for a\nsports-participation-level scale as of authoring (verified July 2026):\nSNOMED CT `social_context` has no match for \"sports participation\" or\n\"competitive sport\"; SNOMED `observable_entity` has candidate axis codes\n(e.g. `68130003` Physical activity, `256235009` Exercise) but no\nprecoordinated grade values; LOINC's answer-list `LL6103-7` (\"Physical\nactivity levels\") has no corresponding bindable FHIR ValueSet and no\nsports-specific question code. Local codes are used in the interim.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/sports-participation-level"
+        },
+        "name": "Sports Participation Level ValueSet",
+        "description": "ValueSet containing the four sports-participation level grades (expert consensus Q1.j).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/sports-participation-observation"
+        },
+        "name": "Sports Participation Observation",
+        "description": "Observation documenting the patient's pre-treatment level of sports\nparticipation. Four-tier ordinal (none / recreational / competitive /\nprofessional), the sports-medicine return-to-sport stratification,\nstrictly more informative than the plain yes/no participation flag used by\nsome peer registries (the `none` grade already subsumes that distinction),\nand coarsely comparable to DART's `DEM-08` \"Activity level (pre-injury)\"\nenum and to the Tegner Activity Scale.\n\nThe expert consensus names only \"Sports\" without specifying a mechanism. A\ncoded ordinal is used rather than a free-text description of sport, frequency,\nand competitive level, which would not be comparable across patients.\n\nNo suitable LOINC or SNOMED CT code exists for level/type of pre-treatment\nsport participation, so a local code (ShoulderObservationCodes#sports-participation)\nis used. The existing ReturnToActivityObservation (#return-to-sport-work) covers\nthe post-treatment return outcome only, these are clinically distinct and use\ndifferent scales.\n\nExpert consensus Q1.j (unanimous consensus), required patient-history element.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/ssv-score-observation"
+        },
+        "name": "Subjective Shoulder Value (SSV) Observation",
+        "description": "Observation documenting the Subjective Shoulder Value (SSV): the patient's self-rated overall shoulder function expressed as a percentage of a normal, uninjured shoulder (0–100%). Covers the expert consensus Q12 preferred score, element `Q12-SSV-SANE` in the mapping, which the consensus names together with the Single Assessment Numeric Evaluation and counts once. The two are separately published instruments, each carried by its own profile here. No equivalent code exists in SNOMED CT International Edition or LOINC at time of authoring; local code used.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/subscapularis-strength-observation"
+        },
+        "name": "Subscapularis Strength Observation",
+        "description": "Observation documenting subscapularis muscle strength on the 0–5 manual muscle testing scale (Janda grading; equivalent to MRC / Daniels-Worthingham 0–5), tested via lift-off or belly-press position, a subscapularis-specific isolation test, positioned to unload the secondary internal rotators. Covers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d (post-treatment) for the subscapularis component of the rotator cuff. Clinically distinct from InternalRotationStrengthObservation, which tests composite internal-rotator strength at neutral, a positive lift-off/belly-press with normal composite internal-rotation strength points specifically at the subscapularis.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/supraspinatus-strength-dynamometry-observation"
+        },
+        "name": "Supraspinatus Strength Dynamometry Observation",
+        "description": "Observation documenting supraspinatus muscle strength as a continuous\nforce measurement (kg) via handheld/spring dynamometry, tested at 90°\nscapular-plane abduction (empty-can/Jobe position), the same test\nposition as SupraspinatusStrengthObservation's ordinal grade, different\ninstrument. Covers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d\n(post-treatment).\n\nThis profile complements the ordinal MMT/Janda 0–5 grade; both are recorded.\nOrdinal manual muscle testing is well documented as insensitive to partial\nsupraspinatus weakness (grades 4–5 span a wide force range and are\nexaminer-dependent), while dynamometry at this single reproducible position\ngives a reliable, continuous kg reading. The dual encoding mirrors this IG's\ntear-size cm plus Cofield-bucket pattern. The ordinal grade is the faster,\nno-equipment-needed default for cross-site comparability; dynamometry\nsupplements it when available. No LOINC or SNOMED CT code exists for shoulder dynamometry or\nfor a \"Janda\" grading eponym (verified July 2026), a local code is used.\n\nNamed \"Supraspinatus Strength (Dynamometry)\" (not \"Abduction Strength\"), \"abduction strength\" unqualified is ambiguous with deltoid-dominant gross\nabduction testing, biomechanically distinct from this test's isolated,\ninternally-rotated empty-can/Jobe position.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/supraspinatus-strength-observation"
+        },
+        "name": "Supraspinatus Strength Observation",
+        "description": "Observation documenting supraspinatus muscle strength on the 0–5 manual muscle testing scale (Janda grading; equivalent to MRC / Daniels-Worthingham 0–5). Tested with the empty-can / Jobe position, a scapular-plane abduction position with the arm internally rotated. Covers expert consensus Q2.d (strength testing, pre-treatment) and Q9.d (post-treatment). Sibling to SupraspinatusStrengthDynamometryObservation (continuous kg force at the same position), this ordinal grade remains the faster, no-equipment-needed default.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "CodeSystem/tear-location"
+        },
+        "name": "Tear Location",
+        "description": "Location of a rotator cuff tear along the affected tendon's course, as\ndistinct from Patte classification (which describes how far the torn stump\nhas *retracted*, not where the original tear started). Three positions\nalong a rotator cuff tendon, proceeding from the bony footprint inward:\n\nReference: no precoordinated SNOMED CT concept exists for this axis as of\nauthoring (verified July 2026); modeled as a local classification, the same\npattern already used for Patte / Goutallier / Cofield tear-size bucket.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/tear-location-observation"
+        },
+        "name": "Tear Location Observation",
+        "description": "Observation documenting where a rotator cuff tear is located along the\naffected tendon's course: near the insertion (footprint), at the\nmusculotendinous junction, or intratendinous. Treated as an in-scope\nrefinement of expert consensus Q4 (tear classification). The consensus names\ntear classification without fixing which axes it decomposes into; this IG\ndecomposes it into location, alongside Patte (retraction) and Goutallier\n(fatty infiltration).\n\nDistinct from PatteObservation, which grades how far the torn stump has\nretracted after the tear occurred, not where the tear originates. Linked to\nthe index RotatorCuffCondition via Condition.evidence.detail (same pattern as\nTendonsInvolvedObservation), one Observation per diagnosis, not per tendon,\nsince tear location is assessed for the tear as a whole.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/tear-location"
+        },
+        "name": "Tear Location ValueSet",
+        "description": "ValueSet containing all tear-location codes (position of a rotator cuff tear along the tendon's course).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/tear-size-classification-observation"
+        },
+        "name": "Tear Size Classification Observation (Cofield)",
+        "description": "Observation documenting the categorical Cofield bucket of rotator cuff tear size (small / medium / large / massive), determined pre-operatively from imaging. Covers expert consensus Q4.a (size, categorical decomposition, imaging context). Sibling to TearSizeObservation, which captures the continuous linear measurement in cm in the same context; the intra-operative direct measurement is captured by IntraopTearSizeClassificationObservation.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/tear-size-observation"
+        },
+        "name": "Tear Size Observation",
+        "description": "Observation documenting maximum rotator cuff tear diameter in centimetres, measured pre-operatively from imaging (MRI/ultrasound). Covers expert consensus Q4.a (size, continuous decomposition, imaging context). Sibling to TearSizeClassificationObservation, which captures the categorical Cofield bucket in the same context; the intra-operative direct measurement is captured by IntraopTearSizeObservation.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/tear-thickness-observation"
+        },
+        "name": "Tear Thickness Observation",
+        "description": "Observation documenting whether the rotator cuff tear is full-thickness or\npartial-thickness, expert consensus Q4.c \"Partial vs full thickness.\"\n\nThickness has its own element, following the \"one axis, one element\"\nprinciple the IG also applies to tendon involvement and to etiology. The\nObservation is linked back to the index `RotatorCuffCondition` via\n`Condition.evidence.detail`, mirroring `TendonsInvolvedObservation` and\n`TearLocationObservation`.\n\n`valueCodeableConcept` is `required`-bound to `TearThickness`, two\nprecoordinated SNOMED CT disorder-level concepts, reused here as an\nObservation value (the same reuse pattern `TendonsInvolvedObservation`\nalready applies to anatomy codes).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/tear-thickness"
+        },
+        "name": "Tear Thickness ValueSet",
+        "description": "SNOMED CT concepts for rotator cuff tear thickness, full-thickness vs.\npartial-thickness, decoupled from `RotatorCuffCondition.code`.\nBoth concepts are precoordinated SNOMED disorder-level codes, reused here as\nObservation values (the same precoordinated-concept-reuse pattern already\nused by `TendonsInvolved`'s anatomy codes).",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "StructureDefinition/tendons-involved-observation"
+        },
+        "name": "Tendons Involved Observation",
+        "description": "Observation recording which rotator cuff tendon is torn, as read from imaging\nor seen at operation. Covers expert consensus element Q4.b (tendons involved).\n\nOne Observation is recorded per affected tendon. A multi-tendon tear is\ntherefore several Observations, each linked back to the index\n`RotatorCuffCondition` through `Condition.evidence.detail`. This is the same\nstructured-evidence pattern used by `PatteObservation`,\n`GoutallierObservation`, and `TearSizeClassificationObservation`.\n\nThe tendon code carries anatomy only. The affected side is carried once, on\n`RotatorCuffCondition.bodySite`.",
+        "exampleBoolean": false
+      },
+      {
+        "reference": {
+          "reference": "ValueSet/tendons-involved"
+        },
+        "name": "Tendons Involved ValueSet",
+        "description": "SNOMED CT anatomical concepts for the four rotator cuff tendons. Bound to\n`TendonsInvolvedObservation.value[x]` to record which tendon or tendons are\ntorn (expert consensus element Q4.b). One Observation is recorded per\naffected tendon, each linked from the index `RotatorCuffCondition` through\n`evidence.detail`.\n\nThe codes are laterality-neutral. The affected side is carried once, on\n`RotatorCuffCondition.bodySite`.",
+        "exampleBoolean": false
+      }
+    ],
+    "page": {
+      "nameUrl": "toc.html",
+      "title": "Table of Contents",
+      "generation": "html",
+      "page": [
+        {
+          "nameUrl": "index.html",
+          "title": "Home",
+          "generation": "markdown"
+        },
+        {
+          "nameUrl": "profiles.html",
+          "title": "Profiles",
+          "generation": "markdown"
+        },
+        {
+          "nameUrl": "terminology.html",
+          "title": "Terminology",
+          "generation": "markdown"
+        },
+        {
+          "nameUrl": "examples.html",
+          "title": "Examples",
+          "generation": "markdown"
+        }
+      ]
+    },
+    "parameter": [
+      {
+        "code": "copyrightyear",
+        "value": "2026+"
+      },
+      {
+        "code": "releaselabel",
+        "value": "draft"
+      },
+      {
+        "code": "apply-publisher",
+        "value": "true"
+      },
+      {
+        "code": "apply-contact",
+        "value": "true"
+      },
+      {
+        "code": "apply-jurisdiction",
+        "value": "true"
+      },
+      {
+        "code": "apply-version",
+        "value": "true"
+      },
+      {
+        "code": "active-tables",
+        "value": "true"
+      },
+      {
+        "code": "fmm-definition",
+        "value": "http://hl7.org/fhir/versions.html#maturity"
+      },
+      {
+        "code": "propagate-status",
+        "value": "true"
+      },
+      {
+        "code": "excludelogbinaryformat",
+        "value": "true"
+      },
+      {
+        "code": "tabbed-snapshots",
+        "value": "true"
+      }
+    ]
+  }
+}

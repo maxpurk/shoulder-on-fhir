@@ -1,0 +1,38 @@
+{
+  "resourceType": "Patient",
+  "id": "AnnaMueller",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient",
+      "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+    ]
+  },
+  "identifier": [
+    {
+      "system": "https://maxpurk.github.io/shoulder-on-fhir/identifier/patient",
+      "value": "PAT-LONG-001"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "family": "Müller",
+      "given": [
+        "Anna"
+      ]
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1971-04-12",
+  "address": [
+    {
+      "use": "home",
+      "line": [
+        "Bertha-von-Suttner-Allee 7"
+      ],
+      "city": "Potsdam",
+      "postalCode": "14471",
+      "country": "DE"
+    }
+  ]
+}

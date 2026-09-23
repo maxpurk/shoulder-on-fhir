@@ -1,0 +1,76 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pain-average-observation",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation",
+  "version": "0.1.0",
+  "name": "PainAverageObservation",
+  "title": "Pain Average Observation",
+  "status": "draft",
+  "date": "2026-07-18",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Observation documenting the patient's average shoulder pain severity on a\n0–10 numeric rating scale. One of four context-specific pain measurements\n(alongside PainActiveMovementObservation, PainPassiveMovementObservation,\nPainRestObservation). Pain is decomposed by context\nrather than captured as a single generic \"pain severity\" field.\n\nNo precoordinated LOINC or SNOMED CT concept exists for \"average pain\" as a\ndistinct question-level clinical variable (verified July 2026); a local code\n(ShoulderObservationCodes#pain-average) is used. valueQuantity uses UCUM\n{score} unit with allowed range 0–10.\n\nReused symmetrically across three expert consensus elements:\n- Q1.h, pain at presentation (patient history)\n- Q8.a, improved pain (treatment-success criterion a)\n- Q12.a, pain component of the PROM (expert consensus required component Q12.a)\n\nPre/post discrimination is via effectiveDateTime relative to the index procedure.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "exam",
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "display": "Exam"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "pain-average",
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Observation.value[x]",
+        "path": "Observation.value[x]",
+        "type": [
+          {
+            "code": "Quantity"
+          }
+        ],
+        "minValueQuantity": {
+          "value": 0,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "maxValueQuantity": {
+          "value": 10,
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        }
+      },
+      {
+        "id": "Observation.value[x].system",
+        "path": "Observation.value[x].system",
+        "patternUri": "http://unitsofmeasure.org"
+      },
+      {
+        "id": "Observation.value[x].code",
+        "path": "Observation.value[x].code",
+        "patternCode": "{score}"
+      }
+    ]
+  }
+}

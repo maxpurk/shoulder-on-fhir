@@ -1,0 +1,57 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "shoulder-coverage",
+  "url": "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-coverage",
+  "version": "0.1.0",
+  "name": "ShoulderCoverage",
+  "title": "Shoulder Coverage",
+  "status": "draft",
+  "date": "2026-05-23",
+  "publisher": "Hasso Plattner Institute",
+  "description": "Profile for documenting the expert consensus Q1.l \"workmen's compensation\" flag, one of 13 patient-history factors in the unanimous-consensus list (Q1).\nThe expert consensus names this as a single yes/no element with no further decomposition;\nthis IG realises a \"yes\" answer as a Coverage resource with `Coverage.type =\nv3-ActCode#WCBPOL`. When the patient is not under a workers'-compensation\nregime (or the status is unknown), no ShoulderCoverage instance is emitted.\n\nThe clinical/medicolegal rationale for capturing this flag is well-established:\nworkers'-compensation status (German Berufsgenossenschaft) both implies a\nwork-related injury (Arbeitsunfall) and triggers a different documentation\npathway (Durchgangsarzt-Verfahren), with consistently different recovery\ntrajectories in shoulder outcomes literature.\n\n`Coverage.type` is extensible-bound to the FHIR core\n`http://hl7.org/fhir/ValueSet/coverage-type` ValueSet. The expert consensus Q1.l element\nis realised by `v3-ActCode#WCBPOL` (worker's compensation):\n\n| Coding | v3-ActCode | Display | Notes |\n|---|---|---|---|\n| Berufsgenossenschaft (BG) | `WCBPOL` | worker's compensation | **Expert consensus Q1.l, the only code this profile exercises** |\n\nBroader payer categorisation (GKV, PKV, Selbstzahler, etc.) is intentionally\nout of scope. The expert consensus does not name these categories; the v3-ActCode coverage\nof German payer types is partial (no exact code for PKV); and a registry that\nwants to capture them belongs in deployment-time extension or HL7 DE\nBasisprofil parenting. The narrower scope keeps this profile honest to\nthe actual consensus element.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Coverage",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coverage",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coverage.status",
+        "path": "Coverage.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type",
+        "path": "Coverage.type",
+        "short": "Workers'-compensation flag (expert consensus Q1.l): v3-ActCode#WCBPOL = Berufsgenossenschaft",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "http://hl7.org/fhir/ValueSet/coverage-type"
+        }
+      },
+      {
+        "id": "Coverage.subscriber",
+        "path": "Coverage.subscriber",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.payor",
+        "path": "Coverage.payor",
+        "mustSupport": true
+      }
+    ]
+  }
+}
