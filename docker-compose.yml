@@ -1,0 +1,264 @@
+# Shoulder on FHIR - Docker Compose Configuration
+# Orchestrates HAPI FHIR Server, PostgreSQL, the unified + SDC React frontends,
+# and the validator-service sidecar (Java wrapper around validator_cli.jar
+# for runtime client pre-flight).
+
+services:
+  # ============================================
+  # HAPI FHIR Server
+  # ============================================
+  hapi-fhir:
+    # Pinned to v8.8.0-1 because :latest exposes an unfixed recursion bug
+    # in VersionedUrlFallbackValidationSupport (HAPI Starter PR #911; fix in
+    # PR #941 not yet released as a tagged image). HAPI runs as storage-only
+    # by design (requests_enabled=false); the frontends' pre-flight gate is
+    # the validator-service sidecar on port 3500, not HAPI's Bundle/$validate.
+    image: hapiproject/hapi:v8.8.0-1
+    container_name: shoulder-hapi-fhir
+    restart: unless-stopped
+    ports:
+      # Loopback-only: no auth on this API and CORS is wide open (see below),
+      # so it must never be reachable directly from outside the host. Public
+      # access goes through a frontend's nginx proxy (or the deploy/ Caddy
+      # reverse proxy in production), never straight to HAPI.
+      - "127.0.0.1:8080:8080"
+    environment:
+      # Database connection
+      - spring.datasource.url=jdbc:postgresql://postgres:5432/hapi
+      - spring.datasource.username=hapi
+      - spring.datasource.password=hapi
+      - spring.datasource.driverClassName=org.postgresql.Driver
+      - spring.jpa.properties.hibernate.dialect=ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
+      # HAPI FHIR settings
+      - hapi.fhir.fhir_version=R4
+      - hapi.fhir.server_address=http://localhost:8080/fhir
+      - hapi.fhir.allow_external_references=true
+      - hapi.fhir.allow_multiple_delete=true
+      - hapi.fhir.cors.allow_credentials=true
+      - hapi.fhir.cors.allowed_origin_patterns=*
+      # Validation — HAPI runs storage-only by design, an architectural
+      # choice, not a deferral. Conformance is enforced at design time by
+      # tools/validate.sh (FHIR Validator CLI, a manual gate — not the CI
+      # pipeline) and strictly at the client via the validator-service
+      # sidecar, NOT HAPI's Bundle/$validate. This keeps the three-tier
+      # separation (storage / terminology / validation) and aligns with
+      # HAPI's documented production guidance on RequestValidatingInterceptor
+      # gaps and runtime Instance Validator cost.
+      - hapi.fhir.validation.requests_enabled=false
+      - hapi.fhir.validation.responses_enabled=false
+      # Explicit heap cap: the image's own entrypoint invokes
+      # `java` directly with no -Xmx, so the JVM's container-aware default
+      # ergonomics previously sized the heap off the full host (comfortably
+      # ~2GB observed against the 7.6GB host). Now that mem_limit below gives
+      # this container its own cgroup ceiling, an explicit -Xmx (read
+      # natively by the JVM launcher via JAVA_TOOL_OPTIONS, no wrapper
+      # script needed) avoids the container-support default recalculating
+      # off the smaller cgroup and under-sizing the heap.
+      - JAVA_TOOL_OPTIONS=-Xmx2200m -XX:MaxMetaspaceSize=400m -XX:+UseG1GC
+    volumes:
+      - ./hapi/application.yaml:/app/config/application.yaml:ro
+    tmpfs:
+      - /lucene-index:uid=65532,gid=65532
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["NONE"]
+    mem_limit: 3g
+    networks:
+      - shoulder-network
+  # ============================================
+  # PostgreSQL Database
+  # ============================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: shoulder-postgres
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=hapi
+      - POSTGRES_USER=hapi
+      - POSTGRES_PASSWORD=hapi
+    volumes:
+      - hapi-postgres-data:/var/lib/postgresql/data
+    networks:
+      - shoulder-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hapi -d hapi"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================
+  # FHIR Validator sidecar (port 3500)
+  # Thin Java HTTP wrapper around tools/validator_cli.jar. Same exact engine
+  # version as tools/validate.sh (the design-time gate) — closes the
+  # drift between client pre-flight and the authoritative design-time validation
+  # that HAPI's Bundle/$validate used to leave open. Frontends POST bundles here;
+  # strict-on-errors, allow on warnings, fail-open with banner on outage. Build
+  # context is the project root so we can reuse tools/validator_cli.jar directly.
+  # ============================================
+  validator-service:
+    build:
+      context: .
+      dockerfile: validator-service/Dockerfile
+    container_name: shoulder-validator
+    restart: unless-stopped
+    ports:
+      # Loopback-only — same reasoning as hapi-fhir above; frontends reach it
+      # via the docker network (validator-service:3500), not the host port.
+      - "127.0.0.1:3500:3500"
+    environment:
+      - TX_SERVER=https://tx.fhir.org/r4
+      - TX_CACHE=/tx-cache
+      - FHIR_VERSION=4.0.1
+      - IG_PATH=/ig/output/package.tgz
+      - IG_FALLBACK=/ig/fsh-generated/resources
+      # hl7.fhir.uv.ips#1.1.0 pinned to match tools/validate.sh —
+      # without it the engine resolves IPS canonicals (e.g.
+      # current-smoking-status-uv-ips) against whichever version tx.fhir.org
+      # currently serves as latest (the 2.0.0 ballot), not the 1.1.0 this
+      # project targets, producing spurious "code not in value set" errors.
+      - IGS=hl7.fhir.eu.base#2.0.0,hl7.fhir.uv.xver-r5.r4#0.1.0,hl7.fhir.uv.ips#1.1.0
+      # Was -Xmx1500m in a 2g container — idle heap already sat at ~77%
+      # utilization (5 redundant hl7.terminology package versions loaded),
+      # so a single realistic bundle's validation pushed
+      # total process RSS past the cgroup ceiling. 12 confirmed OOM kills in
+      # 18 days. Raised together with mem_limit below; MaxMetaspaceSize caps
+      # the previously-uncapped off-heap growth that ate into the same
+      # headroom.
+      - JAVA_OPTS=-Xmx2200m -XX:MaxMetaspaceSize=400m -XX:+UseG1GC
+      - VALIDATOR_THREADS=4
+      - VALIDATE_TIMEOUT_SECONDS=90
+    volumes:
+      - ./ig/output:/ig/output:ro
+      - ./ig/fsh-generated/resources:/ig/fsh-generated/resources:ro
+      - ./tools/.tx-cache:/tx-cache
+    mem_limit: 3g
+    healthcheck:
+      test: ["CMD", "curl", "-fs", "http://localhost:3500/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 60s
+    networks:
+      - shoulder-network
+
+  # ============================================
+  # React Frontend (Unified — port 3000)
+  # Landing page offering three documentation flows — Registration (T0),
+  # Surgery (T1), Follow-Up (per Q11 timepoint) — plus a patient browser
+  # (/patients) with per-resource CRUD views, which sit outside the
+  # bundle-submission path. All three flows use typed FHIR builders and
+  # target the corresponding bundle profile. The
+  # follow-up frontend (formerly port 3003) was merged in here.
+  # ============================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shoulder-frontend
+    restart: unless-stopped
+    ports:
+      # Loopback-only in production so the deploy/ Caddy reverse proxy (TLS +
+      # Basic Auth) is the only public entry point; harmless for local dev,
+      # where localhost:3000 already resolves to 127.0.0.1.
+      - "127.0.0.1:3000:80"
+    # No VITE_* entries here on purpose: Vite inlines import.meta.env.* at
+    # build time and this image serves prebuilt static files through nginx,
+    # so container environment never reaches the app. The app uses its own
+    # defaults — /fhir/DEFAULT and /validate-sidecar — which nginx.conf
+    # proxies to hapi-fhir:8080 and validator-service:3500 over the compose
+    # network. Same-origin, so it also works unchanged behind the production
+    # reverse proxy, where neither port is reachable from a browser.
+    depends_on:
+      hapi-fhir:
+        condition: service_started
+    networks:
+      - shoulder-network
+
+  # ============================================
+  # SDC Questionnaire Frontend (port 3001)
+  # Implements the HL7 Structured Data Capture IG v4.0.0:
+  # three Questionnaires (Registration / Surgery / Follow-Up) parented from
+  # sdc-questionnaire-extr-defn; definition-driven client-side $extract;
+  # SDC calculatedExpression + itemPopulationContext used where they apply.
+  # Routes /, /register, /surgery, /follow-up correspond to the three
+  # bundle profiles.
+  # ============================================
+  sdc-frontend:
+    build:
+      context: ./sdc-frontend
+      dockerfile: Dockerfile
+    container_name: shoulder-sdc-frontend
+    restart: unless-stopped
+    ports:
+      # Loopback-only — see frontend service above.
+      - "127.0.0.1:3001:80"
+    # No VITE_* entries — same reasoning as the frontend service above.
+    depends_on:
+      hapi-fhir:
+        condition: service_started
+    networks:
+      - shoulder-network
+
+  # Generic SDC frontend: given only the published Questionnaires, it renders
+  # them, extracts a transaction Bundle from their own declarations, validates
+  # it against a profile chosen at runtime, and submits. It carries no
+  # knowledge of this guide, which is what makes it a portability test rather
+  # than a third demonstrator of the same code.
+  sdc-generic-frontend:
+    build:
+      context: ./sdc-generic-frontend
+      dockerfile: Dockerfile
+    container_name: shoulder-sdc-generic-frontend
+    restart: unless-stopped
+    ports:
+      # Loopback-only — see frontend service above.
+      - "127.0.0.1:3002:80"
+    depends_on:
+      hapi-fhir:
+        condition: service_started
+      validator-service:
+        condition: service_started
+    networks:
+      - shoulder-network
+
+  # LHC-Forms frontend: the form is rendered and the Bundle extracted by the
+  # NLM's LHC-Forms, an independent SDC implementation. It reads the contained
+  # template the Questionnaire carries, so nothing in this container knows the
+  # guide. This is the portability test with a third-party engine rather than
+  # one written here.
+  sdc-lforms-frontend:
+    build:
+      context: ./sdc-lforms-frontend
+      dockerfile: Dockerfile
+    container_name: shoulder-sdc-lforms-frontend
+    restart: unless-stopped
+    ports:
+      # Loopback-only — see frontend service above.
+      - "127.0.0.1:3003:80"
+    depends_on:
+      hapi-fhir:
+        condition: service_started
+      validator-service:
+        condition: service_started
+    networks:
+      - shoulder-network
+
+  # The LHC-Forms frontend that formerly held port 3002 was deprecated and
+  # removed on 2026-05-19; its tree is retained only in the project's
+  # historical archive, outside this directory.
+
+# ============================================
+# Networks
+# ============================================
+networks:
+  shoulder-network:
+    driver: bridge
+
+# ============================================
+# Volumes
+# ============================================
+volumes:
+  hapi-postgres-data:
+    driver: local

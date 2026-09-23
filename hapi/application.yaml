@@ -1,0 +1,170 @@
+# HAPI FHIR Server Configuration for Shoulder on FHIR
+# This file is mounted into the container at /app/config/application.yaml
+
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/hapi
+    username: hapi
+    password: hapi
+    driverClassName: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
+        search:
+          enabled: true
+          backend:
+            type: lucene
+            analysis:
+              configurer: ca.uhn.fhir.jpa.search.HapiHSearchAnalysisConfigurers$HapiLuceneAnalysisConfigurer
+            directory:
+              root: /lucene-index
+            lucene_version: lucene_current
+        format_sql: false
+        show_sql: false
+        hbm2ddl:
+          auto: update
+        jdbc:
+          batch_size: 20
+        cache:
+          use_query_cache: false
+          use_second_level_cache: false
+          use_structured_entries: false
+          use_minimal_puts: false
+
+hapi:
+  fhir:
+    ### Server Configuration
+    server_address: http://localhost:8080/fhir
+    fhir_version: R4
+
+    ### REST Server Settings
+    default_encoding: JSON
+    default_pretty_print: true
+    default_page_size: 20
+    maximum_page_size: 200
+
+    ### Feature Toggles
+    allow_external_references: true
+    allow_multiple_delete: true
+    allow_placeholder_references: true
+    expunge_enabled: true
+    delete_expunge_enabled: true
+
+    ### CORS Configuration
+    cors:
+      allow_credentials: true
+      allowed_origin_patterns:
+        - "*"
+
+    ### Validation Settings
+    # HAPI runs as storage-only by design (ADR-0031 stance, restored by
+    # ADR-0044 which reverted ADR-0042). Conformance is enforced at design
+    # time by tools/validate.sh (FHIR Validator CLI) — the authoritative gate,
+    # invoked manually / via build-and-deploy.sh --validate. The IG Publisher's
+    # QA pass (--genonce) is the second design-time gate. There is no CI
+    # pipeline; both gates run on demand.
+    # Both frontends run a strict pre-flight via the validator-service sidecar
+    # (ADR-0051), NOT HAPI's Bundle/$validate. This three-tier separation
+    # (storage / terminology / validation) matches HAPI's documented production
+    # guidance: `RequestValidatingInterceptor` has known gaps and the Instance
+    # Validator has performance implications at runtime. See ADR-0044 for the
+    # rationale and the conditions under which a future deployer might re-enable
+    # runtime gating.
+    validation:
+      enabled: true
+      requests_enabled: false
+      responses_enabled: false
+
+    ### Subscriptions (disabled for simplicity)
+    subscription:
+      resthook_enabled: false
+      websocket_enabled: false
+
+    ### Bulk Operations
+    bulk_export_enabled: true
+
+    ### Narrative Generation
+    narrative_enabled: true
+
+    ### Terminology Services
+    # Disable HAPI's scheduled startup pre-expansion of every ValueSet in
+    # storage. With hl7.terminology.r4 loaded (ADR-0053), HAPI otherwise
+    # spends 15–25 min on cold start grinding through ~2596 v3-* ValueSets
+    # whose CodeSystems we don't have (each expansion saves 0 concepts —
+    # pure waste). The IG follows ADR-0031's on-demand expansion model:
+    # frontends call /ValueSet/$expand?url=... explicitly, and the
+    # build-and-deploy.sh TERM stage still POSTs $reindex-terminology +
+    # $invalidate-expansion to rebuild the tmpfs Lucene index and clear
+    # any stale entries after restart. First dropdown access incurs a one-
+    # time synchronous compute (~30–50 ms; cached afterwards). As a side
+    # benefit, this eliminates the pre-expansion race documented in
+    # ADR-0053 §Consequences.
+    #
+    # Two separate properties are involved (verified empirically + against
+    # HAPI Starter master application.yaml §I. Terminology / ValueSet
+    # Expansion, 2026-05-22):
+    #   - pre_expand_value_sets: gates the expansion-caching mechanism
+    #     itself. When false, HAPI falls back to "in-memory expansion
+    #     without parameters", which empirically returns 0 concepts for
+    #     local-CodeSystem-backed enumerated VSs (Goutallier, Cofield, …)
+    #     even though $lookup against the same CS works. So this must
+    #     stay *true* for our IG dropdowns to populate.
+    #   - enable_task_pre_expand_value_sets: gates the *scheduled
+    #     background task* (TermReadSvcImpl) that sweeps every ValueSet
+    #     in storage at startup. This is the actual culprit — it grinds
+    #     through ~2596 v3-* VSs from hl7.terminology.r4 at 250–900 ms
+    #     each, saving 0 concepts (their CodeSystems aren't loaded) for
+    #     15–25 min of wasted work per cold start. Disable this one.
+    #
+    # Combined effect: HAPI computes + caches expansions on-demand when
+    # a frontend or the TERM stage POSTs $expand (cheap; small VSs). The
+    # 2596 v3-* VSs we never touch stay un-expanded. Cold start drops
+    # from ~20 min to ~5 min.
+    pre_expand_value_sets: true
+    enable_task_pre_expand_value_sets: false
+    defer_indexing_for_codesystems_of_size: 101
+    # Terminology validation is delegated out of HAPI to (1) the FHIR Validator
+    # CLI in CI for all design-time artefacts and (2) a production terminology
+    # server (e.g. Snowstorm / Ontoserver / tx.fhir.org) for any runtime
+    # need — see ADR-0031. HAPI here is a storage server only.
+    #
+    # Remote SNOMED CT resolution: per ADR-0050, HAPI delegates any SNOMED-
+    # system code lookup ($validate-code, $lookup, $expand member resolution)
+    # to https://tx.fhir.org/r4. The IG's ValueSets enumerate SNOMED codes by
+    # reference (* http://snomed.info/sct#XXXX "..."); without a CodeSystem for
+    # http://snomed.info/sct in HAPI's chain, $expand collapses those codes
+    # out of the result (empirically verified 2026-05-20). Before ADR-0050 the
+    # workaround was a local CodeSystem fragment loaded by
+    # seed/load-snomed-fragment.sh; that script is retired. Local IG ValueSets
+    # and custom CodeSystems (Goutallier, Patte, Cofield, etc.) continue to be
+    # served by HAPI itself — only SNOMED is delegated outward.
+    #
+    # Runtime dependency: HAPI now needs outbound network access to tx.fhir.org
+    # for the SNOMED-bound dropdowns to populate. If tx.fhir.org is down, the
+    # frontends' useValueSet hook surfaces a "Could not load options" error —
+    # HAPI itself stays up. ADR-0050 §Consequences documents this trade-off.
+    remote_terminology_service:
+      snomed:
+        system: "http://snomed.info/sct"
+        url: "https://tx.fhir.org/r4/"
+
+    ### Client ID (for logging)
+    client_id_strategy: ANY
+
+    ### Partitioning / multitenancy
+    # The presence of this block enables HAPI's URL-based multitenancy that
+    # routes /fhir/DEFAULT/* — both frontends and the seed scripts use
+    # that endpoint, so this block must stay. It is INCOMPATIBLE with the
+    # built-in `implementationguides` IG installer (HAPI-1315 — see ADR-0031);
+    # the workaround is `seed/load-base-profiles.sh`, which uploads base R4
+    # StructureDefinitions via the regular REST API (which the bug does not
+    # affect).
+    partitioning:
+      allow_references_across_partitions: false
+
+logging:
+  level:
+    ca.uhn.fhir: INFO
+    org.springframework: WARN
+    org.hibernate: WARN

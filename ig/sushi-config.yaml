@@ -1,0 +1,97 @@
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Shoulder on FHIR - SUSHI Configuration                                     │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+id: shoulder-on-fhir
+canonical: https://maxpurk.github.io/shoulder-on-fhir
+name: ShoulderOnFHIR
+title: Shoulder on FHIR Implementation Guide
+description: >-
+  FHIR Implementation Guide for standardised documentation of rotator cuff
+  injuries and surgical treatments, developed as a master thesis at the Hasso
+  Plattner Institute. ShoulderPatient, the Condition family, and
+  RotatorCuffProcedure derive from HL7 Europe Core 2.0.0 (hl7.fhir.eu.base) for
+  EHDS realm alignment. Applicable instances additionally claim IPS conformance
+  via meta.profile[] for Patient, the comorbidity Condition, every Procedure,
+  and the smoking Observation. The guide depends on the HL7 Structured Data
+  Capture IG v4.0.0 (hl7.fhir.uv.sdc) for its six Questionnaire artifacts, one
+  per transaction bundle under each of the two declarative extraction
+  mechanisms the specification provides, definition-based and template-based.
+  Extraction runs client-side; the guide does not require a server $extract
+  operation.
+status: draft
+version: 1.0.0-thesis
+fhirVersion: 4.0.1
+copyrightYear: 2026+
+releaseLabel: draft
+license: CC-BY-4.0
+publisher:
+  name: Maximilian Purk
+  url: https://github.com/maxpurk/shoulder-on-fhir
+
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Dependencies                                                               │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+dependencies:
+  hl7.terminology.r4:
+    version: 7.1.0
+    reason: "Standard HL7 terminology bindings (value sets and code systems). Transitively required by EU Core and IPS; declared explicitly to pin the version."
+  hl7.fhir.eu.base:
+    version: 2.0.0
+    reason: "Profile parents: ShoulderPatient from patient-eu-core, RotatorCuffCondition, ShoulderComorbidityCondition and ShoulderDiagnosisCondition from condition-eu-core, RotatorCuffProcedure from procedure-eu-core. Provides EHDS realm alignment, the EU Address format, and inherits condition-assertedDate and the Procedure.recorded R5 backport."
+  hl7.fhir.uv.xver-r5.r4:
+    version: 0.1.0
+    reason: "R4 to R5 cross-version extension pack; required to reference the Procedure.recorded R5 backport extension on RotatorCuffProcedure."
+  hl7.fhir.uv.sdc:
+    version: 4.0.0
+    reason: "Structured Data Capture; six Questionnaire artifacts, three conforming to sdc-questionnaire-extr-defn for definition-based client-side extraction and three to sdc-questionnaire-extr-template, which carries the whole submission inside the form."
+  hl7.fhir.uv.ips:
+    version: 1.1.0
+    reason: "Instance-level IPS claims via meta.profile[] on Patient (Patient-uv-ips), ShoulderComorbidityCondition (Condition-uv-ips), Procedure (Procedure-uv-ips), and the smoking Observation (Observation-tobaccouse-uv-ips)."
+
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Pages                                                                      │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+pages:
+  index.md:
+    title: Home
+  profiles.md:
+    title: Profiles
+  terminology.md:
+    title: Terminology
+  examples.md:
+    title: Examples
+
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Menu                                                                       │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+menu:
+  Home: index.html
+  Profiles: profiles.html
+  Terminology: terminology.html
+  Examples: examples.html
+  Artifacts: artifacts.html
+
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Parameters                                                                 │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+parameters:
+  apply-publisher: true
+  apply-contact: true
+  apply-jurisdiction: true
+  apply-version: true
+  active-tables: true
+  fmm-definition: "http://hl7.org/fhir/versions.html#maturity"
+  propagate-status: true
+  excludelogbinaryformat: true
+  tabbed-snapshots: true
+
+# ╭─────────────────────────────────────────────────────────────────────────────╮
+# │  Jurisdiction                                                               │
+# ╰─────────────────────────────────────────────────────────────────────────────╯
+
+jurisdiction: http://unstats.un.org/unsd/methods/m49/m49.htm#150 "Europe"

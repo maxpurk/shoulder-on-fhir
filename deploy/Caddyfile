@@ -1,0 +1,43 @@
+{
+	email {$ACME_EMAIL}
+}
+
+{$DOMAIN} {
+	basic_auth {
+		{$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
+	}
+	reverse_proxy frontend:80
+}
+
+# The SDC host carries three form fillers. The default one is the guide-aware
+# filler at the root; the two experimental engines sit under a path prefix so
+# no extra DNS record or certificate is needed. Both are built with relative
+# asset and API URLs, so handle_path can strip the prefix before nginx sees it.
+{$SDC_DOMAIN} {
+	basic_auth {
+		{$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
+	}
+
+	redir /generic /generic/ 308
+	redir /lforms /lforms/ 308
+
+	handle_path /generic/* {
+		reverse_proxy sdc-generic-frontend:80
+	}
+
+	handle_path /lforms/* {
+		reverse_proxy sdc-lforms-frontend:80
+	}
+
+	handle {
+		reverse_proxy sdc-frontend:80
+	}
+}
+
+{$IG_DOMAIN} {
+	basic_auth {
+		{$BASIC_AUTH_USER} {$BASIC_AUTH_HASH}
+	}
+	root * /srv/ig-output
+	file_server
+}

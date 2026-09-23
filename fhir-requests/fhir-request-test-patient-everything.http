@@ -1,0 +1,17 @@
+@base = http://localhost:8080/fhir/DEFAULT
+
+### Look a seed patient up by business identifier.
+### Copy the returned Patient.id into @id below — HAPI assigns a fresh server id
+### on every `build-and-deploy.sh --clean`, so a hardcoded id goes stale.
+GET {{base}}/Patient?identifier=PAT-1785654803489
+Accept: application/fhir+json
+
+
+@id = REPLACE_WITH_PATIENT_ID
+
+### Whole picture for that patient — Patient plus every resource referencing them
+### (Encounters, Conditions, Procedures, Observations, Coverage). A fully seeded
+### longitudinal patient returns on the order of 130 resources across 6 types,
+### comfortably inside one page at _count=1000.
+GET {{base}}/Patient/{{id}}/$everything?_count=1000
+Accept: application/fhir+json

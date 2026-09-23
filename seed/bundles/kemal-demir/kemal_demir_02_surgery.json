@@ -1,0 +1,585 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-surgery-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:3e6efc35-6c5b-4913-8bc9-4129d923a553",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "kemal-demir-encounter-surgery-2024-03-18",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Surgical admission for arthroscopic rotator cuff repair, 2024-03-18</div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "IMP",
+          "display": "inpatient encounter"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "308335008",
+                "display": "Patient encounter procedure"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "period": {
+          "start": "2024-03-18T08:30:00+01:00",
+          "end": "2024-03-18T10:20:00+01:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:003ec180-3fa5-4ce5-bda8-f461c723bdd4",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Arthroscopic double-row suture-anchor repair of right supraspinatus and infraspinatus — 2024-03-18</div>"
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "387713003",
+              "display": "Surgical procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "699120002",
+              "display": "Arthroscopic repair of rotator cuff"
+            }
+          ],
+          "text": "Arthroscopic double-row suture-anchor repair of right supraspinatus and infraspinatus"
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "performedPeriod": {
+          "start": "2024-03-18T08:30:00+01:00",
+          "end": "2024-03-18T10:20:00+01:00"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "outcome": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "385669000",
+              "display": "Successful"
+            }
+          ],
+          "text": "Complete double-row repair of the supraspinatus and infraspinatus, both full-thickness; fair-to-good tendon quality given traumatic etiology"
+        },
+        "note": [
+          {
+            "text": "Intra-op confirmation: full-thickness supraspinatus tear ~3.8 cm AP with full-thickness infraspinatus tear, Patte II, Goutallier 0. Biceps tendon intact, no tenodesis performed."
+          }
+        ],
+        "id": "kemal-demir-surgery-2024-03-18",
+        "encounter": {
+          "reference": "urn:uuid:3e6efc35-6c5b-4913-8bc9-4129d923a553"
+        },
+        "performer": [
+          {
+            "actor": {
+              "display": "Dr. med. Sabine Hoffmann"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Procedure/kemal-demir-surgery-2024-03-18"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bd2e3f40-5162-4738-9d4e-5f6a7b8c9d0e",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/procedure-approach-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Procedure approach: arthroscopic</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "procedure-approach",
+              "display": "Procedure Approach"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2024-03-18T08:30:00+01:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/procedure-approach",
+              "code": "arthroscopic",
+              "display": "Arthroscopic"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:003ec180-3fa5-4ce5-bda8-f461c723bdd4"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ce3f4051-6273-4849-8e5f-6a7b8c9d0e1f",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/reconstruction-extent-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Reconstruction extent: complete repair</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "reconstruction-extent",
+              "display": "Reconstruction Extent"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2024-03-18T08:30:00+01:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "304384006",
+              "display": "Complete repair of rotator cuff"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:003ec180-3fa5-4ce5-bda8-f461c723bdd4"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:df405162-7384-495a-9f60-7a8b9c0d1e2f",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/fixation-technique-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Fixation technique: double-row</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "fixation-technique",
+              "display": "Fixation Technique"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2024-03-18T08:30:00+01:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/fixation-technique",
+              "code": "double-row",
+              "display": "Double-row fixation"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:003ec180-3fa5-4ce5-bda8-f461c723bdd4"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:af627e8b-9360-4302-a7c9-5e1fa41c55f2",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Intra-Operative Tear Size on 2024-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size",
+              "display": "Tear Size"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2024-03-18T08:30:00+01:00",
+        "valueQuantity": {
+          "value": 3.5,
+          "unit": "centimetres",
+          "system": "http://unitsofmeasure.org",
+          "code": "cm"
+        },
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5ad3401e-4770-4096-a816-d9596ea16609",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-classification-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Intra-Operative Tear Size Classification (Cofield) on 2024-03-18: large</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size-classification",
+              "display": "Tear Size Classification (Cofield)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2024-03-18T08:30:00+01:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+              "code": "large",
+              "display": "Large tear (3–5 cm)"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-surgery-2024-03-18"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7b1d4e6a-2f83-4c95-b017-3e9a5d8c2f61",
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "kemal-demir-careplan-research-followup",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-research-care-plan"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Q11 research follow-up schedule: 6 weeks, 3 months, 6 months, 1 year, 2 years post-surgery, computed from the index procedure date (ADR-0129)</div>"
+        },
+        "status": "active",
+        "intent": "plan",
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "period": {
+          "start": "2024-03-18T08:30:00+01:00",
+          "end": "2026-03-18T08:30:00+01:00"
+        },
+        "activity": [
+          {
+            "detail": {
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-04-29T08:30:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 6 wk post-surgery",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "6-weeks"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "detail": {
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-06-16T08:30:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 3 mo post-surgery",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "3-months"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "detail": {
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-09-14T08:30:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 6 mo post-surgery",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "6-months"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "detail": {
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2025-03-18T08:30:00+01:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 12 mo post-surgery",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "1-year"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "detail": {
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2026-03-18T08:30:00+01:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 24 mo post-surgery",
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "2-years"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "CarePlan/kemal-demir-careplan-research-followup"
+      }
+    }
+  ]
+}

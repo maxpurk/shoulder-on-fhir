@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this software or the Implementation Guide, please cite it using these metadata."
+title: "Shoulder on FHIR — a FHIR R4 Implementation Guide for standardized rotator cuff surgery documentation"
+abstract: >-
+  A FHIR R4 Implementation Guide and demonstration system for standardized
+  documentation of rotator cuff injuries and their surgical treatment in
+  research registries, developed as a master's thesis at the Hasso Plattner
+  Institute. Bundles the FSH source and generated conformance resources, two
+  demonstration frontends (a typed-builder application and an HL7 SDC-driven
+  questionnaire application), the SECEC->FHIR element-coverage mapping, and two
+  longitudinal example-patient walkthroughs.
+type: software
+authors:
+  - given-names: Maximilian
+    family-names: Purk
+    affiliation: "Hasso Plattner Institute, University of Potsdam"
+repository-code: "https://github.com/maxpurk/shoulder-on-fhir"
+license:
+  - Apache-2.0   # code: frontends, scripts, deployment configuration, tooling
+  - CC-BY-4.0    # Implementation Guide content: FSH source, narrative, conformance resources
+keywords:
+  - FHIR
+  - HL7
+  - Implementation Guide
+  - rotator cuff
+  - orthopaedics
+  - shoulder surgery
+  - clinical registry
+  - interoperability
+# The version and release date are filled in and uncommented when a tagged
+# release of this Implementation Guide is published. There is no DOI field:
+# the tagged release in this repository is the fixed reference point, and it
+# is reachable only while the repository itself is reachable.
+version: "1.0.0-thesis"
+date-released: "2026-09-22"

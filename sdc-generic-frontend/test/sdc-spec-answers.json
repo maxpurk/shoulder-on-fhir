@@ -1,0 +1,60 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "extract-complex-answers",
+  "questionnaire": "http://hl7.org/fhir/uv/sdc/Questionnaire/extract-complex-defn3",
+  "status": "completed",
+  "authored": "2026-09-17T10:30:00+02:00",
+  "author": { "reference": "Practitioner/example" },
+  "item": [
+    {
+      "linkId": "patient",
+      "text": "Patient Information",
+      "item": [
+        {
+          "linkId": "name",
+          "text": "Name",
+          "item": [
+            { "linkId": "given", "text": "Given Name(s)",
+              "answer": [ { "valueString": "Regina" }, { "valueString": "Marie" } ] },
+            { "linkId": "family", "text": "Family/Surname",
+              "answer": [ { "valueString": "Lowe" } ] }
+          ]
+        },
+        { "linkId": "gender", "text": "Gender",
+          "answer": [ { "valueCoding": { "system": "http://hl7.org/fhir/administrative-gender", "code": "female", "display": "Female" } } ] },
+        { "linkId": "dob", "text": "Date of Birth", "answer": [ { "valueDate": "1987-02-20" } ] },
+        { "linkId": "ihi", "text": "National Identifier (IHI)", "answer": [ { "valueString": "8003608833357361" } ] },
+        { "linkId": "mobile-phone", "text": "Mobile Phone number", "answer": [ { "valueString": "+61491570156" } ] }
+      ]
+    },
+    {
+      "linkId": "contacts",
+      "text": "Contacts",
+      "item": [
+        { "linkId": "contact-name", "text": "Name", "answer": [ { "valueString": "Jodie Lowe" } ] },
+        { "linkId": "relationship", "text": "Relationship",
+          "answer": [ { "valueCoding": { "system": "http://terminology.hl7.org/CodeSystem/v2-0131", "code": "N", "display": "Next-of-Kin" } } ] },
+        { "linkId": "phone", "text": "Phone", "answer": [ { "valueString": "+61412345678" } ] }
+      ]
+    },
+    {
+      "linkId": "contacts",
+      "text": "Contacts",
+      "item": [
+        { "linkId": "contact-name", "text": "Name", "answer": [ { "valueString": "Peter Lowe" } ] },
+        { "linkId": "relationship", "text": "Relationship",
+          "answer": [ { "valueCoding": { "system": "http://terminology.hl7.org/CodeSystem/v2-0131", "code": "C", "display": "Emergency Contact" } } ] },
+        { "linkId": "phone", "text": "Phone", "answer": [ { "valueString": "+61498765432" } ] }
+      ]
+    },
+    {
+      "linkId": "obs",
+      "text": "Observations",
+      "item": [
+        { "linkId": "height", "text": "What is your current height (m)", "answer": [ { "valueDecimal": 1.66 } ] },
+        { "linkId": "weight", "text": "What is your current weight (kg)", "answer": [ { "valueDecimal": 67.5 } ] },
+        { "linkId": "complication", "text": "Have you had a Sigmoidoscopy Complication (concern with invasive procedure, for example)", "answer": [ { "valueBoolean": false } ] }
+      ]
+    }
+  ]
+}

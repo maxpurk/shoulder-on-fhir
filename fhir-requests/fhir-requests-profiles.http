@@ -1,0 +1,328 @@
+# Shoulder on FHIR — Profiles, CodeSystems, ValueSets
+# VS Code REST Client (humao.rest-client)
+# Tenant endpoint: http://localhost:8080/fhir/DEFAULT
+# PREREQUISITE: run ./seed/load-profiles.sh before using these
+
+@base = http://localhost:8080/fhir/DEFAULT
+
+
+# ─────────────────────────────────────────────────────────────
+# BASE PROFILES
+# ─────────────────────────────────────────────────────────────
+
+### ShoulderPatient
+GET {{base}}/StructureDefinition/shoulder-patient
+Accept: application/fhir+json
+
+###
+
+### RotatorCuffCondition
+GET {{base}}/StructureDefinition/rotator-cuff-condition
+Accept: application/fhir+json
+
+###
+
+### RotatorCuffProcedure
+GET {{base}}/StructureDefinition/rotator-cuff-procedure
+Accept: application/fhir+json
+
+###
+
+### ShoulderObservation (abstract base)
+GET {{base}}/StructureDefinition/shoulder-observation
+Accept: application/fhir+json
+
+###
+
+### RotatorCuffQuestionnaireResponse
+GET {{base}}/StructureDefinition/rotator-cuff-questionnaire-response
+Accept: application/fhir+json
+
+###
+
+### ShoulderImagingStudy
+GET {{base}}/StructureDefinition/shoulder-imaging-study
+Accept: application/fhir+json
+
+###
+
+### ShoulderCoverage
+GET {{base}}/StructureDefinition/shoulder-coverage
+Accept: application/fhir+json
+
+###
+
+### RotatorCuffResearchCarePlan
+GET {{base}}/StructureDefinition/rotator-cuff-research-care-plan
+Accept: application/fhir+json
+
+###
+
+### RotatorCuffRegistrationBundle
+GET {{base}}/StructureDefinition/rotator-cuff-registration-bundle
+Accept: application/fhir+json
+
+###
+
+# ─────────────────────────────────────────────────────────────
+# DERIVED OBSERVATION PROFILES (57 child profiles)
+# ─────────────────────────────────────────────────────────────
+
+### Shoulder Abduction Active ROM (LOINC 41381-5)
+GET {{base}}/StructureDefinition/shoulder-abduction-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder Flexion Active ROM (LOINC 41389-8)
+GET {{base}}/StructureDefinition/shoulder-flexion-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder External Rotation Active ROM (LOINC 41387-2)
+GET {{base}}/StructureDefinition/shoulder-external-rotation-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder Internal Rotation Active ROM (local internal-rotation, vertebral-level ordinal)
+GET {{base}}/StructureDefinition/shoulder-internal-rotation-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder Abduction Passive ROM (LOINC 41382-3)
+GET {{base}}/StructureDefinition/shoulder-passive-abduction-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder Flexion Passive ROM (LOINC 41390-6)
+GET {{base}}/StructureDefinition/shoulder-passive-flexion-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder External Rotation Passive ROM (LOINC 41388-0)
+GET {{base}}/StructureDefinition/shoulder-passive-external-rotation-observation
+Accept: application/fhir+json
+
+###
+
+### Shoulder Internal Rotation Passive ROM (local passive-internal-rotation, vertebral-level ordinal)
+GET {{base}}/StructureDefinition/shoulder-passive-internal-rotation-observation
+Accept: application/fhir+json
+
+###
+
+### Supraspinatus Strength
+GET {{base}}/StructureDefinition/supraspinatus-strength-observation
+Accept: application/fhir+json
+
+###
+
+### External Rotation Strength
+GET {{base}}/StructureDefinition/external-rotation-strength-observation
+Accept: application/fhir+json
+
+###
+
+### Jobe Test (provocation)
+GET {{base}}/StructureDefinition/jobe-test-observation
+Accept: application/fhir+json
+
+###
+
+### Bear Hug Test
+GET {{base}}/StructureDefinition/bear-hug-test-observation
+Accept: application/fhir+json
+
+###
+
+### Belly Press Test
+GET {{base}}/StructureDefinition/belly-press-test-observation
+Accept: application/fhir+json
+
+###
+
+### Lift-off Test
+GET {{base}}/StructureDefinition/lift-off-test-observation
+Accept: application/fhir+json
+
+###
+
+### Hornblower Test
+GET {{base}}/StructureDefinition/hornblower-test-observation
+Accept: application/fhir+json
+
+###
+
+### Goutallier Classification (imaging)
+GET {{base}}/StructureDefinition/goutallier-observation
+Accept: application/fhir+json
+
+###
+
+### Patte Classification (imaging)
+GET {{base}}/StructureDefinition/patte-observation
+Accept: application/fhir+json
+
+###
+
+### Tear Size (imaging)
+GET {{base}}/StructureDefinition/tear-size-observation
+Accept: application/fhir+json
+
+###
+
+### Constant Score (PROM)
+GET {{base}}/StructureDefinition/constant-score-observation
+Accept: application/fhir+json
+
+###
+
+### SSV Score (PROM)
+GET {{base}}/StructureDefinition/ssv-score-observation
+Accept: application/fhir+json
+
+###
+
+### SANE Score (PROM)
+GET {{base}}/StructureDefinition/sane-score-observation
+Accept: application/fhir+json
+
+###
+
+### Patient Satisfaction
+GET {{base}}/StructureDefinition/patient-satisfaction-observation
+Accept: application/fhir+json
+
+###
+
+### Return to Activity
+GET {{base}}/StructureDefinition/return-to-activity-observation
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# CODESYSTEMS (19 custom)
+# ─────────────────────────────────────────────────────────────
+
+### Shoulder Observation codes (44 observation type codes)
+GET {{base}}/CodeSystem/shoulder-observation
+Accept: application/fhir+json
+
+###
+
+### Goutallier Classification (grades 0–4)
+GET {{base}}/CodeSystem/goutallier-classification
+Accept: application/fhir+json
+
+###
+
+### Patte Classification (stages I–III)
+GET {{base}}/CodeSystem/patte-classification
+Accept: application/fhir+json
+
+###
+
+### Return to Activity
+GET {{base}}/CodeSystem/return-to-activity
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# VALUESETS (35 custom)
+# ─────────────────────────────────────────────────────────────
+
+### Rotator Cuff Diagnosis
+GET {{base}}/ValueSet/rotator-cuff-diagnosis
+Accept: application/fhir+json
+
+###
+
+### Shoulder Procedure Type
+GET {{base}}/ValueSet/rotator-cuff-procedure-type
+Accept: application/fhir+json
+
+###
+
+### Shoulder Laterality
+GET {{base}}/ValueSet/shoulder-laterality
+Accept: application/fhir+json
+
+###
+
+### Shoulder Observation Code
+GET {{base}}/ValueSet/shoulder-observation-code
+Accept: application/fhir+json
+
+###
+
+### Goutallier Classification
+GET {{base}}/ValueSet/goutallier-classification
+Accept: application/fhir+json
+
+###
+
+### Patte Classification
+GET {{base}}/ValueSet/patte-classification
+Accept: application/fhir+json
+
+###
+
+### Positive / Negative (provocation tests)
+GET {{base}}/ValueSet/positive-negative
+Accept: application/fhir+json
+
+###
+
+### Satisfaction Scale
+GET {{base}}/ValueSet/satisfaction-scale
+Accept: application/fhir+json
+
+###
+
+### Return to Activity
+GET {{base}}/ValueSet/return-to-activity
+Accept: application/fhir+json
+
+###
+
+### Hand Dominance
+GET {{base}}/ValueSet/hand-dominance
+Accept: application/fhir+json
+
+###
+
+### Tendons Involved
+GET {{base}}/ValueSet/tendons-involved
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# VALUESET EXPANSION — verify terminology service
+# ─────────────────────────────────────────────────────────────
+
+### Expand RotatorCuffDiagnosis (SNOMED codes — requires HAPI to have network or cached expansion)
+GET {{base}}/ValueSet/rotator-cuff-diagnosis/$expand
+Accept: application/fhir+json
+
+###
+
+### Expand ShoulderLaterality
+GET {{base}}/ValueSet/shoulder-laterality/$expand
+Accept: application/fhir+json
+
+###
+
+### Expand GoutallierClassification
+GET {{base}}/ValueSet/goutallier-classification/$expand
+Accept: application/fhir+json
+
+###
+
+### Expand PositiveNegative
+GET {{base}}/ValueSet/positive-negative/$expand
+Accept: application/fhir+json

@@ -1,0 +1,14 @@
+@base = http://localhost:8080/fhir/DEFAULT
+
+@id = pat-long-001
+
+###
+GET {{base}}/Patient
+Accept: application/fhir+json
+
+
+###
+GET {{base}}/Patient/{{id}}/$everything?_count=1000
+Accept: application/fhir+json
+
+

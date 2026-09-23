@@ -1,0 +1,675 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-surgery-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49",
+      "resource": {
+        "resourceType": "Encounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Surgical admission for arthroscopic rotator cuff repair, 2024-04-15</div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "IMP",
+          "display": "inpatient encounter"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "308335008",
+                "display": "Patient encounter procedure"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "period": {
+          "start": "2024-04-15T09:00:00+02:00",
+          "end": "2024-04-15T10:40:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/7d9f274f-6d73-44b8-9c55-7e4919e45b3c"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a20d0bb2-f8a9-4346-b123-4c149be779f0",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Arthroscopic single-row suture-anchor repair of right supraspinatus — 2024-04-15</div>"
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "387713003",
+              "display": "Surgical procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "734057006",
+              "display": "Excision of distal clavicle"
+            }
+          ],
+          "text": "Arthroscopic single-row suture-anchor repair of right supraspinatus"
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "performedPeriod": {
+          "start": "2024-04-15T09:00:00+02:00",
+          "end": "2024-04-15T10:40:00+02:00"
+        },
+        "performer": [
+          {
+            "actor": {
+              "display": "Dr. med. Sabine Hoffmann"
+            }
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/7d9f274f-6d73-44b8-9c55-7e4919e45b3c"
+          }
+        ],
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "outcome": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "385669000",
+              "display": "Successful"
+            }
+          ],
+          "text": "Complete anatomic repair with two suture anchors; good tendon quality"
+        },
+        "note": [
+          {
+            "text": "Intra-op confirmation: full-thickness supraspinatus tear, 2.4 cm AP, Patte II, Goutallier 1. No biceps pathology."
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:989b8468-d42c-43de-acae-da85f73cf2a0",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Procedure-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Concomitant arthroscopic excision of the distal clavicle, right shoulder — 2024-04-15</div>"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:a20d0bb2-f8a9-4346-b123-4c149be779f0"
+          }
+        ],
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "387713003",
+              "display": "Surgical procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "734057006",
+              "display": "Excision of distal clavicle"
+            }
+          ],
+          "text": "Arthroscopic distal clavicle excision (Mumford procedure), right AC joint"
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "performedPeriod": {
+          "start": "2024-04-15T09:00:00+02:00",
+          "end": "2024-04-15T10:40:00+02:00"
+        },
+        "performer": [
+          {
+            "actor": {
+              "display": "Dr. med. Sabine Hoffmann"
+            }
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/23b4fa56-db27-494f-9c47-ab635473242b"
+          }
+        ],
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "outcome": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "385669000",
+              "display": "Successful"
+            }
+          ],
+          "text": "Adequate subacromial decompression of the AC joint achieved arthroscopically"
+        },
+        "note": [
+          {
+            "text": "Performed through the same arthroscopic portals as the rotator cuff repair, same operative session (ADR-0121) — not a separate skin incision. Point tenderness over the AC joint on pre-op exam, together with the mild osteoarthritic changes on the 2024-01-22 MRI, supported concomitant treatment rather than leaving it unaddressed."
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:af1f44f0-d85c-469b-99d5-7ba14cd86c55",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/procedure-approach-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Procedure approach: arthroscopic</div>"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:a20d0bb2-f8a9-4346-b123-4c149be779f0"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "procedure-approach",
+              "display": "Procedure Approach"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "effectiveDateTime": "2024-04-15T09:00:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/procedure-approach",
+              "code": "arthroscopic",
+              "display": "Arthroscopic"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:64236e5d-bccf-4e18-b665-c773d14b6140",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/reconstruction-extent-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Reconstruction extent: complete repair</div>"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:a20d0bb2-f8a9-4346-b123-4c149be779f0"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "reconstruction-extent",
+              "display": "Reconstruction Extent"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "effectiveDateTime": "2024-04-15T09:00:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "304384006",
+              "display": "Complete repair of rotator cuff"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d05c9a28-32d9-4580-b18b-df712a7ec4c0",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/fixation-technique-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Fixation technique: single-row</div>"
+        },
+        "partOf": [
+          {
+            "reference": "urn:uuid:a20d0bb2-f8a9-4346-b123-4c149be779f0"
+          }
+        ],
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "procedure",
+                "display": "Procedure"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "fixation-technique",
+              "display": "Fixation Technique"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "effectiveDateTime": "2024-04-15T09:00:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/fixation-technique",
+              "code": "single-row",
+              "display": "Single-row fixation"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:67ef35d6-ca52-41b9-81a7-03ebcfb2e4a5",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Intra-Operative Tear Size on 2024-04-15</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size",
+              "display": "Tear Size"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "effectiveDateTime": "2024-04-15T09:00:00+02:00",
+        "valueQuantity": {
+          "value": 3.2,
+          "unit": "centimetres",
+          "system": "http://unitsofmeasure.org",
+          "code": "cm"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:08def6ec-8d9e-4d6a-ba49-b58e48db8a47",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/intraop-tear-size-classification-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Intra-Operative Tear Size Classification (Cofield) on 2024-04-15: large</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size-classification",
+              "display": "Tear Size Classification (Cofield)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "encounter": {
+          "reference": "urn:uuid:fd903c08-6a81-4b8d-930f-bb4c8cc3eb49"
+        },
+        "effectiveDateTime": "2024-04-15T09:00:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+              "code": "large",
+              "display": "Large tear (3–5 cm)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:16d814e0-b8e2-42ab-9780-b243a976cb81",
+      "resource": {
+        "resourceType": "CarePlan",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-research-care-plan"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Q11 research follow-up schedule: 6 weeks, 3 months, 6 months, 1 year, 2 years post-surgery, computed from the index procedure date (ADR-0129)</div>"
+        },
+        "status": "active",
+        "intent": "plan",
+        "subject": {
+          "reference": "Patient/717de7e7-88e4-4961-9fcf-70fba080958f"
+        },
+        "period": {
+          "start": "2024-04-15T09:00:00+02:00",
+          "end": "2026-04-15T09:00:00+02:00"
+        },
+        "activity": [
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "6-weeks"
+                  }
+                ]
+              },
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-05-27T09:00:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 6 wk post-surgery"
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "3-months"
+                  }
+                ]
+              },
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-07-15T09:00:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 3 mo post-surgery"
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "6-months"
+                  }
+                ]
+              },
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2024-10-15T09:00:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 6 mo post-surgery"
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "1-year"
+                  }
+                ]
+              },
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2025-04-15T09:00:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 12 mo post-surgery"
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/q11-timepoint",
+                    "code": "2-years"
+                  }
+                ]
+              },
+              "status": "scheduled",
+              "scheduledTiming": {
+                "event": [
+                  "2026-04-15T09:00:00+02:00"
+                ]
+              },
+              "description": "Q11 research follow-up — 24 mo post-surgery"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "CarePlan"
+      }
+    }
+  ]
+}

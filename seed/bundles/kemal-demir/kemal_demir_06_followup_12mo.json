@@ -1,0 +1,1889 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-follow-up-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:a5397b40-2502-47d8-a1bf-d98eaef6b6ec",
+      "resource": {
+        "resourceType": "Encounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">12 months post-op follow-up visit (Q11) on 2025-03-18</div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "390906007",
+                "display": "Follow-up encounter"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "period": {
+          "start": "2025-03-18T11:00:00+01:00",
+          "end": "2025-03-18T11:35:00+01:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "id": "kemal-demir-encounter-fu-12mo"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/kemal-demir-encounter-fu-12mo"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1676e7b5-40da-4dd5-9a11-86b1d3ac1643",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Flexion ROM on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41389-8",
+              "display": "Shoulder Flexion Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 160,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f04b6fae-5f44-45e8-b43e-67ec725278f1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Abduction ROM on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41381-5",
+              "display": "Shoulder Abduction Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 150,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:da94e89c-9f9b-4a7d-af06-b36b3188f4fa",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Supraspinatus Strength on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength",
+              "display": "Supraspinatus Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7b46e66d-07be-454d-9d36-9c8c2ec97c00",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Pain Severity — On Average on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-average",
+              "display": "Pain Severity — On Average"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6481b45c-8165-4f26-91de-a96d7978c1e2",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Constant-Murley Score on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "273383002",
+              "display": "Constant and Murley shoulder assessment score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "focus": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 78,
+          "unit": "points",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-pain",
+                  "display": "Constant-Murley: Pain (0-15)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 12,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-adl",
+                  "display": "Constant-Murley: Activities of Daily Living (0-20)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 17,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-rom",
+                  "display": "Constant-Murley: Range of Motion (0-40)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 33,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-strength",
+                  "display": "Constant-Murley: Strength (0-25)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 16,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b7338051-626d-4295-8032-c5701b4baefb",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Subjective Shoulder Value on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "ssv-score",
+              "display": "Subjective Shoulder Value"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "focus": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 80,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:476b94e7-c35a-4eb2-b587-846fc17c1397",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patient-satisfaction-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Patient Satisfaction on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "77218-6",
+              "display": "Patient satisfaction with healthcare delivery"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "focus": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA27752-7",
+              "display": "Somewhat satisfied"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:19c1b6f0-6a13-4a4b-9c2e-2f6a2c1d9b3a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/return-to-activity-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Return to Sport/Work on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "return-to-sport-work",
+              "display": "Return to Sport/Work"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "focus": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/return-to-activity",
+              "code": "returned-modified",
+              "display": "Returned to Modified Activities"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2b8f6b7e-1a4e-4a3b-9f7f-5e0d3d6a8c11",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder External Rotation ROM on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41387-2",
+              "display": "Shoulder External rotation Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 65,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7d6e0f2a-3b4c-4d5e-8f9a-0b1c2d3e4f5a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Internal Rotation (hand behind back) on 2025-03-18: L3 (waist)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation",
+              "display": "Internal Rotation (at side, active)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+              "code": "l3",
+              "display": "L3 (waist)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8e1f3a4b-5c6d-4e7f-9a0b-1c2d3e4f5a6b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-90-abduction-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder External Rotation at 90° Abduction on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "external-rotation-90-abduction",
+              "display": "External Rotation at 90° Abduction (active)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 65,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9f2a4b5c-6d7e-4f8a-9b0c-1d2e3f4a5b6c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-90-abduction-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Internal Rotation at 90° Abduction on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation-90-abduction",
+              "display": "Internal Rotation at 90° Abduction (active)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 40,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0a3b5c6d-7e8f-4a9b-8c1d-2e3f4a5b6c7d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Supraspinatus Strength (Dynamometry) on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength-dynamometry",
+              "display": "Supraspinatus Strength (Dynamometry)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 7.5,
+          "unit": "kilograms",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1b4c6d7e-8f9a-4b0c-9d2e-3f4a5b6c7d8e",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">External Rotation Strength on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "external-rotation-strength",
+              "display": "External Rotation Strength (Composite: Infraspinatus + Teres Minor)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2c5d7e8f-9a0b-4c1d-8e3f-4a5b6c7d8e9f",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Internal Rotation Strength (Composite) on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation-strength",
+              "display": "Internal Rotation Strength (Composite)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3d6e8f9a-0b1c-4d2e-9f4a-5b6c7d8e9f0a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Subscapularis Strength on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "subscapularis-strength",
+              "display": "Subscapularis Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4e7f9a0b-1c2d-4e3f-8a5b-6c7d8e9f0a1b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Jobe Test (Empty Can) on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231437004",
+              "display": "Empty can test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5f8a0b1c-2d3e-4f4a-9b6c-7d8e9f0a1b2c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Lift-off Test on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231510004",
+              "display": "Lift-off test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6a9b1c2d-3e4f-4a5b-8c7d-8e9f0a1b2c3d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Belly Press Test on 2025-03-18</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "belly-press-test",
+              "display": "Belly Press Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d5c3c4f8-f669-41e7-ab2f-9a9aeb3fba47",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-flexion-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41390-6",
+              "display": "Shoulder Flexion Passive Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 170,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:72edb259-c919-4a1e-8c5a-5f30d556fde1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-abduction-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41382-3",
+              "display": "Shoulder Abduction Passive Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 160,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1dd3f4ea-7e42-4add-af33-2e4653232c10",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41388-0",
+              "display": "Shoulder External rotation Passive Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 75,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e690c6b4-20a7-42c6-9074-b25787971ce4",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "passive-internal-rotation",
+              "display": "Internal Rotation (at side, passive)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+              "code": "t12",
+              "display": "T12 (thoracolumbar junction)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:590f4119-0fcf-4fba-958c-19444c81fdc5",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-external-rotation-90-abduction-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "passive-external-rotation-90-abduction",
+              "display": "External Rotation at 90° Abduction (passive)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 75,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:514d521a-80fe-4221-a344-35f22a76ce8b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-passive-internal-rotation-90-abduction-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "passive-internal-rotation-90-abduction",
+              "display": "Internal Rotation at 90° Abduction (passive)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 50,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6a7e5ef6-afed-40e2-b8fe-114a16ead99d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-active-movement-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-active-movement",
+              "display": "Pain Severity — With Active Movement"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 2,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:414c744a-f802-49eb-9ce3-5752fc3425f0",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-passive-movement-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-passive-movement",
+              "display": "Pain Severity — With Passive Movement"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 1,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aaf77b35-278f-4838-b83c-5cd8d64a4182",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-rest-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-rest",
+              "display": "Pain Severity — At Rest"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 0,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6d868985-cdb3-4495-adce-0dd97e539bc3",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sane-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "sane-score",
+              "display": "SANE Score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-002"
+        },
+        "focus": [
+          {
+            "reference": "Condition/kemal-demir-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2025-03-18T11:00:00+01:00",
+        "encounter": {
+          "reference": "Encounter/kemal-demir-encounter-fu-12mo"
+        },
+        "valueQuantity": {
+          "value": 78,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

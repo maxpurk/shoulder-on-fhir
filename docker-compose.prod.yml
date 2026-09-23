@@ -1,0 +1,44 @@
+# Production overlay — adds a Caddy reverse proxy in front of the frontends
+# for automatic HTTPS + shared Basic Auth, so the demo can be handed out as
+# one link + one password. Everything else (HAPI, Postgres, validator
+# sidecar) is unchanged and stays loopback-only per docker-compose.yml.
+#
+# Usage (on the server, from this directory):
+#   cp deploy/.env.prod.example .env.prod   # fill in DOMAIN / SDC_DOMAIN / password hash
+#   ./build-and-deploy.sh                   # bring up the base stack + seed data
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.prod up -d caddy
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    container_name: shoulder-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN=${DOMAIN}
+      - SDC_DOMAIN=${SDC_DOMAIN}
+      - IG_DOMAIN=${IG_DOMAIN}
+      - BASIC_AUTH_USER=${BASIC_AUTH_USER}
+      - BASIC_AUTH_HASH=${BASIC_AUTH_HASH}
+      - ACME_EMAIL=${ACME_EMAIL}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      # Static IG HTML site (produced by `build-and-deploy.sh --genonce`).
+      # Read-only; Caddy reads this directory fresh on every request, so
+      # each --genonce run republishes automatically — no restart needed.
+      - ./ig/output:/srv/ig-output:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    depends_on:
+      - frontend
+      - sdc-frontend
+      - sdc-generic-frontend
+      - sdc-lforms-frontend
+    networks:
+      - shoulder-network
+
+volumes:
+  caddy-data:
+  caddy-config:

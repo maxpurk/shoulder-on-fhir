@@ -1,0 +1,81 @@
+# Shoulder on FHIR — General / Health Checks
+# VS Code REST Client (humao.rest-client)
+# Tenant endpoint: http://localhost:8080/fhir/DEFAULT
+
+@base = http://localhost:8080/fhir/DEFAULT
+
+
+# ─────────────────────────────────────────────────────────────
+# SERVER HEALTH
+# ─────────────────────────────────────────────────────────────
+
+### Capability Statement — confirms server is up and FHIR version
+GET {{base}}/metadata
+Accept: application/fhir+json
+
+###
+
+### Count StructureDefinitions loaded
+GET {{base}}/StructureDefinition?_summary=count
+Accept: application/fhir+json
+
+###
+
+### Count CodeSystems loaded
+GET {{base}}/CodeSystem?_summary=count
+Accept: application/fhir+json
+
+###
+
+### Count ValueSets loaded
+GET {{base}}/ValueSet?_summary=count
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# PROFILE LISTINGS — verify IG is loaded
+# Expected: 71 StructureDefs, 19 CodeSystems, 35 ValueSets
+# ─────────────────────────────────────────────────────────────
+
+### List all HPI StructureDefinitions (name + url)
+GET {{base}}/StructureDefinition?_elements=name,url,status&_count=100
+Accept: application/fhir+json
+
+###
+
+### List all CodeSystems
+GET {{base}}/CodeSystem?_elements=name,url,status
+Accept: application/fhir+json
+
+###
+
+### List all ValueSets
+GET {{base}}/ValueSet?_elements=name,url,status&_count=50
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# CLINICAL DATA COUNTS
+# ─────────────────────────────────────────────────────────────
+
+### Count Patients
+GET {{base}}/Patient?_summary=count
+Accept: application/fhir+json
+
+###
+
+### Count Conditions
+GET {{base}}/Condition?_summary=count
+Accept: application/fhir+json
+
+###
+
+### Count Procedures
+GET {{base}}/Procedure?_summary=count
+Accept: application/fhir+json
+
+###
+
+### Count Observations
+GET {{base}}/Observation?_summary=count
+Accept: application/fhir+json

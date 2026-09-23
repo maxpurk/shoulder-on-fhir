@@ -1,0 +1,26 @@
+{
+  "name": "shoulder-on-fhir-sdc-generic-frontend",
+  "version": "1.0.0-thesis",
+  "description": "Generic SDC form filler and definition-based extraction engine. Holds no knowledge of any registry: it is given Questionnaires and returns a transaction Bundle.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0",
+    "pretest": "esbuild src/lib/sdcExtract.ts --bundle --format=esm --platform=node --outfile=dist-test/sdcExtract.mjs --external:fhirpath && esbuild src/lib/templateExtract.ts --bundle --format=esm --platform=node --outfile=dist-test/templateExtract.mjs --external:fhirpath && esbuild src/lib/populate.ts --bundle --format=esm --platform=node --outfile=dist-test/populate.mjs --external:fhirpath && esbuild src/lib/profileTypes.ts --bundle --format=esm --platform=node --outfile=dist-test/profileTypes.mjs --external:fhirpath && esbuild src/lib/formLogic.ts --bundle --format=esm --platform=node --outfile=dist-test/formLogic.mjs && esbuild src/lib/response.ts --bundle --format=esm --platform=node --outfile=dist-test/response.mjs",
+    "test": "node test/extract.test.mjs && node test/declares-required.test.mjs && node test/sdc-spec-examples.test.mjs"
+  },
+  "dependencies": {
+    "fhirpath": "^5.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.3.1"
+  }
+}

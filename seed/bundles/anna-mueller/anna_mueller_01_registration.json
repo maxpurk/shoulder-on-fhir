@@ -1,0 +1,3070 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-registration-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:4bde96ba-9644-4ff0-af2b-5fb69ab7ea4e",
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Anna Müller, female, born 1971-04-12 — example registry patient PAT-LONG-001</div>"
+        },
+        "identifier": [
+          {
+            "system": "https://maxpurk.github.io/shoulder-on-fhir/identifier/patient",
+            "value": "PAT-LONG-001"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Müller",
+            "given": [
+              "Anna"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1971-04-12",
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+49 331 5556677",
+            "use": "home"
+          }
+        ],
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Bertha-von-Suttner-Allee 7"
+            ],
+            "city": "Potsdam",
+            "postalCode": "14471",
+            "country": "DE"
+          }
+        ],
+        "id": "pat-long-001",
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender",
+            "extension": [
+              {
+                "url": "value",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/administrative-gender",
+                      "code": "female",
+                      "display": "Female"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "type",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://loinc.org",
+                      "code": "76689-9",
+                      "display": "Sex assigned at birth"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/pat-long-001"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c0e2c0e2-c0e2-4c0e-ac0e-2c0e2c0e2c0e",
+      "resource": {
+        "resourceType": "Encounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Pre-operative registration consultation, 2024-04-03</div>"
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "period": {
+          "start": "2024-04-03T09:00:00+02:00",
+          "end": "2024-04-03T09:45:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "Condition/anna-mueller-rc-tear"
+          }
+        ],
+        "id": "anna-mueller-registration-encounter",
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "Condition/anna-mueller-rc-tear"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "CC",
+                  "display": "Chief complaint"
+                }
+              ]
+            },
+            "rank": 1
+          },
+          {
+            "condition": {
+              "reference": "Condition/anna-mueller-ac-oa"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "CM",
+                  "display": "comorbidity diagnosis"
+                }
+              ]
+            },
+            "rank": 2
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Encounter/anna-mueller-registration-encounter"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8316aaf8-57a4-40ff-a35a-0a9a751c29df",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/condition-dueTo",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "362975008",
+                  "display": "Degenerative disorder"
+                }
+              ]
+            }
+          }
+        ],
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Full-thickness supraspinatus tear, right shoulder, degenerative onset (insidious, from 2023-12-22)</div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "926335004",
+              "display": "Rupture of rotator cuff of shoulder"
+            }
+          ],
+          "text": "Full-thickness supraspinatus tear, right shoulder"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "onsetDateTime": "2023-12-22",
+        "recordedDate": "2024-01-08",
+        "id": "anna-mueller-rc-tear",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "stage": [
+          {
+            "assessment": [
+              {
+                "reference": "Observation/anna-mueller-patte"
+              },
+              {
+                "reference": "Observation/anna-mueller-goutallier"
+              },
+              {
+                "reference": "Observation/anna-mueller-tear-size-classification"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "detail": [
+              {
+                "reference": "Observation/anna-mueller-tendon-supraspinatus"
+              },
+              {
+                "reference": "Observation/anna-mueller-tear-location"
+              },
+              {
+                "reference": "Observation/anna-mueller-tear-thickness"
+              },
+              {
+                "reference": "Observation/anna-mueller-sleep-disturbance"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/anna-mueller-rc-tear"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1f2e3d4c-5b6a-4978-8e9f-0a1b2c3d4e5f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "anna-mueller-tear-thickness",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-thickness-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tear thickness: full-thickness</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-thickness",
+              "display": "Tear Thickness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "202843000",
+              "display": "Full thickness rotator cuff tear"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-tear-thickness"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5b9f2e2a-6b3a-4f9a-9a2e-1a2b3c4d5e6f",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "anna-mueller-tendon-supraspinatus",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tendons-involved-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tendons involved: supraspinatus</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tendons-involved",
+              "display": "Tendons Involved"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "5580002",
+              "display": "Structure of tendon of supraspinatus muscle"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-tendon-supraspinatus"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c1a3f4b-8d5e-4a6b-9c7d-2e3f4a5b6c7d",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "anna-mueller-tear-location",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-location-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tear location: near the insertion (footprint)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-location",
+              "display": "Tear Location"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+              "code": "insertion-near",
+              "display": "Near the insertion (footprint)"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-tear-location"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9e2d4c5b-1a3f-4e6d-8b9c-3d4e5f6a7b8c",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "anna-mueller-ac-oa",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Mild osteoarthritis of the right acromioclavicular joint, incidental finding on the 2024-01-22 MRI — secondary to the rotator cuff tear, not the principal diagnosis.</div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "239865003",
+              "display": "Osteoarthritis of acromioclavicular joint"
+            }
+          ],
+          "text": "Mild AC joint osteoarthritis, right shoulder (incidental MRI finding)"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "onsetDateTime": "2024-01-22",
+        "recordedDate": "2024-01-22"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/anna-mueller-ac-oa"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d92f2c5e-1f87-4a3b-9f10-9b8c91e7a601",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "anna-mueller-comorbidity-hypertension",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Essential hypertension — well-controlled, recorded 2018-03-15. expert consensus Q1.c comorbidity per ADR-0055.</div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "59621000",
+              "display": "Essential hypertension"
+            }
+          ],
+          "text": "Essential hypertension"
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/anna-mueller-comorbidity-hypertension"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e7a31b6d-2c98-4b5a-8d21-ac7d82f8b502",
+      "resource": {
+        "resourceType": "Condition",
+        "id": "anna-mueller-comorbidity-diabetes-t2",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Type 2 diabetes mellitus — oral antidiabetic therapy, recorded 2020-09-02. expert consensus Q1.c comorbidity per ADR-0055.</div>"
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "44054006",
+              "display": "Diabetes mellitus type 2"
+            }
+          ],
+          "text": "Type 2 diabetes mellitus"
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Condition/anna-mueller-comorbidity-diabetes-t2"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:90540efa-faac-4f6f-9142-35cd670dbb0f",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Prior conservative care: 12 weeks structured PT (Q1.f), Jan–Mar 2024</div>"
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91251008",
+              "display": "Physical therapy procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91251008",
+              "display": "Physical therapy procedure"
+            }
+          ],
+          "text": "Prior conservative treatment — 12 weeks structured PT (Q1.f)"
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "performedPeriod": {
+          "start": "2024-01-15",
+          "end": "2024-03-29"
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/anna-mueller-rc-tear"
+          }
+        ],
+        "id": "anna-mueller-prior-pt",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Procedure/anna-mueller-prior-pt"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2a3b4c5d-6e7f-4081-9a2b-3c4d5e6f7a8b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/prior-physical-therapy-session-count-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Prior PT session count: more than 20 (12 weeks structured PT)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "prior-physical-therapy-session-count",
+              "display": "Prior Physical Therapy Session Count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-physical-therapy-session-count",
+              "code": "gt-20",
+              "display": "More than 20 sessions"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:cc4ace0c-f64c-4737-aa1c-0e55b0ea219f",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Prior subacromial corticosteroid injection (Q1.f), 2024-02-20</div>"
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "18629005",
+              "display": "Administration of medication"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "290035003",
+              "display": "Injection into shoulder joint"
+            }
+          ],
+          "text": "Prior subacromial corticosteroid injection (Q1.f)"
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "performedDateTime": "2024-02-20",
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ],
+        "reasonReference": [
+          {
+            "reference": "Condition/anna-mueller-rc-tear"
+          }
+        ],
+        "id": "anna-mueller-prior-injection",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Procedure/anna-mueller-prior-injection"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b4c5d6e-7f80-4192-8b3c-4d5e6f7a8b9c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/prior-injection-count-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Prior injection count: 1 to 3 (single subacromial corticosteroid injection)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "prior-injection-count",
+              "display": "Prior Shoulder Injection Count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-injection-count",
+              "code": "1-3",
+              "display": "1 to 3 injections"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:17ca2981-16cf-4cfd-8d02-cc5b4d382a19",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/smoking-status-observation",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-tobaccouse-uv-ips"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tobacco smoking status on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "72166-2",
+              "display": "Tobacco smoking status"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA15920-4",
+              "display": "Former smoker"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4c5d6e7f-8091-4a2b-9c3d-4e5f6a7b8c9d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/smoking-pack-years-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Smoking history: 8 pack-years (former smoker)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "782516008",
+              "display": "Number of calculated smoking pack years"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 8,
+          "unit": "pack-years",
+          "system": "http://unitsofmeasure.org",
+          "code": "{pack-years}"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c29550c0-9bf4-492a-8d7e-499d64235e95",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/employment-status-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Employed full time (schoolteacher, ISCO-08 2330) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "67875-5",
+              "display": "Employment status - current"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA17957-4",
+              "display": "Employed full time"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d3a661d1-ac05-4c8f-9e8f-5aa75d346fa6",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/occupational-physical-demand-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Light manual work (teacher) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "occupational-physical-demand",
+              "display": "Occupational Physical Demand"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-physical-demand",
+              "code": "light-manual",
+              "display": "Light manual work"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/occupational-overhead-exposure-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Regular overhead work (frequent overhead blackboard writing) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "occupational-overhead-exposure",
+              "display": "Occupational Overhead Exposure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-overhead-exposure",
+              "code": "yes",
+              "display": "Regular overhead work"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:85ad2256-48cf-41bb-b81e-cb9e95dac0ff",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "anna-mueller-sleep-disturbance",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sleep-disturbance-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sleep occasionally disturbed by shoulder pain on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "sleep-disturbance",
+              "display": "Sleep Disturbance"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sleep-disturbance-severity",
+              "code": "occasional",
+              "display": "Occasionally disturbed"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-sleep-disturbance"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a2b053d2-1218-42e3-bfca-ce3a2a44151d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sports-participation-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Sports Participation on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "sports-participation",
+              "display": "Sports Participation"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sports-participation-level",
+              "code": "recreational",
+              "display": "Recreational / leisure sport"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1eedd139-e82e-461a-946b-a3d7e0723b01",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/functional-limitations-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Below-shoulder-level activity limited (unable to write on the blackboard above shoulder height; difficulty dressing) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "functional-limitation-severity",
+              "display": "Functional Limitation Severity"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/functional-limitation-severity",
+              "code": "below-shoulder-limitation",
+              "display": "Below-shoulder-level activity limited"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6ff1f37c-c6e1-4157-a9df-7d710c568950",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hand Dominance on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "57427004",
+              "display": "Handedness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "46669005",
+              "display": "Right handed"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e810d125-9996-4539-89cd-de97a7b4f312",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Pain Severity — On Average on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-average",
+              "display": "Pain Severity — On Average"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 7,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d2115827-e0a2-4ad9-a73d-2376fa911b4e",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Atrophy on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "atrophy",
+              "display": "Atrophy"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "52101004",
+              "display": "Present"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5944172a-7af2-4322-93ba-fbf0799422b4",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Deformity on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "111263009",
+              "display": "Acquired deformity of shoulder"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "2667000",
+              "display": "Absent"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f86b6817-35b7-425c-a169-2af39cdc7706",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Normal Shoulder Contour on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "normal-shoulder-contour",
+              "display": "Normal Shoulder Contour"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "2667000",
+              "display": "Absent"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9cfdd008-8c0e-4a76-8b45-cbe75711349c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Flexion ROM on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41389-8",
+              "display": "Shoulder Flexion Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 110,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ad1cb0dd-59f5-45d6-954c-2321dcc98fdd",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Abduction ROM on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41381-5",
+              "display": "Shoulder Abduction Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6f3d84ea-07f3-427c-b1de-8561a12d4bb5",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Supraspinatus Strength on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength",
+              "display": "Supraspinatus Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 2,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:3b35e420-fd46-4989-88c2-6758487573cd",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Jobe Test (Empty Can) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231437004",
+              "display": "Empty can test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:98f3b58c-70a2-4c65-8692-e6ab41fdffa1",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Lift-off Test on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231510004",
+              "display": "Lift-off test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:673299a2-1dcc-4a9f-ba71-4be5c180e73b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Constant-Murley Score on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "273383002",
+              "display": "Constant and Murley shoulder assessment score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "focus": [
+          {
+            "reference": "Condition/anna-mueller-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 38,
+          "unit": "points",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-pain",
+                  "display": "Constant-Murley: Pain (0-15)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 4,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-adl",
+                  "display": "Constant-Murley: Activities of Daily Living (0-20)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 4,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-rom",
+                  "display": "Constant-Murley: Range of Motion (0-40)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 20,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-strength",
+                  "display": "Constant-Murley: Strength (0-25)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 10,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:c562aed8-3ea2-43a5-a30b-f0ab90481f17",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Subjective Shoulder Value on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "ssv-score",
+              "display": "Subjective Shoulder Value"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "focus": [
+          {
+            "reference": "Condition/anna-mueller-rc-tear"
+          }
+        ],
+        "effectiveDateTime": "2024-01-08",
+        "valueQuantity": {
+          "value": 35,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:e7142fcb-5246-4ba6-b063-859cae630c96",
+      "resource": {
+        "resourceType": "ImagingStudy",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+          ]
+        },
+        "status": "available",
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "started": "2024-01-22",
+        "modality": [
+          {
+            "system": "http://dicom.nema.org/resources/ontology/DCM",
+            "code": "MR",
+            "display": "Magnetic Resonance"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "ImagingStudy"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ee90a720-0b20-428f-9c65-206a0de8b523",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patte-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Patte Classification on 2024-01-22</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "patte-classification",
+              "display": "Patte Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+              "code": "II",
+              "display": "Stage II - Retracted tendon end at the humeral head"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "id": "anna-mueller-patte",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-patte"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:dec94034-45ed-4643-a4f8-b2a8efb14d38",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/goutallier-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Goutallier Classification on 2024-01-22</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "goutallier-classification",
+              "display": "Goutallier Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/goutallier-classification",
+              "code": "1",
+              "display": "Grade 1 – Some fatty streaks"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "id": "anna-mueller-goutallier",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-goutallier"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:709bc22d-469a-4034-ba5a-fc2e7928986c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-size-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tear Size on 2024-01-22</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size",
+              "display": "Tear Size"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueQuantity": {
+          "value": 2.5,
+          "unit": "centimetres",
+          "system": "http://unitsofmeasure.org",
+          "code": "cm"
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "id": "anna-mueller-tear-size",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-tear-size"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7f0c1d4b-90b6-4d44-86d2-1b3a2e5a7c91",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-size-classification-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Tear Size Classification (Cofield) on 2024-01-22: medium</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size-classification",
+              "display": "Tear Size Classification (Cofield)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-22",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+              "code": "medium",
+              "display": "Medium tear (1–3 cm)"
+            }
+          ]
+        },
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "id": "anna-mueller-tear-size-classification",
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Observation/anna-mueller-tear-size-classification"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:775d8f35-fa6b-4ba0-b391-3bb1f3cb890c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder External Rotation ROM on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41387-2",
+              "display": "Shoulder External rotation Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueQuantity": {
+          "value": 40,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:33d3a65c-5aed-4176-ba96-84912becc140",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Active Shoulder Internal Rotation (hand behind back) on 2024-01-08: L5 (belt line)</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation",
+              "display": "Internal Rotation (at side, active)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+              "code": "l5",
+              "display": "L5 (belt line)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:51ef34d1-0b0a-4a61-af95-3f118112e289",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Belly Press Test on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "belly-press-test",
+              "display": "Belly Press Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ece91350-eacc-4d0d-a2c4-c14a710c84b7",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/bear-hug-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Bear Hug Test on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "bear-hug-test",
+              "display": "Bear Hug Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:85a73e05-1b7f-48da-b6a9-f8e03fa06d37",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hornblower-test-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Hornblower Test on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "hornblower-test",
+              "display": "Hornblower Test (Signe du Clairon)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "260385009",
+              "display": "Negative"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4de538f6-dfff-4f8d-b97b-52a149d94c62",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Supraspinatus Strength (Dynamometry) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength-dynamometry",
+              "display": "Supraspinatus Strength (Dynamometry)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueQuantity": {
+          "value": 1.8,
+          "unit": "kilograms",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:a56269b8-7461-4b17-89a1-ad67cb922f95",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">External Rotation Strength on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "external-rotation-strength",
+              "display": "External Rotation Strength (Composite: Infraspinatus + Teres Minor)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b5b36711-bfc5-47fa-b2de-faa25e57b4c6",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Internal Rotation Strength (Composite) on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation-strength",
+              "display": "Internal Rotation Strength (Composite)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d2b1be03-d2b5-4f26-821f-3f7ec0355152",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation"
+          ]
+        },
+        "text": {
+          "status": "generated",
+          "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\">Subscapularis Strength on 2024-01-08</div>"
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "subscapularis-strength",
+              "display": "Subscapularis Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "Patient/pat-long-001"
+        },
+        "effectiveDateTime": "2024-01-08",
+        "encounter": {
+          "reference": "Encounter/anna-mueller-registration-encounter"
+        },
+        "valueQuantity": {
+          "value": 5,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

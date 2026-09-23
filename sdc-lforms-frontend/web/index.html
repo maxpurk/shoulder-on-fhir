@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LHC-Forms SDC Extraction</title>
+<link rel="stylesheet" href="lforms-assets/styles.css">
+<style>
+ body{font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;margin:0;background:#f6f8fa;color:#14202e}
+ .wrap{max-width:1000px;margin:0 auto;padding:22px 20px 80px}
+ h1{font-size:20px;margin:0 0 4px}.sub{color:#5b6b7d;font-size:13px;margin:0 0 18px}
+ .card{background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:16px 18px;margin-bottom:14px}
+ .card>h2{font-size:15px;margin:0 0 12px;color:#1b3a5c}
+ button{font:inherit;font-size:13px;padding:7px 14px;border-radius:6px;border:1px solid #1b3a5c;background:#1b3a5c;color:#fff;cursor:pointer}
+ button.ghost{background:#fff;color:#1b3a5c} button:disabled{opacity:.45;cursor:not-allowed}
+ select,input{font:inherit;font-size:13px;padding:6px 8px;border:1px solid #c6d0da;border-radius:5px}
+ .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+ pre{background:#0f1c2b;color:#cfe3f5;padding:12px;border-radius:6px;overflow:auto;max-height:320px;font-size:11.5px;line-height:1.45}
+ .ok{color:#1a7f4b}.bad{color:#b3261e}.warn{color:#9a6700}
+ .issue{font-size:12px;padding:4px 0;border-bottom:1px solid #eef2f6}
+ .pill{display:inline-block;font-size:11px;padding:2px 7px;border-radius:99px;background:#eef2f6;color:#33475b;margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>LHC-Forms SDC Extraction</h1>
+  <p class="sub">
+    The form is rendered and the Bundle is extracted by <a href="https://lhncbc.github.io/lforms/" target="_blank" rel="noopener">LHC-Forms</a>,
+    an independent SDC implementation from the US National Library of Medicine.
+    Nothing on this page knows anything about this registry: the Questionnaire carries its own
+    extraction template. The result is checked against a bundle profile before it is submitted.
+  </p>
+
+  <div class="card">
+    <h2>Form</h2>
+    <div class="row">
+      <select id="formPicker" style="min-width:380px"><option value="">Loading Questionnaires…</option></select>
+      <span id="lformsVer" class="pill"></span>
+    </div>
+  </div>
+
+  <div class="card"><h2>Questionnaire</h2><div id="formContainer"></div></div>
+
+  <div class="card">
+    <h2>Extract, validate, submit</h2>
+    <div class="row">
+      <button id="btnExtract" disabled>Extract Bundle</button>
+      <select id="profilePicker" style="min-width:320px"><option value="">Validate against…</option></select>
+      <button id="btnValidate" class="ghost" disabled>Validate</button>
+      <button id="btnSubmit" disabled>Submit to server</button>
+      <span id="busy" class="pill" hidden></span>
+    </div>
+    <p id="summary" class="sub" style="margin-top:12px"></p>
+    <div id="issues"></div>
+    <pre id="out" hidden></pre>
+  </div>
+</div>
+
+<script src="lforms-assets/assets/lib/zone.min.js"></script>
+<script src="lforms-assets/lhc-forms.js"></script>
+<script src="lforms-assets/fhir/R4/lformsFHIR.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

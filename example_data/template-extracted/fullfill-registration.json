@@ -1,0 +1,2864 @@
+{
+  "resourceType": "Bundle",
+  "meta": {
+    "profile": [
+      "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-registration-bundle"
+    ]
+  },
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a",
+      "resource": {
+        "resourceType": "Patient",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/individual-recordedSexOrGender",
+            "extension": [
+              {
+                "url": "value",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/administrative-gender",
+                      "code": "other",
+                      "display": "Other"
+                    }
+                  ]
+                }
+              },
+              {
+                "url": "type",
+                "valueCodeableConcept": {
+                  "coding": [
+                    {
+                      "system": "http://loinc.org",
+                      "code": "76689-9",
+                      "display": "Sex assigned at birth"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "https://maxpurk.github.io/shoulder-on-fhir/identifier/patient",
+            "value": "FULL-FILL-001"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Testfall",
+            "given": [
+              "Vollstaendig"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "+49 331 5556677",
+            "use": "home"
+          }
+        ],
+        "gender": "other",
+        "birthDate": "1968-11-02",
+        "address": [
+          {
+            "use": "home",
+            "line": [
+              "Bertha-von-Suttner-Allee 7"
+            ],
+            "city": "Potsdam",
+            "postalCode": "14471",
+            "country": "DE"
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e",
+      "resource": {
+        "resourceType": "Encounter",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-encounter"
+          ]
+        },
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB",
+          "display": "ambulatory"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "185349003",
+                "display": "Encounter for check up"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "period": {
+          "start": "2026-09-16T08:30:00+02:00",
+          "end": "2026-09-16T09:15:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+          }
+        ],
+        "diagnosis": [
+          {
+            "condition": {
+              "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "CC",
+                  "display": "Chief complaint"
+                }
+              ]
+            },
+            "rank": 1
+          },
+          {
+            "condition": {
+              "reference": "urn:uuid:6ccbb086-d637-4f14-83a7-fa6fdf0eee38"
+            },
+            "use": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/diagnosis-role",
+                  "code": "CM",
+                  "display": "comorbidity diagnosis"
+                }
+              ]
+            },
+            "rank": 2
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Encounter"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"
+          ]
+        },
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/condition-dueTo",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://snomed.info/sct",
+                  "code": "773760007",
+                  "display": "Traumatic event"
+                }
+              ]
+            }
+          }
+        ],
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "926335004",
+              "display": "Rupture of rotator cuff of shoulder"
+            }
+          ]
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91775009",
+                "display": "Structure of left shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "onsetDateTime": "2026-09-16T08:30:00+02:00",
+        "recordedDate": "2026-09-16T08:30:00+02:00",
+        "stage": [
+          {
+            "assessment": [
+              {
+                "reference": "urn:uuid:4a8f9a5b-fce2-41f5-8ddd-ec6600bab472"
+              },
+              {
+                "reference": "urn:uuid:b0a4936e-1958-4761-9096-e817d41781d4"
+              },
+              {
+                "reference": "urn:uuid:63e57220-2abf-40b9-a1fa-486286b14680"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "detail": [
+              {
+                "reference": "urn:uuid:98e89a58-3546-46ee-83c9-cee82b6ffe2e"
+              },
+              {
+                "reference": "urn:uuid:65e088eb-c016-47ac-90a1-5ca00254c31e"
+              },
+              {
+                "reference": "urn:uuid:bb35cdf8-45f1-482c-a5cd-026db1030fa9"
+              },
+              {
+                "reference": "urn:uuid:d798db03-6a61-417d-a856-fbf67fe83260"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bb35cdf8-45f1-482c-a5cd-026db1030fa9",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-thickness-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-thickness",
+              "display": "Tear Thickness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "202843000",
+              "display": "Full thickness rotator cuff tear"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:98e89a58-3546-46ee-83c9-cee82b6ffe2e",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tendons-involved-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tendons-involved",
+              "display": "Tendons Involved"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "5580002",
+              "display": "Structure of tendon of supraspinatus muscle"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:65e088eb-c016-47ac-90a1-5ca00254c31e",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-location-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-location",
+              "display": "Tear Location"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/tear-location",
+              "code": "insertion-near",
+              "display": "Near the insertion (footprint)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6ccbb086-d637-4f14-83a7-fa6fdf0eee38",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-diagnosis-condition"
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "encounter-diagnosis",
+                "display": "Encounter Diagnosis"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "202856007",
+              "display": "Biceps tendinitis"
+            }
+          ]
+        },
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91775009",
+                "display": "Structure of left shoulder region"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "onsetDateTime": "2026-09-16T08:30:00+02:00",
+        "recordedDate": "2026-09-16T08:30:00+02:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:881f28f6-b3a4-4490-9bf9-671eeba51132",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips"
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "59621000",
+              "display": "Essential hypertension"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:306bb91c-6f9c-433a-9977-2bb0179bdba1",
+      "resource": {
+        "resourceType": "Condition",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-comorbidity-condition",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Condition-uv-ips"
+          ]
+        },
+        "clinicalStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+              "code": "active",
+              "display": "Active"
+            }
+          ]
+        },
+        "verificationStatus": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+              "code": "confirmed",
+              "display": "Confirmed"
+            }
+          ]
+        },
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+                "code": "problem-list-item",
+                "display": "Problem List Item"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "81531005",
+              "display": "Type 2 diabetes mellitus in obese"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Condition"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:ef01e9c7-688e-43ba-a34a-bb13861bd30b",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+          ]
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91251008",
+              "display": "Physical therapy procedure"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91251008",
+              "display": "Physical therapy procedure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "performedPeriod": {
+          "start": "2026-03-02T09:00:00+01:00",
+          "end": "2026-05-25T09:00:00+02:00"
+        },
+        "reasonReference": [
+          {
+            "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+          }
+        ],
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:73ca2907-266e-41fc-b8d9-cd194bc5f69a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/prior-physical-therapy-session-count-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "prior-physical-therapy-session-count",
+              "display": "Prior Physical Therapy Session Count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-physical-therapy-session-count",
+              "code": "le-10",
+              "display": "10 sessions or fewer"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1260c14b-4265-4de6-8376-5dbbd72d58e1",
+      "resource": {
+        "resourceType": "Procedure",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure"
+          ]
+        },
+        "status": "completed",
+        "category": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "18629005",
+              "display": "Administration of medication"
+            }
+          ]
+        },
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "290035003",
+              "display": "Injection into shoulder joint"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "performedDateTime": "2026-06-10T09:00:00+02:00",
+        "reasonReference": [
+          {
+            "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+          }
+        ],
+        "bodySite": [
+          {
+            "coding": [
+              {
+                "system": "http://snomed.info/sct",
+                "code": "91774008",
+                "display": "Structure of right shoulder region"
+              }
+            ]
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Procedure"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:456b460d-d036-4acb-8145-72498bc7bb7c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/prior-injection-count-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "prior-injection-count",
+              "display": "Prior Shoulder Injection Count"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/prior-injection-count",
+              "code": "1-3",
+              "display": "1 to 3 injections"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:afe979a5-c767-4f96-9353-2a614bf17a66",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/smoking-status-observation",
+            "http://hl7.org/fhir/uv/ips/StructureDefinition/Observation-tobaccouse-uv-ips"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "72166-2",
+              "display": "Tobacco smoking status"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA18976-3",
+              "display": "Current every day smoker"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:de784eb0-6a03-4486-b150-030b08d95aa0",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/smoking-pack-years-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "782516008",
+              "display": "Number of calculated smoking pack years"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 12,
+          "unit": "pack-years",
+          "system": "http://unitsofmeasure.org",
+          "code": "{pack-years}"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:9511b0bc-7e88-486e-bf98-0f7d8c26b41b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/employment-status-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "67875-5",
+              "display": "Employment status - current"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "LA17957-4",
+              "display": "Employed full time"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f428c3d5-39f6-485e-9a1d-c31ca388d5a0",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/occupational-physical-demand-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "occupational-physical-demand",
+              "display": "Occupational Physical Demand"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-physical-demand",
+              "code": "sedentary",
+              "display": "Sedentary / desk-based work"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:70bb36f3-ac79-44e2-bb58-ae401afa384f",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/occupational-overhead-exposure-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "occupational-overhead-exposure",
+              "display": "Occupational Overhead Exposure"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/occupational-overhead-exposure",
+              "code": "yes",
+              "display": "Regular overhead work"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:d798db03-6a61-417d-a856-fbf67fe83260",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sleep-disturbance-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "sleep-disturbance",
+              "display": "Sleep Disturbance"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sleep-disturbance-severity",
+              "code": "unaffected",
+              "display": "Unaffected"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6e953a28-a1be-4dae-9144-ed5503c0bfc3",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/sports-participation-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "sports-participation",
+              "display": "Sports Participation"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/sports-participation-level",
+              "code": "none",
+              "display": "Does not participate in sport"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:bbb12c65-2af6-4c47-8748-93be860717fc",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/functional-limitations-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "functional-limitation-severity",
+              "display": "Functional Limitation Severity"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/functional-limitation-severity",
+              "code": "no-limitation",
+              "display": "No functional limitation"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:2336e25a-72ec-49a3-83d7-3ec7073e4f0c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hand-dominance-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "social-history",
+                "display": "Social History"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "57427004",
+              "display": "Handedness"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "46669005",
+              "display": "Right handed"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:54d2180f-d1c6-470c-ad3f-bd20804e1d86",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/pain-average-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "pain-average",
+              "display": "Pain Severity — On Average"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 6,
+          "unit": "pain score",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:45fa1dd4-fbe6-4ffe-8d53-e0e81a867059",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/atrophy-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "atrophy",
+              "display": "Atrophy"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "52101004",
+              "display": "Present"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7c7a05f5-4d58-42d6-83e0-508c9154c62a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/deformity-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "111263009",
+              "display": "Acquired deformity of shoulder"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "52101004",
+              "display": "Present"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6ed338cf-1055-46a2-9912-a1b95dd5aea4",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/normal-shoulder-contour-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "normal-shoulder-contour",
+              "display": "Normal Shoulder Contour"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "52101004",
+              "display": "Present"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:49cbd54a-a781-49f1-93b5-08c26a1cf163",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-flexion-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41389-8",
+              "display": "Shoulder Flexion Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 110,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7dfe82ec-9d78-43e2-961d-e23d0c27cf60",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-abduction-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41381-5",
+              "display": "Shoulder Abduction Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 95,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7a1d055f-8c86-4d46-adfb-ceb31b4d7c12",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength",
+              "display": "Supraspinatus Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 3,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:5fb43fb6-d1d2-4e98-8add-adf9679fff4d",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231437004",
+              "display": "Empty can test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:44bb38ae-bf5c-465c-b6c9-cafc834131de",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/lift-off-test-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "1231510004",
+              "display": "Lift-off test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:003c3701-c369-43bb-be41-1dc2c02b457c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "273383002",
+              "display": "Constant and Murley shoulder assessment score"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "focus": [
+          {
+            "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+          }
+        ],
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 75,
+          "unit": "points",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "component": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-pain",
+                  "display": "Constant-Murley: Pain (0-15)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 10,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-adl",
+                  "display": "Constant-Murley: Activities of Daily Living (0-20)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 15,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-rom",
+                  "display": "Constant-Murley: Range of Motion (0-40)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 30,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          },
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+                  "code": "constant-score-strength",
+                  "display": "Constant-Murley: Strength (0-25)"
+                }
+              ]
+            },
+            "valueQuantity": {
+              "value": 20,
+              "unit": "points",
+              "system": "http://unitsofmeasure.org",
+              "code": "{score}"
+            }
+          }
+        ]
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:1bd7fc93-ed0e-4268-864e-e79c3142c656",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/ssv-score-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "survey",
+                "display": "Survey"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "ssv-score",
+              "display": "Subjective Shoulder Value"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "focus": [
+          {
+            "reference": "urn:uuid:8236a6f5-9cbf-4e9b-afd8-d2ebf3ea1541"
+          }
+        ],
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 45,
+          "unit": "%",
+          "system": "http://unitsofmeasure.org",
+          "code": "%"
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:06b170cc-3c13-468b-a8b9-be5cabc21ee5",
+      "resource": {
+        "resourceType": "ImagingStudy",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-imaging-study"
+          ]
+        },
+        "status": "available",
+        "modality": [
+          {
+            "system": "http://dicom.nema.org/resources/ontology/DCM",
+            "code": "CT",
+            "display": "Computed Tomography"
+          }
+        ],
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "started": "2026-09-16T08:30:00+02:00"
+      },
+      "request": {
+        "method": "POST",
+        "url": "ImagingStudy"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:4a8f9a5b-fce2-41f5-8ddd-ec6600bab472",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/patte-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "patte-classification",
+              "display": "Patte Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/patte-classification",
+              "code": "I",
+              "display": "Stage I - Retracted tendon end at the bony insertion"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:b0a4936e-1958-4761-9096-e817d41781d4",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/goutallier-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "goutallier-classification",
+              "display": "Goutallier Classification"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/goutallier-classification",
+              "code": "0",
+              "display": "Grade 0 – Normal muscle"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0d3c5609-aa43-4973-b0f8-090ab417abd0",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-size-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size",
+              "display": "Tear Size"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 2.5,
+          "unit": "centimetres",
+          "system": "http://unitsofmeasure.org",
+          "code": "cm"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:63e57220-2abf-40b9-a1fa-486286b14680",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/tear-size-classification-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "imaging",
+                "display": "Imaging"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "tear-size-classification",
+              "display": "Tear Size Classification (Cofield)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/cofield-tear-size-classification",
+              "code": "small",
+              "display": "Small tear (<1 cm)"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:72f80fe5-86a4-48f1-9e06-adc90073d4ae",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-external-rotation-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "41387-2",
+              "display": "Shoulder External rotation Active Range of Motion Quantitative"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 40,
+          "unit": "degrees",
+          "system": "http://unitsofmeasure.org",
+          "code": "deg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:96d9d58c-39a8-4069-bf6d-26a60352457c",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-internal-rotation-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation",
+              "display": "Internal Rotation (at side, active)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/internal-rotation-vertebral-level",
+              "code": "unable",
+              "display": "Unable to reach behind back"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:0f16bfd9-e76c-42fc-818a-2e2f26c52061",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/belly-press-test-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "belly-press-test",
+              "display": "Belly Press Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:6a4dfd14-8aa3-4f84-b05f-daa794946001",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/bear-hug-test-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "bear-hug-test",
+              "display": "Bear Hug Test"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7aae55da-c76e-4155-ba4f-8f607d30715a",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/hornblower-test-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "hornblower-test",
+              "display": "Hornblower Test (Signe du Clairon)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "10828004",
+              "display": "Positive"
+            }
+          ]
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:035dd01a-7015-413d-91a3-96e4e9f6703b",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/supraspinatus-strength-dynamometry-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "supraspinatus-strength-dynamometry",
+              "display": "Supraspinatus Strength (Dynamometry)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 2.4,
+          "unit": "kilograms",
+          "system": "http://unitsofmeasure.org",
+          "code": "kg"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:aee91674-da70-452d-9a0f-40f2c846f9bc",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/external-rotation-strength-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "external-rotation-strength",
+              "display": "External Rotation Strength (Composite: Infraspinatus + Teres Minor)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:f9a659af-438f-40e6-a722-a52c558ceb28",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/internal-rotation-strength-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "internal-rotation-strength",
+              "display": "Internal Rotation Strength (Composite)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 4,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:7346a2f2-2800-4e29-88c4-64b5a9ce1624",
+      "resource": {
+        "resourceType": "Observation",
+        "meta": {
+          "profile": [
+            "https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/subscapularis-strength-observation"
+          ]
+        },
+        "status": "final",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+                "code": "exam",
+                "display": "Exam"
+              }
+            ]
+          }
+        ],
+        "code": {
+          "coding": [
+            {
+              "system": "https://maxpurk.github.io/shoulder-on-fhir/CodeSystem/shoulder-observation",
+              "code": "subscapularis-strength",
+              "display": "Subscapularis Strength"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "urn:uuid:e9706c65-c635-4721-87bc-08229255d69a"
+        },
+        "encounter": {
+          "reference": "urn:uuid:44c651d9-a8ab-4e7c-a7ee-cde5636c744e"
+        },
+        "effectiveDateTime": "2026-09-16T08:30:00+02:00",
+        "valueQuantity": {
+          "value": 5,
+          "unit": "MMT grade",
+          "system": "http://unitsofmeasure.org",
+          "code": "{score}"
+        },
+        "bodySite": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "code": "91774008",
+              "display": "Structure of right shoulder region"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "POST",
+        "url": "Observation"
+      }
+    }
+  ]
+}

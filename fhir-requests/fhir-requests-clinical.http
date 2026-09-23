@@ -1,0 +1,121 @@
+# Shoulder on FHIR — Clinical Data (Patients, Conditions, Procedures, Observations)
+# VS Code REST Client (humao.rest-client)
+# Tenant endpoint: http://localhost:8080/fhir/DEFAULT
+#
+# Seed patients are the two longitudinal cases auto-loaded by build-and-deploy.sh
+# (seed/bundles/<slug>/):
+#   PAT-LONG-001  Anna Müller   — degenerative, single-tendon, statutory insurance
+#   PAT-LONG-002  Kemal Demir   — traumatic, two-tendon, workers' compensation
+#
+# HAPI assigns resource IDs at load time, so this file looks patients up by
+# identifier rather than hardcoding a resource ID that would go stale on the
+# next --clean rebuild.
+
+@base = http://localhost:8080/fhir/DEFAULT
+
+# ─────────────────────────────────────────────────────────────
+# PATIENTS
+# ─────────────────────────────────────────────────────────────
+
+### List all patients (summary)
+GET {{base}}/Patient?_summary=true&_count=20
+Accept: application/fhir+json
+
+###
+
+### Search patient by family name
+GET {{base}}/Patient?name=demir
+Accept: application/fhir+json
+
+###
+
+### Get Anna Müller by identifier
+GET {{base}}/Patient?identifier=PAT-LONG-001
+Accept: application/fhir+json
+
+###
+
+### Get Kemal Demir by identifier
+GET {{base}}/Patient?identifier=PAT-LONG-002
+Accept: application/fhir+json
+
+###
+
+### Everything for Kemal Demir (all linked resources — resolve the resource id from the identifier search above)
+GET {{base}}/Patient?identifier=PAT-LONG-002&_revinclude=*
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# CONDITIONS
+# ─────────────────────────────────────────────────────────────
+
+### List all conditions (summary)
+GET {{base}}/Condition?_summary=true
+Accept: application/fhir+json
+
+###
+
+### Conditions by RotatorCuffCondition profile
+GET {{base}}/Condition?_profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition
+Accept: application/fhir+json
+
+###
+
+### Kemal Demir's rotator cuff condition (fixed logical id — see kemal_demir_01_registration.json)
+GET {{base}}/Condition/kemal-demir-rc-tear
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# PROCEDURES
+# ─────────────────────────────────────────────────────────────
+
+### List all procedures (summary)
+GET {{base}}/Procedure?_summary=true
+Accept: application/fhir+json
+
+###
+
+### Procedures by RotatorCuffProcedure profile
+GET {{base}}/Procedure?_profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-procedure
+Accept: application/fhir+json
+
+###
+
+### Kemal Demir's surgical repair (fixed logical id — see kemal_demir_02_surgery.json)
+GET {{base}}/Procedure/kemal-demir-surgery-2024-03-18
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# OBSERVATIONS
+# ─────────────────────────────────────────────────────────────
+
+### List all observations (summary)
+GET {{base}}/Observation?_summary=true&_count=50
+Accept: application/fhir+json
+
+###
+
+### Observations by category: clinical exam
+GET {{base}}/Observation?category=exam
+Accept: application/fhir+json
+
+###
+
+### Observations by category: imaging
+GET {{base}}/Observation?category=imaging
+Accept: application/fhir+json
+
+###
+
+### Observations by category: survey / PROMs
+GET {{base}}/Observation?category=survey
+Accept: application/fhir+json
+
+###
+
+### Kemal Demir's 12-month Constant-Murley score (fixed encounter id — see kemal_demir_06_followup_12mo.json)
+GET {{base}}/Observation?encounter=Encounter/kemal-demir-encounter-fu-12mo&code=273383002
+Accept: application/fhir+json

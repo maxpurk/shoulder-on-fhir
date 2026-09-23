@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for the Rotator Cuff Registry — a restrained, journal-like
+   palette (cool slate neutrals) with the HPI brand accent reserved for
+   primary actions and active states. */
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold text-slate-900 tracking-tight;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-hpi-orange text-white hover:bg-orange-700;
+  }
+
+  .btn-secondary {
+    @apply bg-slate-200 text-slate-800 hover:bg-slate-300;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+
+  .form-input {
+    @apply w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm
+           focus:outline-none focus:ring-2 focus:ring-hpi-orange focus:border-hpi-orange;
+  }
+
+  .form-label {
+    @apply block text-sm font-medium text-slate-700 mb-1;
+  }
+
+  /* Fields sit in 2-column grids (grid stretches every cell to the row's
+     tallest neighbor) but label/help-text/input is plain block flow inside
+     each cell, so a cell with longer help text pushes its input down while
+     its shorter row-mate's input stays flush under the label — the two
+     inputs end up at different heights. Making the cell a flex column and
+     anchoring its last child (the input, or its unit-suffix wrapper) to the
+     bottom re-aligns every input in a row to the same baseline regardless of
+     how much help text precedes it. */
+  .form-group {
+    @apply mb-4 flex flex-col;
+  }
+
+  .form-group > *:last-child {
+    @apply mt-auto;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 border border-slate-200;
+  }
+
+  .card-header {
+    @apply text-xl font-semibold text-slate-800 mb-4 pb-2 border-b border-slate-200;
+  }
+
+  .chip {
+    @apply px-3 py-1.5 rounded-full border text-sm font-medium transition-colors;
+  }
+}

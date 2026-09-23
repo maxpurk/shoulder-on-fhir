@@ -1,0 +1,19 @@
+{
+  "package-id": "shoulder-on-fhir",
+  "title": "Shoulder on FHIR Implementation Guide",
+  "canonical": "https://maxpurk.github.io/shoulder-on-fhir",
+  "introduction": "FHIR R4 Implementation Guide for standardized documentation of rotator cuff injuries and surgical treatments in research registries (DVSE, SECEC). Developed as a master thesis artifact at Hasso Plattner Institute.",
+  "category": "Research",
+  "list": [
+    {
+      "version": "1.0.0-thesis",
+      "desc": "Master thesis release of the Shoulder on FHIR Implementation Guide.",
+      "path": "https://maxpurk.github.io/shoulder-on-fhir",
+      "status": "draft",
+      "sequence": "Draft",
+      "fhirversion": "4.0.1",
+      "date": "2026-09-22",
+      "current": true
+    }
+  ]
+}

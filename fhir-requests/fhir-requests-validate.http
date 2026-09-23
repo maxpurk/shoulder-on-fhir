@@ -1,0 +1,267 @@
+# Shoulder on FHIR — Profile Validation ($validate operation)
+# VS Code REST Client (humao.rest-client)
+# Tenant endpoint: http://localhost:8080/fhir/DEFAULT
+#
+# HAPI returns OperationOutcome:
+#   issue.severity "error"       → validation FAILED
+#   issue.severity "information" → validation PASSED (informational only)
+#   issue.severity "warning"     → passed but with warnings
+#
+# PREREQUISITE: profiles must be loaded — run ./seed/load-profiles.sh first.
+
+@base = http://localhost:8080/fhir/DEFAULT
+
+
+# ─────────────────────────────────────────────────────────────
+# EXISTING SERVER RESOURCES — validate live data against profiles
+# Uses the GET …/$validate form: HAPI re-validates the stored resource.
+# All seed patients/conditions/observations self-declare meta.profile,
+# so HAPI knows which profile to validate against automatically.
+#
+# These reference Kemal Demir's (PAT-LONG-002) fixed logical IDs from the
+# seed data (seed/bundles/kemal-demir/) — deterministic and stable across
+# reloads, unlike HAPI-assigned resource IDs.
+# ─────────────────────────────────────────────────────────────
+
+### Validate existing Patient (PAT-LONG-002 Kemal Demir) against ShoulderPatient
+GET {{base}}/Patient/pat-long-002/$validate
+Accept: application/fhir+json
+
+###
+
+### Validate existing Condition (seed RotatorCuffCondition) against its profile
+GET {{base}}/Condition/kemal-demir-rc-tear/$validate
+Accept: application/fhir+json
+
+###
+
+### Validate existing Observation (Patte classification) against its profile
+GET {{base}}/Observation/kemal-demir-patte/$validate
+Accept: application/fhir+json
+
+###
+
+### Validate existing Observation (Goutallier classification) against its profile
+GET {{base}}/Observation/kemal-demir-goutallier/$validate
+Accept: application/fhir+json
+
+
+# ─────────────────────────────────────────────────────────────
+# VALID RESOURCES — expect no errors
+# ─────────────────────────────────────────────────────────────
+
+### Validate a valid ShoulderPatient
+POST {{base}}/Patient/$validate?profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient
+Content-Type: application/fhir+json
+Accept: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "meta": {
+    "profile": ["https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"]
+  },
+  "identifier": [
+    {
+      "system": "https://maxpurk.github.io/shoulder-on-fhir/identifier/patient-id",
+      "value": "PAT-VALIDATE-001"
+    }
+  ],
+  "name": [
+    {
+      "family": "Mustermann",
+      "given": ["Max"]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1975-03-15"
+}
+# Note: hand dominance is NOT a Patient extension. Per ADR-0026 it is captured
+# as a separate HandDominanceObservation (Observation.code = SNOMED CT 57427004
+# "Handedness", Observation.valueCodeableConcept from the HandDominance ValueSet).
+
+###
+
+### Validate a valid RotatorCuffCondition
+POST {{base}}/Condition/$validate?profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition
+Content-Type: application/fhir+json
+Accept: application/fhir+json
+
+{
+  "resourceType": "Condition",
+  "meta": {
+    "profile": ["https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/rotator-cuff-condition"]
+  },
+  "clinicalStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-clinical",
+        "code": "active"
+      }
+    ]
+  },
+  "verificationStatus": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+        "code": "confirmed"
+      }
+    ]
+  },
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/condition-category",
+          "code": "encounter-diagnosis"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "926335004",
+        "display": "Rupture of rotator cuff of shoulder"
+      }
+    ]
+  },
+  "bodySite": [
+    {
+      "coding": [
+        {
+          "system": "http://snomed.info/sct",
+          "code": "91774008",
+          "display": "Structure of right shoulder region"
+        }
+      ]
+    }
+  ],
+  "subject": {
+    "reference": "Patient/pat-long-002"
+  }
+}
+
+###
+
+### Validate a valid Observation (Jobe Test — provocation, CodeableConcept value)
+POST {{base}}/Observation/$validate?profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation
+Content-Type: application/fhir+json
+Accept: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/jobe-test-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "exam"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "1231437004",
+        "display": "Empty can test"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/pat-long-002"
+  },
+  "effectiveDateTime": "2024-06-01",
+  "valueCodeableConcept": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "10828004",
+        "display": "Positive"
+      }
+    ]
+  }
+}
+
+###
+
+### Validate a valid Observation (Constant Score — Quantity value)
+POST {{base}}/Observation/$validate?profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation
+Content-Type: application/fhir+json
+Accept: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/constant-score-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "survey"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "273383002",
+        "display": "Constant and Murley shoulder assessment score"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/pat-long-002"
+  },
+  "effectiveDateTime": "2024-06-01",
+  "valueQuantity": {
+    "value": 78,
+    "unit": "score",
+    "system": "http://unitsofmeasure.org",
+    "code": "{score}"
+  }
+}
+
+
+# ─────────────────────────────────────────────────────────────
+# INVALID RESOURCES — expect errors in OperationOutcome
+# ─────────────────────────────────────────────────────────────
+
+### INVALID Patient — missing required name
+POST {{base}}/Patient/$validate?profile=https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient
+Content-Type: application/fhir+json
+Accept: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "meta": {
+    "profile": ["https://maxpurk.github.io/shoulder-on-fhir/StructureDefinition/shoulder-patient"]
+  },
+  "gender": "male"
+}
+
+###
+
+# NEGATIVE TEST (retired) — Patient.extension[hand-dominance]
+#
+# This block previously posted a Patient with an `extension[hand-dominance]`
+# expecting rejection. The extension was never published as a StructureDefinition;
+# per ADR-0026, hand dominance is captured as a separate `HandDominanceObservation`
+# resource, not as a Patient extension. The HAPI validator no longer flags this
+# the way it used to — unknown extensions are typically accepted as `modifierExtension:false`
+# anonymous data — so the test is preserved only as a comment for historical context.
+# To exercise hand-dominance validation today, POST a HandDominanceObservation
+# with `Observation.code = SNOMED CT 57427004 "Handedness"` and
+# `Observation.valueCodeableConcept` bound to the `HandDominance` ValueSet (SNOMED CT
+# 46669005 right / 87683000 left / 23088002 ambidextrous).
